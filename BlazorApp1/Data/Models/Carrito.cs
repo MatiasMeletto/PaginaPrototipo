@@ -4,7 +4,7 @@ namespace BlazorApp1.Data.Models
 {
     public class Carrito
     {
-        public int CarritoId = 0;
+        public int CarritoId { get; set; }
         public List<Bebida> BebidasC { get; } = new();
         public List<Choripan> ChoripanesC { get; } = new();
         public List<Empanada> EmpanadasC { get; } = new();
