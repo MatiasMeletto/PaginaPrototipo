@@ -16,17 +16,23 @@
           <option label="5" value="5"></option>
         </datalist> 
         <br>
-        <label for="Chimichurri">Chimichurri</label>
-        <input type="checkbox" name="Chimichurri" id="chimichurri">
+        <label>
+            <input @bind="criollak"  type="checkbox" />
+             Salsa criolla
+        </label>
         <br>
-        <label for="Criolla">Criolla</label>
-        <input type="checkbox" name="Criolla" id="criolla">
+        <label>
+            <input @bind="chimik"  type="checkbox" />
+             Chimichurri
+        </label>
         <br>
     </div>
 </form>
-        <button class="btn btn-primary" @onclick="CargarChoriCarro()">Confirmar</button>
-
+ @criolla = criollak;
+        <button class="btn btn-primary" @onclick="CargarChoriCarro(1,criolla)">Confirmar</button>
+0....
 @code {
+    private int criolla;
     private void CargarChoriCarro(int idcarro, int criolla, int chimi, int cantidad)
     {
         using var db = new CompraContext();
