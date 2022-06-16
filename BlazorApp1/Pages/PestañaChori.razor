@@ -3,36 +3,46 @@
 @using BlazorApp1.Data.Models
 @using BlazorApp1.Models
 
-<PageTitle>Pedido</PageTitle>
-<form action="#">    
-    <div class = "container"> 
-       <h1>Ingrese la cantidad de choripanes que quiere:</h1> 
-      <input type="text" id="choripanes" list="cantidadCh">
-        <datalist id="cantidadCh">
-          <option label="1" value="1"></option>
-          <option label="2" value="2"></option>
-          <option label="3" value="3"></option>
-          <option label="4" value="4"></option>
-          <option label="5" value="5"></option>
-        </datalist> 
-        <br>
-        <label>
-            <input @bind="criollak"  type="checkbox" />
-             Salsa criolla
-        </label>
-        <br>
-        <label>
-            <input @bind="chimik"  type="checkbox" />
-             Chimichurri
-        </label>
-        <br>
-    </div>
-</form>
- @criolla = criollak;
-        <button class="btn btn-primary" @onclick="CargarChoriCarro(1,criolla)">Confirmar</button>
-0....
+<!DOCTYPE html>
+<html>
+    <head>
+        <PageTitle>Pedido</PageTitle>
+    </head>
+    <body>
+        <div>
+            <form action="#">    
+                <div class = "container"> 
+                    <h1>Ingrese la cantidad de choripanes que quiere:</h1> 
+                    <input type="text" id="choripanes" list="cantidadCh">
+                    <datalist id="cantidadCh">
+                        <option label="1" value="1"></option>
+                        <option label="2" value="2"></option>
+                        <option label="3" value="3"></option>
+                        <option label="4" value="4"></option>
+                        <option label="5" value="5"></option>
+                    </datalist> 
+                    <br>
+                    <label>
+                        <input id="criollak"  type="checkbox" />
+                        Salsa criolla
+                    </label>
+                    <br>
+                    <label>
+                      <input id="chimik"  type="checkbox" />
+                       Chimichurri
+                    </label>
+                    <br>
+                </div>
+            </form>
+            <button class="btn btn-primary" id="btnGuardar">Confirmar</button>
+        </div>
+        <script src="js/Logica.js"></script>
+        <script src="js/LogicaUsuario.js"></script>
+    </body>
+</html>
+
+
 @code {
-    private int criolla;
     private void CargarChoriCarro(int idcarro, int criolla, int chimi, int cantidad)
     {
         using var db = new CompraContext();

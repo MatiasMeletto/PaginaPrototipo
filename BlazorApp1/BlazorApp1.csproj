@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\js\Logica.js" />
+    <None Remove="Pages\js\LogicaUsuario.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\js\Logica.js" />
+    <Content Include="Pages\js\LogicaUsuario.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
