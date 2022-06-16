@@ -1,0 +1,41 @@
+﻿@page "/fetchdata"
+@using BlazorApp1.Data
+@using BlazorApp1.Data.Models
+@using BlazorApp1.Models
+
+<PageTitle>Pedido</PageTitle>
+<form action="#">    
+    <div class = "container"> 
+       <h1>Ingrese la cantidad de choripanes que quiere:</h1> 
+      <input type="text" id="choripanes" list="cantidadCh">
+        <datalist id="cantidadCh">
+          <option label="1" value="1"></option>
+          <option label="2" value="2"></option>
+          <option label="3" value="3"></option>
+          <option label="4" value="4"></option>
+          <option label="5" value="5"></option>
+        </datalist> 
+        <br>
+        <label for="Chimichurri">Chimichurri</label>
+        <input type="checkbox" name="Chimichurri" id="chimichurri">
+        <br>
+        <label for="Criolla">Criolla</label>
+        <input type="checkbox" name="Criolla" id="criolla">
+        <br>
+    </div>
+</form>
+        <button class="btn btn-primary" @onclick="CargarChoriCarro()">Confirmar</button>
+
+@code {
+    private void CargarChoriCarro(int idcarro, int criolla, int chimi, int cantidad)
+    {
+        using var db = new CompraContext();
+        Carrito carrito = db.Carritos.Find(idcarro);
+        if (carrito is not null)
+        {
+            Choripan choripan = new Choripan(criolla, chimi, cantidad);
+            carrito.ChoripanesC.Add(choripan);
+            db.SaveChanges();
+        }
+    }
+}
