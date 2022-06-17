@@ -1,57 +1,52 @@
-﻿@page "/fetchdata"
-@using BlazorApp1.Data
-@using BlazorApp1.Data.Models
-@using BlazorApp1.Models
+﻿@page "/chori"
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <PageTitle>Pedido</PageTitle>
-    </head>
-    <body>
-        <div>
-            <form action="#">    
-                <div class = "container"> 
-                    <h1>Ingrese la cantidad de choripanes que quiere:</h1> 
-                    <input type="text" id="choripanes" list="cantidadCh">
-                    <datalist id="cantidadCh">
-                        <option label="1" value="1"></option>
-                        <option label="2" value="2"></option>
-                        <option label="3" value="3"></option>
-                        <option label="4" value="4"></option>
-                        <option label="5" value="5"></option>
-                    </datalist> 
-                    <br>
-                    <label>
-                        <input id="criollak"  type="checkbox" />
-                        Salsa criolla
-                    </label>
-                    <br>
-                    <label>
-                      <input id="chimik"  type="checkbox" />
-                       Chimichurri
-                    </label>
-                    <br>
-                </div>
-            </form>
-            <button class="btn btn-primary" id="btnGuardar">Confirmar</button>
+<div>
+    <form action="#">
+        <div class="container">
+            <h1>Ingrese la cantidad de choripanes que quiere:</h1>
+            <input @bind="Model.Cantidad" type="number" min="0" max="5" />
+            <br>
+            <label>
+                <input @bind="Model.Criolla" type="checkbox" />
+                Salsa criolla
+            </label>
+            <br>
+            <label>
+                <input @bind="Model.Chimi" type="checkbox" />
+                Chimichurri
+            </label>
+            <br>
         </div>
-        <script src="js/Logica.js"></script>
-        <script src="js/LogicaUsuario.js"></script>
-    </body>
-</html>
-
+    </form>
+    <button class="btn btn-primary" @onclick="CargarChoriCarro">Confirmar</button>
+</div>
 
 @code {
-    private void CargarChoriCarro(int idcarro, int criolla, int chimi, int cantidad)
+    private class ChoriViewModel
+    {
+        public int Cantidad { get; set; }
+        public bool Criolla { get; set; }
+        public bool Chimi { get; set; }
+    }
+
+    private ChoriViewModel Model { get; set; } = new();
+
+    private void CargarChoriCarro()
     {
         using var db = new CompraContext();
-        Carrito carrito = db.Carritos.Find(idcarro);
-        if (carrito is not null)
-        {
-            Choripan choripan = new Choripan(criolla, chimi, cantidad);
-            carrito.ChoripanesC.Add(choripan);
-            db.SaveChanges();
-        }
+
+        Carrito carrito = new Carrito()
+            {
+                ChoripanesC = new List<Choripan>()
+            };
+        Choripan choripan = new Choripan()
+            {
+                Cantidad = Model.Cantidad,
+                Chimichurri = Model.Chimi,
+                Criolla = Model.Criolla
+            };
+        carrito.ChoripanesC.Add(choripan);
+        db.Add(carrito);
+        db.SaveChanges();
     }
 }

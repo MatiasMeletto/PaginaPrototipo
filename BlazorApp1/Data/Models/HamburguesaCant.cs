@@ -1,6 +1,4 @@
-﻿using BlazorApp1.Data.Models;
-
-namespace BlazorApp1.Models
+﻿namespace BlazorApp1.Data.Models
 {
     public class HamburguesaCant
     {
