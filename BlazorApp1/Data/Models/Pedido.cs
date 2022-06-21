@@ -1,12 +1,11 @@
 ﻿namespace BlazorApp1.Data.Models
 {
-    public class Carrito
+    public class Pedido
     {
-        public int CarritoId { get; set; }
+        public int PedidoId { get; set; }
 
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
-
-        public List<CarritoProducto> Productos { get; set; } = new();
+        public List<PedidoProducto> Productos { get; set; } = new();
     }
 }

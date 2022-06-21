@@ -7,45 +7,75 @@
             <input @bind="Model.Cantidad" type="number" min="0" max="5" />
             <br>
             <label>
-                <input @bind="Model.Criolla" type="checkbox" />
+                <input @bind="DeNombre.Criolla" type="checkbox" />
                 Salsa criolla
             </label>
             <br>
             <label>
-                <input @bind="Model.Chimi" type="checkbox" />
+                <input @bind="DeNombre.Chimi" type="checkbox" />
                 Chimichurri
             </label>
             <br>
         </div>
     </form>
-    <button class="btn btn-primary" @onclick="CargarChoriCarro">Confirmar</button>
+    <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
 </div>
 
 @code {
-    private class ChoriViewModel
+    private class ProductoViewModel
     {
         public int Cantidad { get; set; }
+        public int Precio = 100;
+        public string Nombre { get; set; }
+    }
+
+    private class FormacionDeNombre
+    {
         public bool Criolla { get; set; }
         public bool Chimi { get; set; }
     }
 
-    private ChoriViewModel Model { get; set; } = new();
+    private ProductoViewModel Model { get; set; } = new();
+    private FormacionDeNombre DeNombre { get; set; } = new();
 
-    private void CargarChoriCarro()
+    private void CrearNombre()
+    {
+        if (DeNombre.Chimi && DeNombre.Criolla)
+            Model.Nombre = "Choripan con chimichurri y salsa criolla";
+        else if(DeNombre.Chimi && !DeNombre.Criolla)
+            Model.Nombre = "Choripan con chimichurri";
+        else if(!DeNombre.Chimi && DeNombre.Criolla)
+            Model.Nombre = "Choripan con salsa criolla";
+    }
+
+    private void CargarProductoCarro()
     {
         using var db = new CompraContext();
 
+        CrearNombre();
+
         Carrito carrito = new Carrito()
-            {
-                ChoripanesC = new List<Choripan>()
-            };
-        Choripan choripan = new Choripan()
-            {
+        {
+            Productos = new List<CarritoProducto>()
+        };
+        Categoria categoria = new Categoria()
+        {
+            Nombre = "Choripan"
+        };
+        Producto producto = new Producto()
+        {
+                Nombre = Model.Nombre,
+                Precio = Model.Precio,
                 Cantidad = Model.Cantidad,
-                Chimichurri = Model.Chimi,
-                Criolla = Model.Criolla
-            };
-        carrito.ChoripanesC.Add(choripan);
+                Categoria = categoria,
+                Carritos = new List<CarritoProducto>()
+        };
+        CarritoProducto carritoProducto = new CarritoProducto()
+        {
+            Producto = producto
+        };
+        
+        carrito.Productos.Add(carritoProducto);
         db.Add(carrito);
         db.SaveChanges();
     }

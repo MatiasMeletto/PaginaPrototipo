@@ -4,6 +4,34 @@
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+<button class="btn btn-primary" @onclick="CrearObj">Agregar al carrito</button>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    private void CrearObj()
+    {
+        Categoria categoria1 = new Categoria()
+        {
+                Nombre = "Choripan"
+        };
+        Categoria categoria2 = new Categoria()
+        {
+                Nombre = "Pizza"
+        };
+        Categoria categoria3 = new Categoria()
+        {
+                Nombre = "Torta"
+        };
+        Categoria categoria4 = new Categoria()
+        {
+                Nombre = "Hamburguesa"
+        };
+        Categoria categoria5 = new Categoria()
+        {
+                Nombre = "Empanada"
+        };
+        Categoria categoria6 = new Categoria()
+        {
+                Nombre = "Bebida"
+        };
+    }
+}
