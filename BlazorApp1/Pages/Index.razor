@@ -4,11 +4,13 @@
 
 <h1>Hello, world!</h1>
 
-<button class="btn btn-primary" @onclick="CrearObj">Agregar al carrito</button>
+<button class="btn btn-primary" @onclick="CrearObj">Agregar categorias</button>
 
 @code {
     private void CrearObj()
     {
+        using var db = new CompraContext();
+
         Categoria categoria1 = new Categoria()
         {
                 Nombre = "Choripan"
@@ -33,5 +35,13 @@
         {
                 Nombre = "Bebida"
         };
+
+        db.Add(categoria1);
+        db.Add(categoria2);
+        db.Add(categoria3);
+        db.Add(categoria4);
+        db.Add(categoria5);
+        db.Add(categoria6);
+        db.SaveChanges();
     }
 }

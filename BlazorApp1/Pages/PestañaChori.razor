@@ -42,10 +42,12 @@
     {
         if (DeNombre.Chimi && DeNombre.Criolla)
             Model.Nombre = "Choripan con chimichurri y salsa criolla";
-        else if(DeNombre.Chimi && !DeNombre.Criolla)
+        else if (DeNombre.Chimi && !DeNombre.Criolla)
             Model.Nombre = "Choripan con chimichurri";
-        else if(!DeNombre.Chimi && DeNombre.Criolla)
+        else if (!DeNombre.Chimi && DeNombre.Criolla)
             Model.Nombre = "Choripan con salsa criolla";
+        else
+            Model.Nombre = "Choripan";
     }
 
     private void CargarProductoCarro()
@@ -54,8 +56,14 @@
 
         CrearNombre();
 
+        Usuario usuario = new Usuario()
+        {
+            Nombre = "guest",
+            Password = "password",
+        };
         Carrito carrito = new Carrito()
         {
+            Usuario = usuario,
             Productos = new List<CarritoProducto>()
         };
         Categoria categoria = new Categoria()
@@ -66,13 +74,17 @@
         {
                 Nombre = Model.Nombre,
                 Precio = Model.Precio,
-                Cantidad = Model.Cantidad,
+                CategoriaId = categoria.CategoriaId,
                 Categoria = categoria,
                 Carritos = new List<CarritoProducto>()
         };
         CarritoProducto carritoProducto = new CarritoProducto()
         {
-            Producto = producto
+            Carrito = carrito,
+            CarritoId = carrito.CarritoId,
+            ProductoId = producto.ProductoId,
+            Producto = producto,
+            Cantidad = Model.Cantidad
         };
         
         carrito.Productos.Add(carritoProducto);
