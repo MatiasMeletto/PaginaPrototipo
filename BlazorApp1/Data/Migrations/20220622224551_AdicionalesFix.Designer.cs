@@ -2,6 +2,7 @@
 using BlazorApp1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorApp1.Data.Migrations
 {
     [DbContext(typeof(CompraContext))]
-    partial class CompraContextModelSnapshot : ModelSnapshot
+    [Migration("20220622224551_AdicionalesFix")]
+    partial class AdicionalesFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -37,22 +39,6 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("ProductoId");
 
                     b.ToTable("Adicionales");
-
-                    b.HasData(
-                        new
-                        {
-                            AdicionalId = 1,
-                            Nombre = "Salsa criolla",
-                            Precio = 0,
-                            ProductoId = 1
-                        },
-                        new
-                        {
-                            AdicionalId = 2,
-                            Nombre = "Chimichurri",
-                            Precio = 0,
-                            ProductoId = 1
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Carrito", b =>
@@ -69,13 +55,6 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Carritos");
-
-                    b.HasData(
-                        new
-                        {
-                            CarritoId = 1,
-                            UsuarioId = 1
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.CarritoProducto", b =>
@@ -139,38 +118,6 @@ namespace BlazorApp1.Data.Migrations
                     b.HasKey("CategoriaId");
 
                     b.ToTable("Categorias");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoriaId = 1,
-                            Nombre = "Choripan"
-                        },
-                        new
-                        {
-                            CategoriaId = 2,
-                            Nombre = "Pizza"
-                        },
-                        new
-                        {
-                            CategoriaId = 3,
-                            Nombre = "Torta"
-                        },
-                        new
-                        {
-                            CategoriaId = 4,
-                            Nombre = "Hamburguesa"
-                        },
-                        new
-                        {
-                            CategoriaId = 5,
-                            Nombre = "Empanada"
-                        },
-                        new
-                        {
-                            CategoriaId = 6,
-                            Nombre = "Bebida"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Pedido", b =>
@@ -237,15 +184,6 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Productos");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductoId = 1,
-                            CategoriaId = 1,
-                            Nombre = "Choripan",
-                            Precio = 100
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Usuario", b =>
@@ -265,14 +203,6 @@ namespace BlazorApp1.Data.Migrations
                     b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
-
-                    b.HasData(
-                        new
-                        {
-                            UsuarioId = 1,
-                            Nombre = "guest",
-                            Password = "password"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Adicional", b =>

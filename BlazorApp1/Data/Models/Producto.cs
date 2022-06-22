@@ -10,7 +10,7 @@
         public Categoria Categoria { get; set; }
 
         public List<CarritoProducto> Carritos { get; set; } = new();
-
         public List<PedidoProducto> Pedidos { get; set; } = new();
+        public List<Adicional> Adicionales { get; set; } = new();
     }
 }

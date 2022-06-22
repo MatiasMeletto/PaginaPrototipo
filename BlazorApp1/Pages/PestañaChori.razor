@@ -1,4 +1,5 @@
 ﻿@page "/chori"
+@using Microsoft.EntityFrameworkCore
 
 <div>
     <form action="#">
@@ -7,88 +8,113 @@
             <input @bind="Model.Cantidad" type="number" min="0" max="5" />
             <br>
             <label>
-                <input @bind="DeNombre.Criolla" type="checkbox" />
+                <input @bind="Model.Criolla" type="checkbox" />
                 Salsa criolla
             </label>
             <br>
             <label>
-                <input @bind="DeNombre.Chimi" type="checkbox" />
+                <input @bind="Model.Chimi" type="checkbox" />
                 Chimichurri
             </label>
             <br>
         </div>
     </form>
     <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
+    <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
 </div>
 
 @code {
     private class ProductoViewModel
     {
         public int Cantidad { get; set; }
-        public int Precio = 100;
-        public string Nombre { get; set; }
-    }
-
-    private class FormacionDeNombre
-    {
         public bool Criolla { get; set; }
         public bool Chimi { get; set; }
     }
 
     private ProductoViewModel Model { get; set; } = new();
-    private FormacionDeNombre DeNombre { get; set; } = new();
 
-    private void CrearNombre()
-    {
-        if (DeNombre.Chimi && DeNombre.Criolla)
-            Model.Nombre = "Choripan con chimichurri y salsa criolla";
-        else if (DeNombre.Chimi && !DeNombre.Criolla)
-            Model.Nombre = "Choripan con chimichurri";
-        else if (!DeNombre.Chimi && DeNombre.Criolla)
-            Model.Nombre = "Choripan con salsa criolla";
-        else
-            Model.Nombre = "Choripan";
-    }
+    //private FormacionDeNombre DeNombre { get; set; } = new();
+
+    //private void CrearNombre()
+    //{
+    //    if (DeNombre.Chimi && DeNombre.Criolla)
+    //        Model.Nombre = "Choripan con chimichurri y salsa criolla";
+    //    else if (DeNombre.Chimi && !DeNombre.Criolla)
+    //        Model.Nombre = "Choripan con chimichurri";
+    //    else if (!DeNombre.Chimi && DeNombre.Criolla)
+    //        Model.Nombre = "Choripan con salsa criolla";
+    //    else
+    //        Model.Nombre = "Choripan";
+    //}
 
     private void CargarProductoCarro()
     {
         using var db = new CompraContext();
 
-        CrearNombre();
+        Carrito carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == 1).SingleOrDefault();
 
-        Usuario usuario = new Usuario()
+        if(carrito is not null)
         {
-            Nombre = "guest",
-            Password = "password",
-        };
-        Carrito carrito = new Carrito()
+            CarritoProducto carritoProducto = new CarritoProducto()
+                {
+                    ProductoId = 1,
+                    Cantidad = Model.Cantidad,
+                    Adicionales = new()
+                };
+
+            if (Model.Chimi)
+            {
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                {
+                    AdicionalId = 2,
+                    Cantidad = 1
+                });
+            }
+            if (Model.Criolla)
+            {
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                {
+                    AdicionalId = 1,
+                    Cantidad = 1
+                });
+            }
+            carrito.Productos.Add(carritoProducto);
+            db.SaveChanges();
+        }
+        else
         {
-            Usuario = usuario,
-            Productos = new List<CarritoProducto>()
-        };
-        Categoria categoria = new Categoria()
-        {
-            Nombre = "Choripan"
-        };
-        Producto producto = new Producto()
-        {
-                Nombre = Model.Nombre,
-                Precio = Model.Precio,
-                CategoriaId = categoria.CategoriaId,
-                Categoria = categoria,
-                Carritos = new List<CarritoProducto>()
-        };
-        CarritoProducto carritoProducto = new CarritoProducto()
-        {
-            Carrito = carrito,
-            CarritoId = carrito.CarritoId,
-            ProductoId = producto.ProductoId,
-            Producto = producto,
-            Cantidad = Model.Cantidad
-        };
-        
-        carrito.Productos.Add(carritoProducto);
-        db.Add(carrito);
-        db.SaveChanges();
+            // Camino del mal
+        }
+
+        //CrearNombre();
+
+
+        //CarritoProducto carritoProducto = new CarritoProducto()
+        //{
+        //    Carrito = carrito,
+        //    CarritoId = carrito.CarritoId,
+        //    ProductoId = producto.ProductoId,
+        //    Producto = producto,
+        //    Cantidad = Model.Cantidad
+        //};
+
+        //carrito.Productos.Add(carritoProducto);
+        //db.Add(carrito);
+        //db.SaveChanges();
+    }
+
+    private void VerCarrito()
+    {
+        using var db = new CompraContext();
+
+        Carrito carrito = db.Carritos
+        .Include(c => c.Usuario)
+        .Include(c => c.Productos)
+        .ThenInclude(p => p.Producto)
+        .ThenInclude(p => p.Adicionales)
+        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
+        .Where(c => c.UsuarioId == 1).SingleOrDefault();
+
+        int t = 0;
     }
 }
