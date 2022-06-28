@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorApp1.Data.Migrations
 {
     [DbContext(typeof(CompraContext))]
-    [Migration("20220622225241_CargaDatosUsuario")]
-    partial class CargaDatosUsuario
+    [Migration("20220628142415_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,104 @@ namespace BlazorApp1.Data.Migrations
                             Nombre = "Chimichurri",
                             Precio = 0,
                             ProductoId = 1
+                        },
+                        new
+                        {
+                            AdicionalId = 3,
+                            Nombre = "Pan",
+                            Precio = 50,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 4,
+                            Nombre = "Carne",
+                            Precio = 100,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 5,
+                            Nombre = "Lechuga",
+                            Precio = 42,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 6,
+                            Nombre = "Tomate",
+                            Precio = 37,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 7,
+                            Nombre = "Huevo",
+                            Precio = 68,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 8,
+                            Nombre = "Bacon",
+                            Precio = 53,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 9,
+                            Nombre = "Cheddar",
+                            Precio = 49,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 10,
+                            Nombre = "Tybo",
+                            Precio = 41,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 11,
+                            Nombre = "Jamon",
+                            Precio = 40,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 12,
+                            Nombre = "Cebolla",
+                            Precio = 67,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 13,
+                            Nombre = "Mayonesa",
+                            Precio = 36,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 14,
+                            Nombre = "Ketchup",
+                            Precio = 33,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 15,
+                            Nombre = "Mostaza",
+                            Precio = 24,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            AdicionalId = 16,
+                            Nombre = "Sabora",
+                            Precio = 26,
+                            ProductoId = 4
                         });
                 });
 
@@ -247,6 +345,13 @@ namespace BlazorApp1.Data.Migrations
                             CategoriaId = 1,
                             Nombre = "Choripan",
                             Precio = 100
+                        },
+                        new
+                        {
+                            ProductoId = 4,
+                            CategoriaId = 4,
+                            Nombre = "Hamburguesa",
+                            Precio = 0
                         });
                 });
 
