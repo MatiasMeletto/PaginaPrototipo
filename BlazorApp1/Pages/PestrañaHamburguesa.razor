@@ -2,84 +2,89 @@
 
 <div>
     <form action="#">
-        <div class="container">
-            <label>PAN</label>
-            <br>
-            <label>
-                Lechuga
-                <input @bind="Model.LechugaCant" type="number" min="0" max="3" />
-            </label>
-            <br>
-            <label>
-                Tomate
-                <input @bind="Model.TomateCant" type="number" min="0" max="3" />
-            </label>
-            <br>
-            <label>
-                Huevo
-                <input @bind="Model.HuevoCant" type="number" min="0" max="2" />
-            </label>
-            <br>
-            <label>
-                Bacon
-                <input @bind="Model.BaconCant" type="number" min="0" max="4" />
-            </label>
-            <br>
-            <label>
-                Cheddar
-                <input @bind="Model.CheddarCant" type="number" min="0" max="2" />
-            </label>
-            <br>
-            <label>
-                Tybo
-                <input @bind="Model.TyboCant" type="number" min="0" max="2" />
-            </label>
-            <br>
-            <label>
-                Jamon
-                <input @bind="Model.JamonCant" type="number" min="0" max="2" />
-            </label>
-            <br>
-            <label>
-                Cebolla
-                <input @bind="Model.CebollaCant" type="number" min="0" max="3" />
-            </label>
-            <br>
-            <label>
-                Mayonesa
-                <input @bind="Model.MayonesaCant" type="number" min="0" max="1" />
-            </label>
-            <br>
-            <label>
-                Ketchup
-                <input @bind="Model.KetchupCant" type="number" min="0" max="1" />
-            </label>
-            <br>
-            <label>
-                Mostaza
-                <input @bind="Model.MostazaCant" type="number" min="0" max="1" />
-            </label>
-            <br>
-            <label>
-                Sabora
-                <input @bind="Model.SaboraCant" type="number" min="0" max="1" />
-            </label>
-            <br>
-            <label>
-                Carne
-                <input @bind="Model.CarneCant" type="number" min="1" max="3" />
-            </label>
-            <br>
-            <label>PAN</label>
-            <br>
-            <br>
-            <br>
-            <label>
-                Cantidad
-                <input @bind="Model.HamburguesaCant" type="number" min="1" max="5" />
-            </label>
-            <br>
+    <section id="Labels">
+        <div class="container">          
+            <div class="Pan">
+
+            </div>
+            <div class="Lechuga">
+                <input @onclick="Restar" type="button" value="-" />
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+" />
+            </div>
+            <div class="Tomate">
+                <input @onclick="Sumar" type="button" value="-" />
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+            <div class="Huevo">
+                <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+            <div class="Bacon">
+                <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+            <div class="Cheddar">
+                <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+            <div class="Tybo">
+               <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+            <div class="Jamon">
+               <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+            <div class="Cebolla">
+              <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/> 
+            </div>
+            <div class="`Mayonesa">
+               <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+            <div class="Ketchup">
+                <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+            <div class="Mostaza">
+               <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+             <div class="Sabora">
+                <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+             <div class="Carne">
+                 <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+             <div class="Pan">
+               <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+             <div class="Cantidad">
+                <input @onclick="Sumar" type="button" value="-"/>
+                <img src=""><img />
+                <input @onclick="Sumar" type="button" value="+"/>
+            </div>
+          
         </div>
+       </section>
     </form>
     <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
     <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
@@ -90,6 +95,15 @@
 
 @code {
 
+    private void Sumar()
+    {
+        Model.LechugaCant++;
+   }
+
+    private void Restar()
+    {
+        Model.LechugaCant--;
+    }
     private class ProductoViewModel
     {
         int _lechugaCant;
