@@ -5,9 +5,10 @@
         <div class="container">
             <label>PAN</label>
             <br>
-            <label>
+            <label> 
+                <input @onclick="Sumar(nombre)" type="button" value="+"/>
                 Lechuga
-                <input @bind="Model.LechugaCant" type="number" min="0" max="3" />
+                <input @onclick="Restar" type="button" value="-"/>
             </label>
             <br>
             <label>
@@ -93,6 +94,19 @@
     private class ProductoViewModel
     {
         int _lechugaCant;
+        int _tomateCant;
+        int _huevoCant;
+        int _baconCant;
+        int _cheddarCant;
+        int _tyboCant;
+        int _jamonCant;
+        int _cebollaCant;
+        int _mayonesaCant;
+        int _ketchupCant;
+        int _mostazaCant;
+        int _saboraCant;
+        int _carneCant;
+        int _hamburguesasCant;
 
         public int LechugaCant
         {
@@ -106,19 +120,162 @@
                 CalcularTotal();
             }
         }
-        public int TomateCant { get; set; }
-        public int HuevoCant { get; set; }
-        public int BaconCant { get; set; }
-        public int CheddarCant { get; set; }
-        public int TyboCant { get; set; }
-        public int JamonCant { get; set; }
-        public int CebollaCant { get; set; }
-        public int MayonesaCant { get; set; }
-        public int KetchupCant { get; set; }
-        public int MostazaCant { get; set; }
-        public int SaboraCant { get; set; }
-        public int CarneCant { get; set; } = 1;
-        public int HamburguesaCant { get; set; } = 1;
+        public int TomateCant 
+        {
+            get
+            {
+                return _tomateCant;
+            }
+            set
+            {
+                _tomateCant = value;
+                CalcularTotal();
+            }
+        }
+        public int HuevoCant
+        {
+            get
+            {
+                return _huevoCant;
+            }
+            set
+            {
+                _huevoCant = value;
+                CalcularTotal();
+            }
+        }
+        public int BaconCant
+        {
+            get
+            {
+                return _baconCant;
+            }
+            set
+            {
+                _baconCant = value;
+                CalcularTotal();
+            }
+        }
+        public int CheddarCant 
+        {
+            get
+            {
+                return _cheddarCant;
+            }
+            set
+            {
+                _cheddarCant = value;
+                CalcularTotal();
+            }
+        }
+        public int TyboCant
+        {
+            get
+            {
+                return _tyboCant;
+            }
+            set
+            {
+                _tyboCant = value;
+                CalcularTotal();
+            }
+        }
+        public int JamonCant
+        {
+            get
+            {
+                return _jamonCant;
+            }
+            set
+            {
+                _jamonCant = value;
+                CalcularTotal();
+            }
+        }
+        public int CebollaCant
+        {
+            get
+            {
+                return _cebollaCant;
+            }
+            set
+            {
+                _cebollaCant = value;
+                CalcularTotal();
+            }
+        }
+        public int MayonesaCant
+        {
+            get
+            {
+                return _mayonesaCant;
+            }
+            set
+            {
+                _mayonesaCant = value;
+                CalcularTotal();
+            }
+        }
+        public int KetchupCant 
+        { 
+            get
+            {
+                return _ketchupCant;
+            }
+            set
+            {
+                _ketchupCant = value;
+                CalcularTotal();
+            } 
+        }
+        public int MostazaCant 
+        {
+            get
+            {
+                return _mostazaCant;
+            }
+            set
+            {
+                _mostazaCant = value;
+                CalcularTotal();
+            }
+        }
+        public int SaboraCant 
+        {
+            get
+            {
+                return _saboraCant;
+            }
+            set
+            {
+                _saboraCant = value;
+                CalcularTotal();
+            }
+        }
+        public int CarneCant 
+        {
+            get
+            {
+                return _carneCant;
+            }
+            set
+            {
+                _carneCant = value;
+                CalcularTotal();
+            }
+        }
+        public int HamburguesaCant 
+        {
+            get
+            {
+                return _hamburguesasCant;
+            }
+            set
+            {
+                _hamburguesasCant = value;
+                CalcularTotal();
+            }
+        }
         public int Total { get; set; }
 
         private async void CalcularTotal()
@@ -131,6 +288,98 @@
     }
 
     private ProductoViewModel Model { get; set; } = new();
+
+    private void Sumar(string nombre)
+    {
+        if (nombre == "lechuga")
+            if(Model.LechugaCant < 3)
+                Model.LechugaCant++;
+        if (nombre == "tomate")
+            if(Model.TomateCant < 2)
+                Model.TomateCant++;
+        if (nombre == "huevo")
+            if(Model.HuevoCant < 2)
+                Model.HuevoCant++;
+        if (nombre == "bacon")
+            if(Model.BaconCant < 4)
+                Model.BaconCant++;
+        if (nombre == "cheddar")
+            if(Model.CheddarCant < 3)
+                Model.CheddarCant++;
+        if (nombre == "tybo")
+            if(Model.TyboCant < 3)
+                Model.TyboCant++;
+        if (nombre == "jamon")
+            if(Model.JamonCant < 3)
+                Model.JamonCant++;
+        if (nombre == "cebolla")
+            if(Model.CebollaCant < 4)
+                Model.CebollaCant++;
+        if (nombre == "mayonesa")
+            if(Model.MayonesaCant < 1)
+                Model.MostazaCant++;
+        if (nombre == "ketchup")
+            if(Model.KetchupCant < 1)
+                Model.KetchupCant++;
+        if (nombre == "mostaza")
+            if(Model.MostazaCant < 1)
+                Model.MostazaCant++;
+        if (nombre == "sabora")
+            if(Model.SaboraCant < 1)
+                Model.SaboraCant++;
+        if (nombre == "carne")
+            if(Model.CarneCant < 3)
+                Model.CarneCant++;
+        if (nombre == "hamburguesa")
+            if(Model.HamburguesaCant < 15)
+                Model.HamburguesaCant++;
+    }
+
+    private void Restar(string nombre)
+    {
+        if (nombre == "lechuga")
+            if(Model.LechugaCant != 0)
+                Model.LechugaCant--;
+        if (nombre == "tomate")
+            if(Model.TomateCant != 0)
+                Model.TomateCant--;
+        if (nombre == "huevo")
+            if(Model.HuevoCant != 0)
+                Model.HuevoCant--;
+        if (nombre == "bacon")
+            if(Model.BaconCant != 0)
+                Model.BaconCant--;
+        if (nombre == "cheddar")
+            if(Model.CheddarCant != 0)
+                Model.CheddarCant--;
+        if (nombre == "tybo")
+            if(Model.TyboCant != 0)
+                Model.TyboCant--;
+        if (nombre == "jamon")
+            if(Model.JamonCant != 0)
+                Model.JamonCant--;
+        if (nombre == "cebolla")
+            if(Model.CebollaCant != 0)
+                Model.CebollaCant--;
+        if (nombre == "mayonesa")
+            if(Model.MayonesaCant != 0)
+                Model.MostazaCant--;
+        if (nombre == "ketchup")
+            if(Model.KetchupCant != 0)
+                Model.KetchupCant--;
+        if (nombre == "mostaza")
+            if(Model.MostazaCant != 0)
+                Model.MostazaCant--;
+        if (nombre == "sabora")
+            if(Model.SaboraCant != 0)
+                Model.SaboraCant--;
+        if (nombre == "carne")
+            if(Model.CarneCant != 0)
+                Model.CarneCant--;
+        if (nombre == "hamburguesa")
+            if(Model.HamburguesaCant != 0)
+                Model.HamburguesaCant--;
+    }
 
     private void CargarProductoCarro()
     {
