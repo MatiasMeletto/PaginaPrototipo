@@ -85,14 +85,27 @@
     <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
 </div>
 <div>
-    <h2>Precio = @EscribirPrecio</h2>
+    <h2>Precio = @Model.Total.ToString("C")</h2>
 </div>
 
 @code {
 
     private class ProductoViewModel
     {
-        public int LechugaCant { get; set; }
+        int _lechugaCant;
+
+        public int LechugaCant
+        {
+            get
+            {
+                return _lechugaCant;
+            }
+            set
+            {
+                _lechugaCant = value;
+                CalcularTotal();
+            }
+        }
         public int TomateCant { get; set; }
         public int HuevoCant { get; set; }
         public int BaconCant { get; set; }
@@ -104,8 +117,17 @@
         public int KetchupCant { get; set; }
         public int MostazaCant { get; set; }
         public int SaboraCant { get; set; }
-        public int CarneCant { get; set; }
-        public int HamburguesaCant { get; set; }
+        public int CarneCant { get; set; } = 1;
+        public int HamburguesaCant { get; set; } = 1;
+        public int Total { get; set; }
+
+        private async void CalcularTotal()
+        {
+            using var db = new CompraContext();
+
+            Total = 0;
+            Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
+        }
     }
 
     private ProductoViewModel Model { get; set; } = new();
@@ -119,134 +141,134 @@
         if (carrito is not null)
         {
             CarritoProducto carritoProducto = new CarritoProducto()
-            {
-                ProductoId = 1,
-                Cantidad = Model.HamburguesaCant,
-                Adicionales = new()
-            };
+                {
+                    ProductoId = 1,
+                    Cantidad = Model.HamburguesaCant,
+                    Adicionales = new()
+                };
 
             carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-            {
-                //pan
-                AdicionalId = 3,
-                Cantidad = 2
-            });
+                {
+                    //pan
+                    AdicionalId = 3,
+                    Cantidad = 2
+                });
 
             if (Model.CarneCant != 0)
             {
                 //carne
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 4,
-                    Cantidad = Model.CarneCant
-                });
+                    {
+                        AdicionalId = 4,
+                        Cantidad = Model.CarneCant
+                    });
             }
             if (Model.LechugaCant != 0)
             {
                 //lechuga
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 5,
-                    Cantidad = Model.LechugaCant
-                });
+                    {
+                        AdicionalId = 5,
+                        Cantidad = Model.LechugaCant
+                    });
             }
             if (Model.TomateCant != 0)
             {
                 //tomate
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 6,
-                    Cantidad = Model.TomateCant
-                });
+                    {
+                        AdicionalId = 6,
+                        Cantidad = Model.TomateCant
+                    });
             }
             if (Model.HuevoCant != 0)
             {
                 //huevo
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 7,
-                    Cantidad = Model.HuevoCant
-                });
+                    {
+                        AdicionalId = 7,
+                        Cantidad = Model.HuevoCant
+                    });
             }
             if (Model.BaconCant != 0)
             {
                 //bacon
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 8,
-                    Cantidad = Model.BaconCant
-                });
+                    {
+                        AdicionalId = 8,
+                        Cantidad = Model.BaconCant
+                    });
             }
             if (Model.CheddarCant != 0)
             {
                 //cheddar
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 9,
-                    Cantidad = Model.CheddarCant
-                });
+                    {
+                        AdicionalId = 9,
+                        Cantidad = Model.CheddarCant
+                    });
             }
             if (Model.TyboCant != 0)
             {
                 //tybo
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 10,
-                    Cantidad = Model.TyboCant
-                });
+                    {
+                        AdicionalId = 10,
+                        Cantidad = Model.TyboCant
+                    });
             }
             if (Model.JamonCant != 0)
             {
                 //jamon
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 11,
-                    Cantidad = Model.JamonCant
-                });
+                    {
+                        AdicionalId = 11,
+                        Cantidad = Model.JamonCant
+                    });
             }
             if (Model.CebollaCant != 0)
             {
                 //cebolla
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 12,
-                    Cantidad = Model.CebollaCant
-                });
+                    {
+                        AdicionalId = 12,
+                        Cantidad = Model.CebollaCant
+                    });
             }
             if (Model.MayonesaCant != 0)
             {
                 //mayonesa
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 13,
-                    Cantidad = Model.MayonesaCant
-                });
+                    {
+                        AdicionalId = 13,
+                        Cantidad = Model.MayonesaCant
+                    });
             }
             if (Model.KetchupCant != 0)
             {
                 //ketchup
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 14,
-                    Cantidad = Model.KetchupCant
-                });
+                    {
+                        AdicionalId = 14,
+                        Cantidad = Model.KetchupCant
+                    });
             }
             if (Model.MostazaCant != 0)
             {
                 //mostaza
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 15,
-                    Cantidad = Model.MostazaCant
-                });
+                    {
+                        AdicionalId = 15,
+                        Cantidad = Model.MostazaCant
+                    });
             }
             if (Model.SaboraCant != 0)
             {
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                {
-                    AdicionalId = 16,
-                    Cantidad = Model.SaboraCant
-                });
+                    {
+                        AdicionalId = 16,
+                        Cantidad = Model.SaboraCant
+                    });
             }
 
             carrito.Productos.Add(carritoProducto);
@@ -255,7 +277,7 @@
         else
         {
             //anashe
-        } 
+        }
     }
 
     private void VerCarrito()
@@ -271,26 +293,25 @@
         .Where(c => c.UsuarioId == 1).SingleOrDefault();
     }
 
-    private int EscribirPrecio()
+    private void EscribirPrecio()
     {
         using var db = new CompraContext();
 
-        Carrito carrito = db.Carritos
-        .Include(c => c.Usuario)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .ThenInclude(p => p.Adicionales)
-        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-        .Where(c => c.UsuarioId == 1).SingleOrDefault();
-
         int total = 0;
 
-        foreach (Producto p in carrito)
-        {
-            
-        }
+        var carritoProducto = db.CarritoProductos
+        .Include(c => c.Adicionales)
+        .ThenInclude(c => c.Adicional).ToList();
 
-        return total;
+        var adicional = db.Adicionales.ToList();
+
+        foreach (CarritoProducto c in carritoProducto)
+        {
+            foreach (CarritoProductoAdicional cpa in c.Adicionales)
+            {
+                total = total + (cpa.Adicional.Precio * cpa.Cantidad);
+            }
+        }
     }
 
 }
