@@ -6,69 +6,81 @@
             <label>PAN</label>
             <br>
             <label> 
-                <input @onclick="Sumar(nombre)" type="button" value="+"/>
+                <input @onclick="@(() => { string nombre = "lechuga"; Sumar(nombre); })" type="button" value="+"/>
                 Lechuga
-                <input @onclick="Restar" type="button" value="-"/>
+                <input @onclick="@(() => { string nombre = "lechuga"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Tomate
-                <input @bind="Model.TomateCant" type="number" min="0" max="3" />
+                <input @onclick="@(() => { string nombre = "tomate"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "tomate"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Huevo
-                <input @bind="Model.HuevoCant" type="number" min="0" max="2" />
+                <input @onclick="@(() => { string nombre = "huevo"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "huevo"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Bacon
-                <input @bind="Model.BaconCant" type="number" min="0" max="4" />
+                <input @onclick="@(() => { string nombre = "bacon"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "bacon"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Cheddar
-                <input @bind="Model.CheddarCant" type="number" min="0" max="2" />
+                <input @onclick="@(() => { string nombre = "cheddar"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "cheddar"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Tybo
-                <input @bind="Model.TyboCant" type="number" min="0" max="2" />
+                <input @onclick="@(() => { string nombre = "tybo"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "tybo"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Jamon
-                <input @bind="Model.JamonCant" type="number" min="0" max="2" />
+                <input @onclick="@(() => { string nombre = "jamon"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "jamon"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Cebolla
-                <input @bind="Model.CebollaCant" type="number" min="0" max="3" />
+                <input @onclick="@(() => { string nombre = "cebolla"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "cebolla"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Mayonesa
-                <input @bind="Model.MayonesaCant" type="number" min="0" max="1" />
+                <input @onclick="@(() => { string nombre = "mayonesa"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "mayonesa"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Ketchup
-                <input @bind="Model.KetchupCant" type="number" min="0" max="1" />
+                <input @onclick="@(() => { string nombre = "ketchup"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "ketchup"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Mostaza
-                <input @bind="Model.MostazaCant" type="number" min="0" max="1" />
+                <input @onclick="@(() => { string nombre = "mostaza"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "mostaza"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Sabora
-                <input @bind="Model.SaboraCant" type="number" min="0" max="1" />
+                <input @onclick="@(() => { string nombre = "sabora"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "sabora"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>
-                Carne
-                <input @bind="Model.CarneCant" type="number" min="1" max="3" />
+                <input @onclick="@(() => { string nombre = "carne"; Sumar(nombre); })" type="button" value="+"/>
+                Lechuga
+                <input @onclick="@(() => { string nombre = "carne"; Restar(nombre); })" type="button" value="-"/>
             </label>
             <br>
             <label>PAN</label>
@@ -278,12 +290,13 @@
         }
         public int Total { get; set; }
 
-        private async void CalcularTotal()
+        private async void CalcularTotal(string nombre)
         {
             using var db = new CompraContext();
 
             Total = 0;
-            Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
+            if ()
+            Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * );
         }
     }
 
@@ -294,43 +307,43 @@
         if (nombre == "lechuga")
             if(Model.LechugaCant < 3)
                 Model.LechugaCant++;
-        if (nombre == "tomate")
+        else if (nombre == "tomate")
             if(Model.TomateCant < 2)
                 Model.TomateCant++;
-        if (nombre == "huevo")
+        else if (nombre == "huevo")
             if(Model.HuevoCant < 2)
                 Model.HuevoCant++;
-        if (nombre == "bacon")
+        else if (nombre == "bacon")
             if(Model.BaconCant < 4)
                 Model.BaconCant++;
-        if (nombre == "cheddar")
+        else if (nombre == "cheddar")
             if(Model.CheddarCant < 3)
                 Model.CheddarCant++;
-        if (nombre == "tybo")
+        else if (nombre == "tybo")
             if(Model.TyboCant < 3)
                 Model.TyboCant++;
-        if (nombre == "jamon")
+        else if (nombre == "jamon")
             if(Model.JamonCant < 3)
                 Model.JamonCant++;
-        if (nombre == "cebolla")
+        else if (nombre == "cebolla")
             if(Model.CebollaCant < 4)
                 Model.CebollaCant++;
-        if (nombre == "mayonesa")
+        else if (nombre == "mayonesa")
             if(Model.MayonesaCant < 1)
                 Model.MostazaCant++;
-        if (nombre == "ketchup")
+        else if (nombre == "ketchup")
             if(Model.KetchupCant < 1)
                 Model.KetchupCant++;
-        if (nombre == "mostaza")
+        else if (nombre == "mostaza")
             if(Model.MostazaCant < 1)
                 Model.MostazaCant++;
-        if (nombre == "sabora")
+        else if (nombre == "sabora")
             if(Model.SaboraCant < 1)
                 Model.SaboraCant++;
-        if (nombre == "carne")
+        else if (nombre == "carne")
             if(Model.CarneCant < 3)
                 Model.CarneCant++;
-        if (nombre == "hamburguesa")
+        else if (nombre == "hamburguesa")
             if(Model.HamburguesaCant < 15)
                 Model.HamburguesaCant++;
     }
@@ -340,43 +353,43 @@
         if (nombre == "lechuga")
             if(Model.LechugaCant != 0)
                 Model.LechugaCant--;
-        if (nombre == "tomate")
+        else if (nombre == "tomate")
             if(Model.TomateCant != 0)
                 Model.TomateCant--;
-        if (nombre == "huevo")
+        else if (nombre == "huevo")
             if(Model.HuevoCant != 0)
                 Model.HuevoCant--;
-        if (nombre == "bacon")
+        else if (nombre == "bacon")
             if(Model.BaconCant != 0)
                 Model.BaconCant--;
-        if (nombre == "cheddar")
+        else if (nombre == "cheddar")
             if(Model.CheddarCant != 0)
                 Model.CheddarCant--;
-        if (nombre == "tybo")
+        else if (nombre == "tybo")
             if(Model.TyboCant != 0)
                 Model.TyboCant--;
-        if (nombre == "jamon")
+        else if (nombre == "jamon")
             if(Model.JamonCant != 0)
                 Model.JamonCant--;
-        if (nombre == "cebolla")
+        else if (nombre == "cebolla")
             if(Model.CebollaCant != 0)
                 Model.CebollaCant--;
-        if (nombre == "mayonesa")
+        else if (nombre == "mayonesa")
             if(Model.MayonesaCant != 0)
                 Model.MostazaCant--;
-        if (nombre == "ketchup")
+        else if (nombre == "ketchup")
             if(Model.KetchupCant != 0)
                 Model.KetchupCant--;
-        if (nombre == "mostaza")
+        else if (nombre == "mostaza")
             if(Model.MostazaCant != 0)
                 Model.MostazaCant--;
-        if (nombre == "sabora")
+        else if (nombre == "sabora")
             if(Model.SaboraCant != 0)
                 Model.SaboraCant--;
-        if (nombre == "carne")
+        else if (nombre == "carne")
             if(Model.CarneCant != 0)
                 Model.CarneCant--;
-        if (nombre == "hamburguesa")
+        else if (nombre == "hamburguesa")
             if(Model.HamburguesaCant != 0)
                 Model.HamburguesaCant--;
     }
