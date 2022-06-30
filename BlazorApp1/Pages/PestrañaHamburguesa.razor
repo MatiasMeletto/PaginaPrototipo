@@ -129,7 +129,8 @@
             set
             {
                 _lechugaCant = value;
-                CalcularTotal();
+                string nombre = "lechuga";
+                CalcularTotal(nombre);
             }
         }
         public int TomateCant 
@@ -141,7 +142,8 @@
             set
             {
                 _tomateCant = value;
-                CalcularTotal();
+                string nombre = "tomate";
+                CalcularTotal(nombre);
             }
         }
         public int HuevoCant
@@ -153,7 +155,8 @@
             set
             {
                 _huevoCant = value;
-                CalcularTotal();
+                string nombre = "huevo";
+                CalcularTotal(nombre);
             }
         }
         public int BaconCant
@@ -165,7 +168,8 @@
             set
             {
                 _baconCant = value;
-                CalcularTotal();
+                string nombre = "bacon";
+                CalcularTotal(nombre);
             }
         }
         public int CheddarCant 
@@ -177,7 +181,8 @@
             set
             {
                 _cheddarCant = value;
-                CalcularTotal();
+                string nombre = "cheddar";
+                CalcularTotal(nombre);
             }
         }
         public int TyboCant
@@ -189,7 +194,8 @@
             set
             {
                 _tyboCant = value;
-                CalcularTotal();
+                string nombre = "tybo";
+                CalcularTotal(nombre);
             }
         }
         public int JamonCant
@@ -201,7 +207,8 @@
             set
             {
                 _jamonCant = value;
-                CalcularTotal();
+                string nombre = "jamon";
+                CalcularTotal(nombre);
             }
         }
         public int CebollaCant
@@ -213,7 +220,8 @@
             set
             {
                 _cebollaCant = value;
-                CalcularTotal();
+                string nombre = "cebolla";
+                CalcularTotal(nombre);
             }
         }
         public int MayonesaCant
@@ -225,7 +233,8 @@
             set
             {
                 _mayonesaCant = value;
-                CalcularTotal();
+                string nombre = "mayonesa";
+                CalcularTotal(nombre);
             }
         }
         public int KetchupCant 
@@ -237,7 +246,8 @@
             set
             {
                 _ketchupCant = value;
-                CalcularTotal();
+                string nombre = "ketchup";
+                CalcularTotal(nombre);
             } 
         }
         public int MostazaCant 
@@ -249,7 +259,8 @@
             set
             {
                 _mostazaCant = value;
-                CalcularTotal();
+                string nombre = "mostaza";
+                CalcularTotal(nombre);            
             }
         }
         public int SaboraCant 
@@ -261,7 +272,8 @@
             set
             {
                 _saboraCant = value;
-                CalcularTotal();
+                string nombre = "sabora";
+                CalcularTotal(nombre);
             }
         }
         public int CarneCant 
@@ -273,7 +285,8 @@
             set
             {
                 _carneCant = value;
-                CalcularTotal();
+                string nombre = "carne";
+                CalcularTotal(nombre);
             }
         }
         public int HamburguesaCant 
@@ -285,7 +298,8 @@
             set
             {
                 _hamburguesasCant = value;
-                CalcularTotal();
+                string nombre = "cantidad";
+                CalcularTotal(nombre);
             }
         }
         public int Total { get; set; }
@@ -295,8 +309,32 @@
             using var db = new CompraContext();
 
             Total = 0;
-            if ()
-            Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * );
+            if (nombre == "lechuga")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
+            else if (nombre == "tomate")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 6)).Precio * TomateCant);
+            else if (nombre == "huevo")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 7)).Precio * HuevoCant);
+            else if (nombre == "bacon")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 8)).Precio * BaconCant);
+            else if (nombre == "cheddar")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 9)).Precio * CheddarCant);
+            else if (nombre == "tybo")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 10)).Precio * TyboCant);
+            else if (nombre == "jamon")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 11)).Precio * JamonCant);
+            else if (nombre == "cebolla")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 12)).Precio * CebollaCant);
+            else if (nombre == "mayonesa")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 13)).Precio * MayonesaCant);
+            else if (nombre == "ketchup")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 14)).Precio * KetchupCant);
+            else if (nombre == "mostaza")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 15)).Precio * MostazaCant);
+            else if (nombre == "sabora")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 16)).Precio * SaboraCant);
+            else if (nombre == "carne")
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
         }
     }
 
@@ -305,93 +343,149 @@
     private void Sumar(string nombre)
     {
         if (nombre == "lechuga")
-            if(Model.LechugaCant < 3)
+        {
+            if (Model.LechugaCant < 3)
                 Model.LechugaCant++;
+        }
         else if (nombre == "tomate")
-            if(Model.TomateCant < 2)
+        {
+            if (Model.TomateCant < 2)
                 Model.TomateCant++;
+        }
         else if (nombre == "huevo")
-            if(Model.HuevoCant < 2)
+        {
+            if (Model.HuevoCant < 2)
                 Model.HuevoCant++;
+        }
         else if (nombre == "bacon")
-            if(Model.BaconCant < 4)
+        {
+            if (Model.BaconCant < 4)
                 Model.BaconCant++;
+        }
         else if (nombre == "cheddar")
-            if(Model.CheddarCant < 3)
+        {
+            if (Model.CheddarCant < 3)
                 Model.CheddarCant++;
+        }
         else if (nombre == "tybo")
-            if(Model.TyboCant < 3)
+        {
+            if (Model.TyboCant < 3)
                 Model.TyboCant++;
+        }
         else if (nombre == "jamon")
-            if(Model.JamonCant < 3)
+        {
+            if (Model.JamonCant < 3)
                 Model.JamonCant++;
+        }
         else if (nombre == "cebolla")
-            if(Model.CebollaCant < 4)
+        {
+            if (Model.CebollaCant < 4)
                 Model.CebollaCant++;
+        }
         else if (nombre == "mayonesa")
-            if(Model.MayonesaCant < 1)
+        {
+            if (Model.MayonesaCant < 1)
                 Model.MostazaCant++;
+        }
         else if (nombre == "ketchup")
-            if(Model.KetchupCant < 1)
+        {
+            if (Model.KetchupCant < 1)
                 Model.KetchupCant++;
+        }
         else if (nombre == "mostaza")
-            if(Model.MostazaCant < 1)
+        {
+            if (Model.MostazaCant < 1)
                 Model.MostazaCant++;
+        }
         else if (nombre == "sabora")
-            if(Model.SaboraCant < 1)
+        {
+            if (Model.SaboraCant < 1)
                 Model.SaboraCant++;
+        }
         else if (nombre == "carne")
-            if(Model.CarneCant < 3)
+        {
+            if (Model.CarneCant < 3)
                 Model.CarneCant++;
+        }
         else if (nombre == "hamburguesa")
-            if(Model.HamburguesaCant < 15)
+        {
+            if (Model.HamburguesaCant < 15)
                 Model.HamburguesaCant++;
+        }
     }
 
     private void Restar(string nombre)
     {
         if (nombre == "lechuga")
-            if(Model.LechugaCant != 0)
+        {
+            if (Model.LechugaCant != 0)
                 Model.LechugaCant--;
+        }
         else if (nombre == "tomate")
-            if(Model.TomateCant != 0)
+        {
+            if (Model.TomateCant != 0)
                 Model.TomateCant--;
+        }
         else if (nombre == "huevo")
-            if(Model.HuevoCant != 0)
+        {
+            if (Model.HuevoCant != 0)
                 Model.HuevoCant--;
+        }
         else if (nombre == "bacon")
-            if(Model.BaconCant != 0)
+        {
+            if (Model.BaconCant != 0)
                 Model.BaconCant--;
+        }
         else if (nombre == "cheddar")
-            if(Model.CheddarCant != 0)
+        {
+            if (Model.CheddarCant != 0)
                 Model.CheddarCant--;
+        }
         else if (nombre == "tybo")
-            if(Model.TyboCant != 0)
+        {
+            if (Model.TyboCant != 0)
                 Model.TyboCant--;
+        }
         else if (nombre == "jamon")
-            if(Model.JamonCant != 0)
+        {
+            if (Model.JamonCant != 0)
                 Model.JamonCant--;
+        }
         else if (nombre == "cebolla")
-            if(Model.CebollaCant != 0)
+        {
+            if (Model.CebollaCant != 0)
                 Model.CebollaCant--;
+        }
         else if (nombre == "mayonesa")
-            if(Model.MayonesaCant != 0)
+        {
+            if (Model.MayonesaCant != 0)
                 Model.MostazaCant--;
+        }
         else if (nombre == "ketchup")
-            if(Model.KetchupCant != 0)
+        {
+            if (Model.KetchupCant != 0)
                 Model.KetchupCant--;
+        }
         else if (nombre == "mostaza")
-            if(Model.MostazaCant != 0)
+        {
+            if (Model.MostazaCant != 0)
                 Model.MostazaCant--;
+        }
         else if (nombre == "sabora")
-            if(Model.SaboraCant != 0)
+        {
+            if (Model.SaboraCant != 0)
                 Model.SaboraCant--;
+        }
         else if (nombre == "carne")
-            if(Model.CarneCant != 0)
+        {
+            if (Model.CarneCant != 0)
                 Model.CarneCant--;
+        }
         else if (nombre == "hamburguesa")
-            if(Model.HamburguesaCant != 0)
+        {
+            if (Model.HamburguesaCant != 0)
                 Model.HamburguesaCant--;
+        }
     }
 
     private void CargarProductoCarro()
