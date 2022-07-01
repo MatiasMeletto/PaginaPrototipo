@@ -14,11 +14,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Imagenes\BACON.png" />
+    <None Remove="wwwroot\css\Imagenes\BACON.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\Imagenes\Bottom bond.png" />
+    <None Include="wwwroot\css\Imagenes\CEBOLLA.png" />
+    <None Include="wwwroot\css\Imagenes\CHEDDAR.png" />
+    <None Include="wwwroot\css\Imagenes\HAMBURGESA.png" />
+    <None Include="wwwroot\css\Imagenes\HUEVO.png" />
+    <None Include="wwwroot\css\Imagenes\JAMON.png" />
+    <None Include="wwwroot\css\Imagenes\LECHUGA.png" />
+    <None Include="wwwroot\css\Imagenes\QUESO.png" />
+    <None Include="wwwroot\css\Imagenes\TOMATE.png" />
+    <None Include="wwwroot\css\Imagenes\Up bond.png" />
   </ItemGroup>
 
   <ItemGroup>
