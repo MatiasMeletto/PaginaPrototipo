@@ -66,13 +66,6 @@ namespace BlazorApp1.Data
                     Nombre = "Hamburguesa",
                     Precio = 0
                 });
-                new Producto()
-                {
-                    ProductoId = 4,
-                    CategoriaId = 4,
-                    Nombre = "Hamburguesa",
-                    Precio = 0
-                };
 
             modelBuilder.Entity<Adicional>()
                 .HasData(new Adicional()

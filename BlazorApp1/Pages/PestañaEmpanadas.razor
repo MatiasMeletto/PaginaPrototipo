@@ -1,14 +1,21 @@
 ﻿@page "/empanadas"
-
-<input type="text" id="choripanes" list="cantidadCh">
-                    <datalist id="cantidadCh">
-                        <option label="1" value="1"></option>
-                        <option label="2" value="2"></option>
-                        <option label="3" value="3"></option>
-                        <option label="4" value="4"></option>
-                        <option label="5" value="5"></option>
-                    </datalist>
-                    
+ <form class="form-inline">
+  <h3><label class="my-1 mr-2" for="inlineFormCustomSelectPref">Tipo de empanada</label></h3>
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+    <option selected></option>
+    <option value="1">Empanada de carne</option>
+    <option value="2">Empanada de choclo</option>
+    <option value="3">Empanada de jamon y queso</option>
+    <option value="1">Empanada de pollo</option>
+    <option value="2">Empanada de verdura</option>
+    </select>
+    <input type="number" min="1" max="30" />
+ <br>
+  <div class="custom-control custom-checkbox my-1 mr-sm-2">
+    <button class="btn btn-primary">Agregar al carrito</button>
+ <button class="btn btn-primary">Ver carrito</button>
+  </div>
+</form>
 @code {
 
 }
