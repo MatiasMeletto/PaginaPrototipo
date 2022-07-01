@@ -309,31 +309,32 @@
             using var db = new CompraContext();
 
             Total = 0;
-            if (nombre == "lechuga")
+
+            if (LechugaCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
-            else if (nombre == "tomate")
+            if (TomateCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 6)).Precio * TomateCant);
-            else if (nombre == "huevo")
+            if (HuevoCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 7)).Precio * HuevoCant);
-            else if (nombre == "bacon")
+            if (BaconCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 8)).Precio * BaconCant);
-            else if (nombre == "cheddar")
+            if (CheddarCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 9)).Precio * CheddarCant);
-            else if (nombre == "tybo")
+            if (TyboCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 10)).Precio * TyboCant);
-            else if (nombre == "jamon")
+            if (JamonCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 11)).Precio * JamonCant);
-            else if (nombre == "cebolla")
+            if (CebollaCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 12)).Precio * CebollaCant);
-            else if (nombre == "mayonesa")
+            if (MayonesaCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 13)).Precio * MayonesaCant);
-            else if (nombre == "ketchup")
+            if (KetchupCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 14)).Precio * KetchupCant);
-            else if (nombre == "mostaza")
+            if (MostazaCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 15)).Precio * MostazaCant);
-            else if (nombre == "sabora")
+            if (SaboraCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 16)).Precio * SaboraCant);
-            else if (nombre == "carne")
+            if (CarneCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
         }
     }
