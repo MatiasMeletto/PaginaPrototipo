@@ -222,7 +222,7 @@ namespace BlazorApp1.Data
                 },
                 new Producto()
                 {
-                    ProductoId = 26,
+                    ProductoId = 27,
                     CategoriaId = 5,
                     Nombre = "JamonYQueso",
                     Precio = 100
