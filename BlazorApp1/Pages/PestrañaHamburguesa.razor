@@ -8,68 +8,86 @@
                 <img src="/css/Imagenes/Up bond.png" width="100" left="20" margin="50%" class="my-1"><img/>
             </div>
             <div class="Lechuga">
-                <input @onclick="Restar" type="button" value="-" />
+                <input @onclick="@(() => { string nombre = "lechuga"; Restar(nombre); })" type="button" value="-"/>
                 <img src="/css/Imagenes/LECHUGA.png" width="100" class="my-1"><img/>
-                <input @onclick="Sumar" type="button" value="+" />
+                <input @onclick="@(() => { string nombre = "lechuga"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.LechugaCant               
+                
             </div>
             <div class="Tomate">
-                <input @onclick="Sumar" type="button" value="-" />
-                <img src="/css/Imagenes/TOMATE.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+                <input @onclick="@(() => { string nombre = "tomate"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/TOMATE.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "tomate"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.TomateCant  
             </div>
             <div class="Huevo">
-                <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/HUEVO.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+               <input @onclick="@(() => { string nombre = "huevo"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/HUEVO.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "huevo"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.HuevoCant   
             </div>
             <div class="Bacon">
-                <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/BACON.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+                <input @onclick="@(() => { string nombre = "bacon"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/BACON.png " width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "bacon"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.BaconCant          
             </div>
             <div class="Cheddar">
-                <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/CHEDDAR.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+                <input @onclick="@(() => { string nombre = "cheddar"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/CHEDDAR.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "cheddar"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.CheddarCant   
             </div>
             <div class="Tybo">
-               <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/QUESO.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+               <input @onclick="@(() => { string nombre = "tybo"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/QUESO.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "tybo"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.TyboCant  
             </div>
             <div class="Jamon">
-               <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/JAMON.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+               <input @onclick="@(() => { string nombre = "jamon"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/JAMON.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "jamon"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.JamonCant   
             </div>
             <div class="Cebolla">
-              <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/CEBOLLA.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/> 
+              <input @onclick="@(() => { string nombre = "cebolla"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/CEBOLLA.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "cebolla"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.CebollaCant   
             </div>
             <div class="`Mayonesa">
-               <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/Mayonesa.PNG" width="100" class="my-4"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+               <input @onclick="@(() => { string nombre = "mayonesa"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "mayonesa"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.MayonesaCant   
             </div>
             <div class="Ketchup">
-                <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/Ketchup.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+                <input @onclick="@(() => { string nombre = "ketchup"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/Ketchup.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "ketchup"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.KetchupCant
             </div>
             <div class="Mostaza">
-               <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/Mostaza.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+               <input @onclick="@(() => { string nombre = "mostaza"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/Mostaza.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "mostaza"; Sumar(nombre); })" type="button" value="+"/>
+                @Model.MostazaCant
             </div>
              <div class="Carne">
-                 <input @onclick="Sumar" type="button" value="-"/>
-                <img src="/css/Imagenes/HAMBURGESA.png" width="100" class="my-1"><img />
-                <input @onclick="Sumar" type="button" value="+"/>
+                <input @onclick="@(() => { string nombre = "carne"; Restar(nombre); })" type="button" value="-"/>
+                <img src="/css/Imagenes/HAMBURGESA.png" width="100" class="my-1"><img/>
+                <input @onclick="@(() => { string nombre = "carne"; Sumar(nombre); })" type="button" value="+"/>
                 @Model.CarneCant
+                
             </div>
-             <div class="Pan">             
-                <img src="/css/Imagenes/Bottom bond.png" width="100" class="my-1"><img />               
+             <div class="Pan">
+                 <div class="col-1">
+                
+                </div>         
+                <div class="col-11">
+                    <img src="/css/Imagenes/Bottom bond.png" width="100" class="my-1"><img />
+                    </div>
             </div>
              <div class="Cantidad">
              
@@ -87,18 +105,22 @@
 
 @code {
 
-    private void Sumar()
-    {
-        Model.LechugaCant++;
-   }
-
-    private void Restar()
-    {
-        Model.LechugaCant--;
-    }
     private class ProductoViewModel
     {
         int _lechugaCant;
+        int _tomateCant;
+        int _huevoCant;
+        int _baconCant;
+        int _cheddarCant;
+        int _tyboCant;
+        int _jamonCant;
+        int _cebollaCant;
+        int _mayonesaCant;
+        int _ketchupCant;
+        int _mostazaCant;
+        int _saboraCant;
+        int _carneCant;
+        int _hamburguesasCant;
 
         public int LechugaCant
         {
@@ -109,22 +131,169 @@
             set
             {
                 _lechugaCant = value;
+
                 CalcularTotal();
             }
         }
-        public int TomateCant { get; set; }
-        public int HuevoCant { get; set; }
-        public int BaconCant { get; set; }
-        public int CheddarCant { get; set; }
-        public int TyboCant { get; set; }
-        public int JamonCant { get; set; }
-        public int CebollaCant { get; set; }
-        public int MayonesaCant { get; set; }
-        public int KetchupCant { get; set; }
-        public int MostazaCant { get; set; }
-        public int SaboraCant { get; set; }
-        public int CarneCant { get; set; } = 1;
-        public int HamburguesaCant { get; set; } = 1;
+        public int TomateCant 
+        {
+            get
+            {
+                return _tomateCant;
+            }
+            set
+            {
+                _tomateCant = value;
+
+                CalcularTotal();
+            }
+        }
+        public int HuevoCant
+        {
+            get
+            {
+                return _huevoCant;
+            }
+            set
+            {
+                _huevoCant = value;
+                CalcularTotal();
+            }
+        }
+        public int BaconCant
+        {
+            get
+            {
+                return _baconCant;
+            }
+            set
+            {
+                _baconCant = value;
+                CalcularTotal();
+            }
+        }
+        public int CheddarCant 
+        {
+            get
+            {
+                return _cheddarCant;
+            }
+            set
+            {
+                _cheddarCant = value;
+
+                CalcularTotal();
+            }
+        }
+        public int TyboCant
+        {
+            get
+            {
+                return _tyboCant;
+            }
+            set
+            {
+                _tyboCant = value;
+                CalcularTotal();
+            }
+        }
+        public int JamonCant
+        {
+            get
+            {
+                return _jamonCant;
+            }
+            set
+            {
+                _jamonCant = value;
+                CalcularTotal();
+            }
+        }
+        public int CebollaCant
+        {
+            get
+            {
+                return _cebollaCant;
+            }
+            set
+            {
+                _cebollaCant = value;
+ 
+                CalcularTotal();
+            }
+        }
+        public int MayonesaCant
+        {
+            get
+            {
+                return _mayonesaCant;
+            }
+            set
+            {
+                _mayonesaCant = value;         
+                CalcularTotal();
+            }
+        }
+        public int KetchupCant 
+        { 
+            get
+            {
+                return _ketchupCant;
+            }
+            set
+            {
+                _ketchupCant = value;
+                CalcularTotal();
+            } 
+        }
+        public int MostazaCant 
+        {
+            get
+            {
+                return _mostazaCant;
+            }
+            set
+            {
+                _mostazaCant = value;
+                CalcularTotal();            
+            }
+        }
+        public int SaboraCant 
+        {
+            get
+            {
+                return _saboraCant;
+            }
+            set
+            {
+                _saboraCant = value;
+                CalcularTotal();
+            }
+        }
+        public int CarneCant 
+        {
+            get
+            {
+                return _carneCant;
+            }
+            set
+            {
+                _carneCant = value;
+                CalcularTotal();
+            }
+        }
+        public int HamburguesaCant 
+        {
+            get
+            {
+                return _hamburguesasCant;
+            }
+            set
+            {
+                _hamburguesasCant = value;
+                CalcularTotal();
+            }
+        }
         public int Total { get; set; }
 
         private async void CalcularTotal()
@@ -132,11 +301,185 @@
             using var db = new CompraContext();
 
             Total = 0;
-            Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
+
+            if (LechugaCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
+            if (TomateCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 6)).Precio * TomateCant);
+            if (HuevoCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 7)).Precio * HuevoCant);
+            if (BaconCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 8)).Precio * BaconCant);
+            if (CheddarCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 9)).Precio * CheddarCant);
+            if (TyboCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 10)).Precio * TyboCant);
+            if (JamonCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 11)).Precio * JamonCant);
+            if (CebollaCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 12)).Precio * CebollaCant);
+            if (MayonesaCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 13)).Precio * MayonesaCant);
+            if (KetchupCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 14)).Precio * KetchupCant);
+            if (MostazaCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 15)).Precio * MostazaCant);
+            if (SaboraCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 16)).Precio * SaboraCant);
+            if (CarneCant != 0)
+                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
         }
     }
 
     private ProductoViewModel Model { get; set; } = new();
+
+    private void Sumar(string nombre)
+    {
+        if (nombre == "lechuga")
+        {
+            if (Model.LechugaCant < 3)
+                Model.LechugaCant++;
+        }
+        else if (nombre == "tomate")
+        {
+            if (Model.TomateCant < 2)
+                Model.TomateCant++;
+        }
+        else if (nombre == "huevo")
+        {
+            if (Model.HuevoCant < 2)
+                Model.HuevoCant++;
+        }
+        else if (nombre == "bacon")
+        {
+            if (Model.BaconCant < 4)
+                Model.BaconCant++;
+        }
+        else if (nombre == "cheddar")
+        {
+            if (Model.CheddarCant < 3)
+                Model.CheddarCant++;
+        }
+        else if (nombre == "tybo")
+        {
+            if (Model.TyboCant < 3)
+                Model.TyboCant++;
+        }
+        else if (nombre == "jamon")
+        {
+            if (Model.JamonCant < 3)
+                Model.JamonCant++;
+        }
+        else if (nombre == "cebolla")
+        {
+            if (Model.CebollaCant < 4)
+                Model.CebollaCant++;
+        }
+        else if (nombre == "mayonesa")
+        {
+            if (Model.MayonesaCant < 1)
+                Model.MayonesaCant++;
+        }
+        else if (nombre == "ketchup")
+        {
+            if (Model.KetchupCant < 1)
+                Model.KetchupCant++;
+        }
+        else if (nombre == "mostaza")
+        {
+            if (Model.MostazaCant < 1)
+                Model.MostazaCant++;
+        }
+        else if (nombre == "sabora")
+        {
+            if (Model.SaboraCant < 1)
+                Model.SaboraCant++;
+        }
+        else if (nombre == "carne")
+        {
+            if (Model.CarneCant < 3)
+                Model.CarneCant++;
+        }
+        else if (nombre == "hamburguesa")
+        {
+            if (Model.HamburguesaCant < 15)
+                Model.HamburguesaCant++;
+        }
+    }
+
+    private void Restar(string nombre)
+    {
+        if (nombre == "lechuga")
+        {
+            if (Model.LechugaCant != 0)
+                Model.LechugaCant--;
+        }
+        else if (nombre == "tomate")
+        {
+            if (Model.TomateCant != 0)
+                Model.TomateCant--;
+        }
+        else if (nombre == "huevo")
+        {
+            if (Model.HuevoCant != 0)
+                Model.HuevoCant--;
+        }
+        else if (nombre == "bacon")
+        {
+            if (Model.BaconCant != 0)
+                Model.BaconCant--;
+        }
+        else if (nombre == "cheddar")
+        {
+            if (Model.CheddarCant != 0)
+                Model.CheddarCant--;
+        }
+        else if (nombre == "tybo")
+        {
+            if (Model.TyboCant != 0)
+                Model.TyboCant--;
+        }
+        else if (nombre == "jamon")
+        {
+            if (Model.JamonCant != 0)
+                Model.JamonCant--;
+        }
+        else if (nombre == "cebolla")
+        {
+            if (Model.CebollaCant != 0)
+                Model.CebollaCant--;
+        }
+        else if (nombre == "mayonesa")
+        {
+            if (Model.MayonesaCant != 0)
+                Model.MayonesaCant--;
+        }
+        else if (nombre == "ketchup")
+        {
+            if (Model.KetchupCant != 0)
+                Model.KetchupCant--;
+        }
+        else if (nombre == "mostaza")
+        {
+            if (Model.MostazaCant != 0)
+                Model.MostazaCant--;
+        }
+        else if (nombre == "sabora")
+        {
+            if (Model.SaboraCant != 0)
+                Model.SaboraCant--;
+        }
+        else if (nombre == "carne")
+        {
+            if (Model.CarneCant != 0)
+                Model.CarneCant--;
+        }
+        else if (nombre == "hamburguesa")
+        {
+            if (Model.HamburguesaCant != 0)
+                Model.HamburguesaCant--;
+        }
+    }
 
     private void CargarProductoCarro()
     {
