@@ -68,4 +68,6 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-    
+.nav-item {
+    right: 0.75rem;
+}
