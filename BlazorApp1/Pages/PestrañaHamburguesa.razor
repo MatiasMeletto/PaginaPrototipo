@@ -142,8 +142,7 @@
             set
             {
                 _lechugaCant = value;
-                string nombre = "lechuga";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int TomateCant 
@@ -155,8 +154,7 @@
             set
             {
                 _tomateCant = value;
-                string nombre = "tomate";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int HuevoCant
@@ -168,8 +166,7 @@
             set
             {
                 _huevoCant = value;
-                string nombre = "huevo";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int BaconCant
@@ -181,8 +178,7 @@
             set
             {
                 _baconCant = value;
-                string nombre = "bacon";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int CheddarCant 
@@ -194,8 +190,7 @@
             set
             {
                 _cheddarCant = value;
-                string nombre = "cheddar";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int TyboCant
@@ -207,8 +202,7 @@
             set
             {
                 _tyboCant = value;
-                string nombre = "tybo";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int JamonCant
@@ -220,8 +214,7 @@
             set
             {
                 _jamonCant = value;
-                string nombre = "jamon";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int CebollaCant
@@ -233,8 +226,7 @@
             set
             {
                 _cebollaCant = value;
-                string nombre = "cebolla";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int MayonesaCant
@@ -246,8 +238,7 @@
             set
             {
                 _mayonesaCant = value;
-                string nombre = "mayonesa";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int KetchupCant 
@@ -259,8 +250,7 @@
             set
             {
                 _ketchupCant = value;
-                string nombre = "ketchup";
-                CalcularTotal(nombre);
+                CalcularTotal();
             } 
         }
         public int MostazaCant 
@@ -272,8 +262,7 @@
             set
             {
                 _mostazaCant = value;
-                string nombre = "mostaza";
-                CalcularTotal(nombre);            
+                CalcularTotal();            
             }
         }
         public int SaboraCant 
@@ -285,8 +274,7 @@
             set
             {
                 _saboraCant = value;
-                string nombre = "sabora";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int CarneCant 
@@ -298,8 +286,7 @@
             set
             {
                 _carneCant = value;
-                string nombre = "carne";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int HamburguesaCant 
@@ -311,13 +298,12 @@
             set
             {
                 _hamburguesasCant = value;
-                string nombre = "cantidad";
-                CalcularTotal(nombre);
+                CalcularTotal();
             }
         }
         public int Total { get; set; }
 
-        private async void CalcularTotal(string nombre)
+        private async void CalcularTotal()
         {
             using var db = new CompraContext();
 
