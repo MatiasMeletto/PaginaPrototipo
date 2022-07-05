@@ -32,6 +32,8 @@
     <None Include="wwwroot\css\Imagenes\QUESO.png" />
     <None Include="wwwroot\css\Imagenes\TOMATE.png" />
     <None Include="wwwroot\css\Imagenes\Up bond.png" />
+    <None Include="wwwroot\Pagina\assets\img\avataaars.svg" />
+    <None Include="wwwroot\Pagina\js\scripts.js" />
   </ItemGroup>
 
   <ItemGroup>
