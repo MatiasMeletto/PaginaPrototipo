@@ -1,0 +1,87 @@
+﻿@page "/carrito"
+
+<h3>PestañaCarrito</h3>
+
+<label>
+    nombre: @Model.Nombre
+    <br>
+    cant :@Model.Cantidad
+    <br>
+    precio: @Model.Precio
+</label>
+
+@code {
+    private class CarritoViewModel
+    {
+        string _nombre;
+
+        public string Nombre 
+        { 
+            get
+            {
+                return _nombre;
+            }
+            set
+            {
+                _nombre = value;
+                VerCarrito();
+            }
+        }
+        public int Precio{ get; set; }
+        public int Cantidad{ get; set; }
+
+        private void VerCarrito()
+        {
+            using var db = new CompraContext();
+
+            var carrito = db.Carritos
+            .Include(c => c.Usuario)
+            .Include(c => c.Productos)
+            .ThenInclude(p => p.Producto)
+            .ThenInclude(p => p.Adicionales)
+            .Include(c => c.Productos)
+            .ThenInclude(p => p.Producto)
+            .Include(c => c.Productos)
+            .ThenInclude(p => p.Producto)
+            .ThenInclude(p => p.Adicionales)
+            .ThenInclude(p => p.Precio)
+            .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
+            .Where(c => c.UsuarioId == 1).ToList();
+
+            foreach (Carrito c in carrito)
+            {
+                foreach(CarritoProducto cp in c.Productos)
+                {
+                    Cantidad = cp.Cantidad;
+                    Nombre = cp.Producto.Nombre;
+                    Precio = cp.Producto.Precio;
+                }
+            }
+        }
+    }
+
+    private CarritoViewModel Model { get; set; }
+
+    
+        
+    private void EscribirPrecio()
+    {
+        using var db = new CompraContext();
+
+        int total = 0;
+
+        var carritoProducto = db.CarritoProductos
+        .Include(c => c.Adicionales)
+        .ThenInclude(c => c.Adicional).ToList();
+
+        var adicional = db.Adicionales.ToList();
+
+        foreach (CarritoProducto c in carritoProducto)
+        {
+            foreach (CarritoProductoAdicional cpa in c.Adicionales)
+            {
+                total = total + (cpa.Adicional.Precio * cpa.Cantidad);
+            }
+        }
+    }
+}
