@@ -1,107 +1,131 @@
 ﻿@page "/hamburguesas"
-
-<div>
-    <form action="#">
-    <section id="Labels">
-        <div class="container">          
-            <div class="Pan">
-                <img src="/css/Imagenes/Up bond.png" width="100" left="20" margin="50%" class="my-1"><img/>
+<body id="page-top">
+    <!-- Barra de navegación-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top">HAMBURGUESAS</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
+                </ul>
             </div>
-            <div class="Lechuga">
-                <input @onclick="@(() => { string nombre = "lechuga"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/LECHUGA.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "lechuga"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.LechugaCant               
-                
-            </div>
-            <div class="Tomate">
-                <input @onclick="@(() => { string nombre = "tomate"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/TOMATE.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "tomate"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.TomateCant  
-            </div>
-            <div class="Huevo">
-               <input @onclick="@(() => { string nombre = "huevo"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/HUEVO.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "huevo"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.HuevoCant   
-            </div>
-            <div class="Bacon">
-                <input @onclick="@(() => { string nombre = "bacon"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/BACON.png " width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "bacon"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.BaconCant          
-            </div>
-            <div class="Cheddar">
-                <input @onclick="@(() => { string nombre = "cheddar"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/CHEDDAR.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "cheddar"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.CheddarCant   
-            </div>
-            <div class="Tybo">
-               <input @onclick="@(() => { string nombre = "tybo"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/QUESO.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "tybo"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.TyboCant  
-            </div>
-            <div class="Jamon">
-               <input @onclick="@(() => { string nombre = "jamon"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/JAMON.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "jamon"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.JamonCant   
-            </div>
-            <div class="Cebolla">
-              <input @onclick="@(() => { string nombre = "cebolla"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/CEBOLLA.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "cebolla"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.CebollaCant   
-            </div>
-            <div class="`Mayonesa">
-               <input @onclick="@(() => { string nombre = "mayonesa"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "mayonesa"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.MayonesaCant   
-            </div>
-            <div class="Ketchup">
-                <input @onclick="@(() => { string nombre = "ketchup"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/Ketchup.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "ketchup"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.KetchupCant
-            </div>
-            <div class="Mostaza">
-               <input @onclick="@(() => { string nombre = "mostaza"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/Mostaza.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "mostaza"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.MostazaCant
-            </div>
-             <div class="Carne">
-                <input @onclick="@(() => { string nombre = "carne"; Restar(nombre); })" type="button" value="-"/>
-                <img src="/css/Imagenes/HAMBURGESA.png" width="100" class="my-1"><img/>
-                <input @onclick="@(() => { string nombre = "carne"; Sumar(nombre); })" type="button" value="+"/>
-                @Model.CarneCant
-                
-            </div>
-             <div class="Pan">
-                 <div class="col-1">
-                
-                </div>         
-                <div class="col-11">
-                    <img src="/css/Imagenes/Bottom bond.png" width="100" class="my-1"><img />
-                    </div>
-            </div>
-             <div class="Cantidad">
-             
-            </div>
-          
         </div>
-       </section>
-    </form>
-    <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
-    <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
-</div>
-<div>
-    <h2>Precio = @Model.Total.ToString("C")</h2>
-</div>
+    </nav>
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+        <div>
+            <form action="#">
+                <section id="Labels">
+                <div class="container">          
+                    <div class="Pan">
+                        <img src="/css/Imagenes/Up bond.png" width="100" left="20" margin="50%" class="my-1"><img/>
+                    </div>
+                    <div class="Lechuga">
+                        <input @onclick="@(() => { string nombre = "lechuga"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/LECHUGA.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "lechuga"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.LechugaCant               
+                
+                    </div>
+                    <div class="Tomate">
+                        <input @onclick="@(() => { string nombre = "tomate"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/TOMATE.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "tomate"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.TomateCant  
+                    </div>
+                    <div class="Huevo">
+                       <input @onclick="@(() => { string nombre = "huevo"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/HUEVO.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "huevo"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.HuevoCant   
+                    </div>
+                    <div class="Bacon">
+                        <input @onclick="@(() => { string nombre = "bacon"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/BACON.png " width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "bacon"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.BaconCant          
+                    </div>
+                    <div class="Cheddar">
+                        <input @onclick="@(() => { string nombre = "cheddar"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/CHEDDAR.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "cheddar"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.CheddarCant   
+                    </div>
+                    <div class="Tybo">
+                       <input @onclick="@(() => { string nombre = "tybo"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/QUESO.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "tybo"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.TyboCant  
+                    </div>
+                    <div class="Jamon">
+                       <input @onclick="@(() => { string nombre = "jamon"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/JAMON.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "jamon"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.JamonCant   
+                    </div>
+                    <div class="Cebolla">
+                      <input @onclick="@(() => { string nombre = "cebolla"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/CEBOLLA.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "cebolla"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.CebollaCant   
+                    </div>
+                    <div class="`Mayonesa">
+                       <input @onclick="@(() => { string nombre = "mayonesa"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/Mayonesaa.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "mayonesa"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.MayonesaCant   
+                    </div>
+                    <div class="Ketchup">
+                        <input @onclick="@(() => { string nombre = "ketchup"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/Ketchup.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "ketchup"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.KetchupCant
+                    </div>
+                    <div class="Mostaza">
+                       <input @onclick="@(() => { string nombre = "mostaza"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/Mostaza.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "mostaza"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.MostazaCant
+                    </div>
+                     <div class="Carne">
+                        <input @onclick="@(() => { string nombre = "carne"; Restar(nombre); })" type="button" value="-"/>
+                        <img src="/css/Imagenes/HAMBURGESA.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "carne"; Sumar(nombre); })" type="button" value="+"/>
+                        @Model.CarneCant
+                
+                    </div>
+                     <div class="Pan">
+                         <div class="col-1">
+                
+                        </div>         
+                        <div class="col-11">
+                            <img src="/css/Imagenes/Bottom bond.png" width="100" class="my-1"><img />
+                            </div>
+                    </div>
+                     <div class="Cantidad">
+             
+                    </div>
+          
+                </div>
+               </section>
+            </form>
+            <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
+            <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
+        </div>
+            <div>
+            <h2>Precio = @Model.Total.ToString("C")</h2>
+            </div>
+        </div>
+    </header>
+
+
+</body>
 
 @code {
 

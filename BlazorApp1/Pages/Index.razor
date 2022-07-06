@@ -11,9 +11,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Comidas</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Quienes Somos?</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contactanos</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
                 </ul>
             </div>
         </div>
@@ -246,11 +246,13 @@
                                 <!-- Modelos de Comida - Imagen -->
                                 <img class="img-fluid rounded mb-5" src="/Pagina/assets/Media/Burguer.jpg" alt="..." />
                                 <!-- Modelos de Comida - Texto -->
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    Cerrar
-                                </button>
+                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>                     
+                                    <a href="/Hamburguesas"> 
+                                        <button class="btn btn-primary" data-bs-dismiss="modal"> 
+                                          Ir 
+                                        </button>
+                                    </a>
+                                  
                             </div>
                         </div>
                     </div>
@@ -279,10 +281,11 @@
                                 <img class="img-fluid rounded mb-5" src="/Pagina/assets/Media/Choripan2.jpg" alt="..." />
                                 <!-- Modelos de Comida - Texto-->
                                 <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    Cerrar
-                                </button>
+                                 <a href="/chori"> 
+                                        <button class="btn btn-primary" data-bs-dismiss="modal"> 
+                                          Ir 
+                                        </button>
+                                    </a>
                             </div>
                         </div>
                     </div>

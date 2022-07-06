@@ -14,6 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\Imagenes\Mayonesa.PNG" />
+    <Content Remove="wwwroot\css\Imagenes\Mayonesa1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="wwwroot\css\Imagenes\BACON.png" />
   </ItemGroup>
 
