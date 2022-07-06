@@ -1,5 +1,67 @@
-﻿<h3>PestañaEmpanada</h3>
-
+﻿@page "/empanadas"
+ <form class="form-inline">
+  <h3><label class="my-1 mr-2" for="inlineFormCustomSelectPref">Tipo de empanada</label></h3>
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" @bind="Model.Id">
+    <option selected></option>
+    <option value="1">Empanada de carne</option>
+    <option value="2">Empanada de choclo</option>
+    <option value="3">Empanada de jamon y queso</option>
+    <option value="1">Empanada de pollo</option>
+    <option value="2">Empanada de verdura</option>
+    </select>
+    <br>
+    <h4><label class="my-1 mr-2" for="inlineFormCustomSelectPref">Cantidad de empanada</label></h4>
+    <input @bind="Model.Cantidad" type="number" min="1" max="30" />
+    <br>
+    <br>
+  <div class="custom-control custom-checkbox my-1 mr-sm-2">
+<button class="btn btn-primary" @onclick="CargarProductoCarrito">Agregar al carrito</button>
+<button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
+  </div>
+</form>
 @code {
+        private class ProductoViewModel
+    {
+        public int Id{ get; set; }
+        public int Cantidad{ get; set; }
+    }
 
+    private ProductoViewModel Model { get; set; } = new();
+
+    private void CargarProductoCarrito()
+    {
+        using var db = new CompraContext();
+
+        Carrito carrito = db.Carritos.Include(c => c.Productos) .Where(c => c.UsuarioId == 1).SingleOrDefault();
+
+        if (carrito is not null)
+        {
+            CarritoProducto carritoProducto = new CarritoProducto()
+            {
+                ProductoId = Model.Id,
+                Cantidad = Model.Cantidad,
+            };
+
+            carrito.Productos.Add(carritoProducto);
+            db.SaveChanges();
+        }
+        else
+        {
+            //anashe
+        }
+
+    }
+    private void VerCarrito()
+    {
+        using var db = new CompraContext();
+
+        Carrito carrito = db.Carritos
+        .Include(c => c.Usuario)
+        .Include(c => c.Productos)
+        .ThenInclude(p => p.Producto)
+        .ThenInclude(p => p.Adicionales)
+        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
+        .Where(c => c.UsuarioId == 1).SingleOrDefault();
+    }
 }
+

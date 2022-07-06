@@ -1,5 +1,66 @@
-﻿<h3>PestañaTortas</h3>
+﻿@page "/tortas"
+
+<h3>PestañaTortas</h3>
+
+<select @bind="Model.Id">
+    <option selected></option>
+    <option value="3">Torta de chocolate</option>
+    <option value="5">Torta de zanahoria</option>
+    <option value="6">Torta de vainilla</option>
+    <option value="7">Pastafrola</option>
+    <option value="8">Brownie c/mani</option>
+    <option value="9">Brownie s/mani</option>
+    <option value="10">Torta de frambuesa</option>
+</select>
+<input @bind="Model.Cantidad" type="number" min="0" max="5" />
+<br>
+
+<button class="btn btn-primary" @onclick="CargarProductoCarrito">Agregar al carrito</button>
+<button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
 
 @code {
+    private class ProductoViewModel
+    {
+        public int Id{ get; set; }
+        public int Cantidad{ get; set; }
+    }
 
+    private ProductoViewModel Model { get; set; } = new();
+
+    private void CargarProductoCarrito()
+    {
+        using var db = new CompraContext();
+
+        Carrito carrito = db.Carritos.Include(c => c.Productos) .Where(c => c.UsuarioId == 1).SingleOrDefault();
+
+        if (carrito is not null)
+        {
+            CarritoProducto carritoProducto = new CarritoProducto()
+            {
+                ProductoId = Model.Id,
+                Cantidad = Model.Cantidad,
+            };
+
+            carrito.Productos.Add(carritoProducto);
+            db.SaveChanges();
+        }
+        else
+        {
+            //anashe
+        }
+
+    }
+    private void VerCarrito()
+    {
+        using var db = new CompraContext();
+
+        Carrito carrito = db.Carritos
+        .Include(c => c.Usuario)
+        .Include(c => c.Productos)
+        .ThenInclude(p => p.Producto)
+        .ThenInclude(p => p.Adicionales)
+        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
+        .Where(c => c.UsuarioId == 1).SingleOrDefault();
+    }
 }
+

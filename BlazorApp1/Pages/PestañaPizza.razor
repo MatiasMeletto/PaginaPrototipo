@@ -1,5 +1,68 @@
-﻿<h3>PestañaPizza</h3>
+﻿@page "/pizzas"
+
+<h3>Pizza</h3>
+<select @bind="Model.Id">
+    <option selected></option>
+    <option value="11">Muzzarela</option>
+    <option value="12">Especial</option>
+    <option value="13">Con jamon</option>
+    <option value="14">Napolitana</option>
+    <option value="15">4 quesos</option>
+    <option value="16">Cebolla</option>
+    <option value="17">Anchoa</option>
+    <option value="18">Anana</option>
+    <option value="19">Huevo</option>
+    <option value="20">Choclo</option>
+    <option value="21">Milan</option>
+</select>
+<input @bind="Model.Cantidad" type="number" min="0" max="5" />
+<br>
+
+<button class="btn btn-primary" @onclick="CargarProductoCarrito">Agregar al carrito</button>
+<button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
 
 @code {
+    private class ProductoViewModel
+    {
+        public int Id{ get; set; }
+        public int Cantidad{ get; set; }
+    }
 
+    private ProductoViewModel Model { get; set; } = new();
+
+    private void CargarProductoCarrito()
+    {
+        using var db = new CompraContext();
+
+        Carrito carrito = db.Carritos.Include(c => c.Productos) .Where(c => c.UsuarioId == 1).SingleOrDefault();
+
+        if (carrito is not null)
+        {
+            CarritoProducto carritoProducto = new CarritoProducto()
+            {
+                ProductoId = Model.Id,
+                Cantidad = Model.Cantidad,
+            };
+
+            carrito.Productos.Add(carritoProducto);
+            db.SaveChanges();
+        }
+        else
+        {
+            //anashe
+        }
+
+    }
+    private void VerCarrito()
+    {
+        using var db = new CompraContext();
+
+        Carrito carrito = db.Carritos
+        .Include(c => c.Usuario)
+        .Include(c => c.Productos)
+        .ThenInclude(p => p.Producto)
+        .ThenInclude(p => p.Adicionales)
+        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
+        .Where(c => c.UsuarioId == 1).SingleOrDefault();
+    }
 }
