@@ -2,7 +2,7 @@
 
 <h3>Carrito</h3>
 
-@if (carritos == null)
+@if (productos == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,89 +18,132 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var c in carritos)
+            @foreach (var producto in Model.Productos)
             {
                 <tr>
-                    <td>@c.Producto.Nombre</td>
-                    <td>@c.Cantidad</td>
-                    <td>@c.Producto.Precio</td>
-                    <td>@foreach (var a in c.Adicionales)
-                        {
-                            @if (c.Adicionales.Count < (a.Adicional.AdicionalId) - 1)
-                            {
-                                <label>@a.Adicional.Nombre (@a.Cantidad).</label>
-                            }
-                            else
-                            {
-                                <label>@a.Adicional.Nombre (@a.Cantidad),<label> </label></label>
-                            }
-                        }
-                    </td>
+                    <td>@producto.Nombre</td>
+                    <td>@producto.Cantidad</td>
+                    <td>@producto.Precio</td>
+                    <td>@producto.Adicionales</td>
+                    @*                    <td>@foreach (var a in producto.Adicionales)
+            {
+            @if (producto.Adicionales.Count < (a.Adicional.AdicionalId) - 1)
+            {
+            <label>@a.Adicional.Nombre (@a.Cantidad).</label>
+            }
+            else
+            {
+            <label>@a.Adicional.Nombre (@a.Cantidad),<label> </label></label>
+            }
+            }
+            </td>*@
                 </tr>
             }
         </tbody>
     </table>
+    <p>Total: @Model.Total</p>
 }
 
 
 @code {
     private class CarritoViewModel
     {
+        public decimal Total
+        {
+            get
+            {
+                return Productos.Sum(p => p.Precio);
+            }
+        }
+        public List<ProductoViewModel> Productos { get; set; } = new List<ProductoViewModel>();
+    }
+
+    private class ProductoViewModel
+    {
         public string Nombre { get; set; }
-        public int Precio{ get; set; }
-        public int Cantidad{ get; set; }
-
-
+        public int Cantidad { get; set; }
+        public int Precio { get; set; }
+        public string Adicionales { get; set; }
     }
 
     private CarritoViewModel Model { get; set; } = new();
 
-    private CarritoProducto[]? carritos;
+    private CarritoProducto[]? productos;
 
     protected override async Task OnInitializedAsync()
     {
         using var db = new CompraContext();
 
-        carritos = db.CarritoProductos
+        productos = db.CarritoProductos
         .Include(c => c.Producto)
         .Include(p => p.Adicionales)
         .ThenInclude(p => p.Adicional).ToArray();
-    }
 
-    private void VerCarrito()
-    {
-        using var db = new CompraContext();
-
-        var carrito = db.Carritos
-        .Include(c => c.Usuario)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .ThenInclude(p => p.Adicionales)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .ThenInclude(p => p.Adicionales)
-        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-        .Where(c => c.UsuarioId == 1).ToList();
-
-        if (carrito is not null)
+        foreach (var producto in productos)
         {
-            foreach (Carrito c in carrito)
-            {
-                foreach (CarritoProducto cp in c.Productos)
+            ProductoViewModel productoViewModel = new ProductoViewModel
                 {
-                    Model.Cantidad = cp.Cantidad;
-                    Model.Nombre = cp.Producto.Nombre;
-                    Model.Precio = cp.Producto.Precio;
+                    Cantidad = producto.Cantidad,
+                    Nombre = producto.Producto.Nombre,
+                    Precio = producto.Producto.Precio
+                };
+            foreach (var adicional in producto.Adicionales)
+            {
+                productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
+                if (producto.Adicionales.Last() == adicional)
+                {
+                    productoViewModel.Adicionales += ".";
+                }
+                else
+                {
+                    productoViewModel.Adicionales += ", ";
                 }
             }
-        }
-        else
-        {
-            //anashe
+            if (producto.ProductoId == 4)
+            {
+                foreach (var adicional in producto.Adicionales)
+                {
+                    productoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
+                }
+            }
+            Model.Productos.Add(productoViewModel);
         }
     }
+
+    //private void VerCarrito()
+    //{
+    //    using var db = new CompraContext();
+
+    //    var carrito = db.Carritos
+    //    .Include(c => c.Usuario)
+    //    .Include(c => c.Productos)
+    //    .ThenInclude(p => p.Producto)
+    //    .ThenInclude(p => p.Adicionales)
+    //    .Include(c => c.Productos)
+    //    .ThenInclude(p => p.Producto)
+    //    .Include(c => c.Productos)
+    //    .ThenInclude(p => p.Producto)
+    //    .ThenInclude(p => p.Adicionales)
+    //    .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
+    //    .Where(c => c.UsuarioId == 1).ToList();
+
+    //    if (carrito is not null)
+    //    {
+    //        foreach (Carrito c in carrito)
+    //        {
+    //            foreach (CarritoProducto cp in c.Productos)
+    //            {
+    //                Model.Cantidad = cp.Cantidad;
+    //                Model.Nombre = cp.Producto.Nombre;
+    //                Model.Precio = cp.Producto.Precio;
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        //anashe
+    //    }
+    //}
 
     private void EscribirPrecio()
     {
