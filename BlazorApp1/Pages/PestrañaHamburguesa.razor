@@ -23,7 +23,8 @@
             <form action="#">
             <section id="Labels">
                <div class="col-2"></div>  
-                <div class="col-md-6 offset-md-3"> 
+                <div class="col-md-8 offset-md-2"> 
+                <div class="row">
                 <div class="container">          
                    <div class="Pan">
                          <div class="col-1"></div>         
@@ -32,58 +33,58 @@
                         </div>
                    </div>
                    <div class="Lechuga">
-                        <input @onclick="@(() => { string nombre = "lechuga"; Restar(nombre); })" type="button" value="-"/>
+                        <input @onclick="@(() => { string nombre = "lechuga"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/LECHUGA.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "lechuga"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "lechuga"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
                         @Model.LechugaCant               
                 
                    </div>
                    <div class="Tomate">
-                        <input @onclick="@(() => { string nombre = "tomate"; Restar(nombre); })" type="button" value="-"/>
+                        <input @onclick="@(() => { string nombre = "tomate"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/TOMATE.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "tomate"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "tomate"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
                         @Model.TomateCant  
                    </div>
                    <div class="Huevo">
-                       <input @onclick="@(() => { string nombre = "huevo"; Restar(nombre); })" type="button" value="-"/>
+                       <input @onclick="@(() => { string nombre = "huevo"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/HUEVO.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "huevo"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "huevo"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
                         @Model.HuevoCant   
                    </div>
                    <div class="Bacon">
-                        <input @onclick="@(() => { string nombre = "bacon"; Restar(nombre); })" type="button" value="-"/>
+                        <input @onclick="@(() => { string nombre = "bacon"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/BACON.png " width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "bacon"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "bacon"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
                         @Model.BaconCant          
                    </div>
                    <div class="Cheddar">
-                        <input @onclick="@(() => { string nombre = "cheddar"; Restar(nombre); })" type="button" value="-"/>
+                        <input @onclick="@(() => { string nombre = "cheddar"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/CHEDDAR.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "cheddar"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "cheddar"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
                         @Model.CheddarCant   
                    </div>
                    <div class="Tybo">
-                       <input @onclick="@(() => { string nombre = "tybo"; Restar(nombre); })" type="button" value="-"/>
+                       <input @onclick="@(() => { string nombre = "tybo"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/QUESO.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "tybo"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "tybo"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
                         @Model.TyboCant  
                    </div>
                    <div class="Jamon">
-                       <input @onclick="@(() => { string nombre = "jamon"; Restar(nombre); })" type="button" value="-"/>
+                       <input @onclick="@(() => { string nombre = "jamon"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/JAMON.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "jamon"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "jamon"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
                         @Model.JamonCant   
                    </div>
                    <div class="Cebolla">
-                      <input @onclick="@(() => { string nombre = "cebolla"; Restar(nombre); })" type="button" value="-"/>
+                      <input @onclick="@(() => { string nombre = "cebolla"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/CEBOLLA.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "cebolla"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "cebolla"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
                         @Model.CebollaCant   
                    </div>
                    <div class="Carne">
-                        <input @onclick="@(() => { string nombre = "carne"; Restar(nombre); })" type="button" value="-"/>
+                        <input @onclick="@(() => { string nombre = "carne"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
                         <img src="/css/Imagenes/HAMBURGESA.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "carne"; Sumar(nombre); })" type="button" value="+"/>
+                        <input @onclick="@(() => { string nombre = "carne"; Sumar(nombre); })"  type="button" class="btn btn-dark" value="+"/>
                         @Model.CarneCant
                 
                    </div>
@@ -92,24 +93,21 @@
                         <div class="col-11">
                            <img src="/css/Imagenes/Bottom bond.png" width="100" class="my-1"><img/>
                         </div>
-                   </div>                   
+                   </div> 
+                   </div>
                </div> 
                <div class="col-2"></div>  
                <br>
                </div>
                     <div class="Aderezos">
-                        <input @onclick="@(() => { string nombre = "mayonesa"; Restar(nombre); })" type="button" value="-"/>
+                        
                         <img src="/css/Imagenes/Mayonesaa.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "mayonesa"; Sumar(nombre); })" type="button" value="+"/>
-                        @Model.MayonesaCant   
-                        <input @onclick="@(() => { string nombre = "ketchup"; Restar(nombre); })" type="button" value="-"/>
+                        <input @bind="Model.MayonesaCant" type="checkbox" />                                       
                         <img src="/css/Imagenes/Ketchup.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "ketchup"; Sumar(nombre); })" type="button" value="+"/>
-                        @Model.KetchupCant                                       
-                        <input @onclick="@(() => { string nombre = "mostaza"; Restar(nombre); })" type="button" value="-"/>
+                        <input @bind="Model.KetchupCant" type="checkbox" />                                                                                    
                         <img src="/css/Imagenes/Mostaza.png" width="100" class="my-1"><img/>
-                        <input @onclick="@(() => { string nombre = "mostaza"; Sumar(nombre); })" type="button" value="+"/>
-                        @Model.MostazaCant
+                        <input @bind="Model.MostazaCant" type="checkbox" />
+                        
                     </div>                   
             </section>
             <br>
@@ -122,7 +120,42 @@
             </div>
         </div>
     </header>
-
+<footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <!-- Locación -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Locación Escolar</h4>
+                    <p class="lead mb-0">
+                        Pellegrini 338.
+                        <br />
+                        6620, Chivilcoy, Buenos Aires, Argentina.
+                    </p>
+                </div>
+                <!-- Iconos -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Encontranos en...</h4>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/Escuela-Industrial-Chivilcoy-106196239412818"><i class="fab fa-fw fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/dani_gariboldi"><i class="fab fa-fw fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/info7mo/"><i class="fab fa-fw fa-instagram"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                </div>
+                <!-- Donaciones -->
+                <div class="col-lg-4">
+                    <h4 class="text-uppercase mb-4">Donaciones</h4>
+                    <p class="lead mb-0">
+                        Aceptamos donaciones para apoyar y contribuir con la Fiesta y el Viaje de Egresados.
+                        <br>                       
+                        <a href="http://startbootstrap.com">DONA AQUÌ</a>                       
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright -->
+    <div class="copyright py-3 text-center text-white">
+        <div class="container"><small>Copyright &copy; Eest1 Chivilcoy</small></div>
+    </div>
 </body>
 
 @code {
