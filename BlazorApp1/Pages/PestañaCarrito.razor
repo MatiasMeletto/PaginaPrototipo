@@ -1,16 +1,36 @@
 ﻿@page "/carrito"
 
-<h3>PestañaCarrito</h3>
+<h3>Carrito</h3>
 
-<label>
-    nombre: @Model.Nombre
-    <br>
-    cant :@Model.Cantidad
-    <br>
-    precio: @Model.Precio
-</label>
+@if (carritos == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Adicionales</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in carritos)
+            {
+                <tr>
+                    <td>@c.Producto.Nombre</td>
+                    <td>@c.Cantidad</td>
+                    <td>@c.Producto.Precio</td>
+                    <td>@c.Adicionales.Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
-<input @onclick="VerCarrito" type="button" />
 
 @code {
     private class CarritoViewModel
@@ -23,6 +43,18 @@
     }
 
     private CarritoViewModel Model { get; set; } = new();
+
+    private CarritoProducto[]? carritos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var db = new CompraContext();
+
+        carritos = db.CarritoProductos
+        .Include(c => c.Producto)
+        .Include(p => p.Adicionales)
+        .ThenInclude(p => p.Adicional).ToArray();
+    }
 
     private void VerCarrito()
     {

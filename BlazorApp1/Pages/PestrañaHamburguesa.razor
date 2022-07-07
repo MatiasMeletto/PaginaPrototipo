@@ -115,6 +115,11 @@
 </div>
 
 @code {
+    protected override async Task OnInitializedAsync()
+    {
+        Model.CarneCant = 1;
+        Model.CalcularTotal();
+    }
 
     private class ProductoViewModel
     {
@@ -277,7 +282,7 @@
                 CalcularTotal();
             }
         }
-        public int CarneCant 
+        public int CarneCant
         {
             get
             {
@@ -303,7 +308,7 @@
         }
         public int Total { get; set; }
 
-        private async void CalcularTotal()
+        public async void CalcularTotal()
         {
             using var db = new CompraContext();
 
@@ -335,6 +340,7 @@
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 16)).Precio * SaboraCant);
             if (CarneCant != 0)
                 Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
+            Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 3)).Precio * 2);
         }
     }
 
@@ -478,7 +484,7 @@
         }
         else if (nombre == "carne")
         {
-            if (Model.CarneCant != 0)
+            if (Model.CarneCant != 1)
                 Model.CarneCant--;
         }
         else if (nombre == "hamburguesa")
@@ -498,7 +504,7 @@
         {
             CarritoProducto carritoProducto = new CarritoProducto()
                 {
-                    ProductoId = 1,
+                    ProductoId = 4,
                     Cantidad = Model.HamburguesaCant,
                     Adicionales = new()
                 };
