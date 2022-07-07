@@ -24,7 +24,11 @@ else
                     <td>@c.Producto.Nombre</td>
                     <td>@c.Cantidad</td>
                     <td>@c.Producto.Precio</td>
-                    <td>@c.Adicionales.Count</td>
+                    <td>@foreach (var a in c.Adicionales)
+                        {
+                           <label> @a.Adicional.Nombre (@a.Cantidad), </label>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>

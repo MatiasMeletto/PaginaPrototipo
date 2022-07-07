@@ -133,7 +133,7 @@ namespace BlazorApp1.Data
                 {
                     ProductoId = 13,
                     CategoriaId = 2,
-                    Nombre = "JamonYQueso",
+                    Nombre = "Jamon",
                     Precio = 850
                 },
                 new Producto()
