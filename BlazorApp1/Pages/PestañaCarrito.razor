@@ -26,7 +26,14 @@ else
                     <td>@c.Producto.Precio</td>
                     <td>@foreach (var a in c.Adicionales)
                         {
-                           <label> @a.Adicional.Nombre (@a.Cantidad), </label>
+                            @if (c.Adicionales.Count < (a.Adicional.AdicionalId) - 1)
+                            {
+                                <label>@a.Adicional.Nombre (@a.Cantidad).</label>
+                            }
+                            else
+                            {
+                                <label>@a.Adicional.Nombre (@a.Cantidad),<label> </label></label>
+                            }
                         }
                     </td>
                 </tr>
