@@ -357,6 +357,13 @@ namespace BlazorApp1.Data
                     CarritoId = 1,
                     UsuarioId = 1
                 });
+
+            modelBuilder.Entity<Pedido>()
+                .HasData(new Pedido()
+                {
+                    PedidoId = 1,
+                    UsuarioId = 1
+                });
         }
     }
 }

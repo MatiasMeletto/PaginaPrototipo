@@ -1,6 +1,6 @@
-﻿@page "/carrito"
+﻿<h3>Pedido</h3>
 
-<h3>Carrito</h3>
+<p>Su pedido es: </p>
 
 @if (productos == null)
 {
@@ -31,9 +31,6 @@ else
     </table>
     <p>Total: @Model.Total</p>
 }
-
-<button class="btn btn-primary" @onclick="AgregarProductoPedido">Pagar</button>
-
 
 @code {
     private class CarritoViewModel
@@ -97,78 +94,6 @@ else
                 }
             }
             Model.Productos.Add(productoViewModel);
-        }
-    }
-
-    private void AgregarProductoPedido()
-    {
-        using var db = new CompraContext();
-
-        Pedido? pedido = db.Pedidos.Where(c => c.UsuarioId == 1).SingleOrDefault();
-
-        if (pedido is not null)
-        {
-
-        }
-        else
-        {
-            //anashe
-        }
-    }
-
-    //private void VerCarrito()
-    //{
-    //    using var db = new CompraContext();
-
-    //    var carrito = db.Carritos
-    //    .Include(c => c.Usuario)
-    //    .Include(c => c.Productos)
-    //    .ThenInclude(p => p.Producto)
-    //    .ThenInclude(p => p.Adicionales)
-    //    .Include(c => c.Productos)
-    //    .ThenInclude(p => p.Producto)
-    //    .Include(c => c.Productos)
-    //    .ThenInclude(p => p.Producto)
-    //    .ThenInclude(p => p.Adicionales)
-    //    .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-    //    .Where(c => c.UsuarioId == 1).ToList();
-
-    //    if (carrito is not null)
-    //    {
-    //        foreach (Carrito c in carrito)
-    //        {
-    //            foreach (CarritoProducto cp in c.Productos)
-    //            {
-    //                Model.Cantidad = cp.Cantidad;
-    //                Model.Nombre = cp.Producto.Nombre;
-    //                Model.Precio = cp.Producto.Precio;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        //anashe
-    //    }
-    //}
-
-    private void EscribirPrecio()
-    {
-        using var db = new CompraContext();
-
-        int total = 0;
-
-        var carritoProducto = db.CarritoProductos
-        .Include(c => c.Adicionales)
-        .ThenInclude(c => c.Adicional).ToList();
-
-        var adicional = db.Adicionales.ToList();
-
-        foreach (CarritoProducto c in carritoProducto)
-        {
-            foreach (CarritoProductoAdicional cpa in c.Adicionales)
-            {
-                total = total + (cpa.Adicional.Precio * cpa.Cantidad);
-            }
         }
     }
 }
