@@ -2,18 +2,16 @@
 using BlazorApp1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BlazorApp1.Data.Migrations
+namespace BlazorApp1.Data.Migrtaions
 {
     [DbContext(typeof(CompraContext))]
-    [Migration("20220704122341_fullProductos")]
-    partial class fullProductos
+    partial class CompraContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -287,6 +285,13 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Pedidos");
+
+                    b.HasData(
+                        new
+                        {
+                            PedidoId = 1,
+                            UsuarioId = 1
+                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProducto", b =>
@@ -314,6 +319,30 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("ProductoId");
 
                     b.ToTable("PedidoProductos");
+                });
+
+            modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProductoAdicional", b =>
+                {
+                    b.Property<int>("PedidoProductoAdicionalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdicionalId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PedidoProductoId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PedidoProductoAdicionalId");
+
+                    b.HasIndex("AdicionalId");
+
+                    b.HasIndex("PedidoProductoId");
+
+                    b.ToTable("pedidoProductoAdicionales");
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Producto", b =>
@@ -420,7 +449,7 @@ namespace BlazorApp1.Data.Migrations
                         {
                             ProductoId = 13,
                             CategoriaId = 2,
-                            Nombre = "JamonYQueso",
+                            Nombre = "Jamon",
                             Precio = 850
                         },
                         new
@@ -631,6 +660,25 @@ namespace BlazorApp1.Data.Migrations
                     b.Navigation("Pedido");
 
                     b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProductoAdicional", b =>
+                {
+                    b.HasOne("BlazorApp1.Data.Models.Adicional", "Adicional")
+                        .WithMany()
+                        .HasForeignKey("AdicionalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlazorApp1.Data.Models.PedidoProducto", "PedidoProducto")
+                        .WithMany()
+                        .HasForeignKey("PedidoProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adicional");
+
+                    b.Navigation("PedidoProducto");
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Producto", b =>

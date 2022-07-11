@@ -11,5 +11,7 @@
         public Producto Producto { get; set; }
         public int Cantidad { get; set; }
         public int Precio { get; set; }
+
+        public List<PedidoProductoAdicional> Adicionales { get; set; }
     }
 }

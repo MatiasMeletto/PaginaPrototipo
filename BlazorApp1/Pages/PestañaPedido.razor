@@ -1,4 +1,6 @@
-﻿<h3>Pedido</h3>
+﻿@page "/pedido"
+
+<h3>Pedido</h3>
 
 <p>Su pedido es: </p>
 
@@ -55,13 +57,13 @@ else
 
     private CarritoViewModel Model { get; set; } = new();
 
-    private CarritoProducto[]? productos;
+    private PedidoProducto[]? productos;
 
     protected override async Task OnInitializedAsync()
     {
         using var db = new CompraContext();
 
-        productos = db.CarritoProductos
+        productos = db.PedidoProductos
         .Include(c => c.Producto)
         .Include(p => p.Adicionales)
         .ThenInclude(p => p.Adicional).ToArray();
@@ -72,7 +74,7 @@ else
                 {
                     Cantidad = producto.Cantidad,
                     Nombre = producto.Producto.Nombre,
-                    Precio = producto.Producto.Precio
+                    Precio = producto.Precio
                 };
             foreach (var adicional in producto.Adicionales)
             {

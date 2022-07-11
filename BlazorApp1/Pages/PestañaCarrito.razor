@@ -56,6 +56,12 @@ else
         public string Adicionales { get; set; }
     }
 
+    private class PedidoViewModel
+    {
+        public int Precio{ get; set; }
+    }
+
+    private PedidoViewModel pedidoViewModel { get; set; } = new();
     private CarritoViewModel Model { get; set; } = new();
 
     private CarritoProducto[]? productos;
@@ -72,11 +78,11 @@ else
         foreach (var producto in productos)
         {
             ProductoViewModel productoViewModel = new ProductoViewModel
-                {
+            {
                     Cantidad = producto.Cantidad,
                     Nombre = producto.Producto.Nombre,
                     Precio = producto.Producto.Precio
-                };
+            };
             foreach (var adicional in producto.Adicionales)
             {
                 productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
@@ -106,69 +112,66 @@ else
 
         Pedido? pedido = db.Pedidos.Include(c => c.Productos).ThenInclude(p => p.Producto).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == 1).SingleOrDefault();
 
+        productos = db.CarritoProductos
+        .Include(c => c.Producto)
+        .Include(p => p.Adicionales)
+        .ThenInclude(p => p.Adicional).ToArray();
+
         if (pedido is not null)
         {
+            foreach(var producto in productos)
+            {
+                if (producto.ProductoId == 4)
+                {
+                    foreach (var adicional in producto.Adicionales)
+                    {
+                        pedidoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
+                    }
 
+                    PedidoProducto pedidoProducto = new PedidoProducto()
+                    {
+                        PedidoId = 1,
+                        ProductoId = producto.ProductoId,
+                        Cantidad = producto.Cantidad,
+                        Precio = pedidoViewModel.Precio
+                    };
+
+                    foreach(var adicional in producto.Adicionales)
+                    {
+                        pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
+                        {
+                            AdicionalId = adicional.AdicionalId,
+                            Cantidad = adicional.Cantidad
+                        });
+                    }
+
+                    pedido.Productos.Add(pedidoProducto);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    PedidoProducto pedidoProducto = new PedidoProducto()
+                    {
+                        PedidoId = 1,
+                        ProductoId = producto.ProductoId,
+                        Cantidad = producto.Cantidad,
+                        Precio = producto.Producto.Precio
+                    };
+
+                    pedido.Productos.Add(pedidoProducto);
+                    db.SaveChanges();
+                }
+            }
+
+            foreach(var producto in productos)
+            {
+                db.CarritoProductos.Remove(producto);
+                db.SaveChanges();
+            }
         }
         else
         {
             //anashe
         }
-    }
-
-    //private void VerCarrito()
-    //{
-    //    using var db = new CompraContext();
-
-    //    var carrito = db.Carritos
-    //    .Include(c => c.Usuario)
-    //    .Include(c => c.Productos)
-    //    .ThenInclude(p => p.Producto)
-    //    .ThenInclude(p => p.Adicionales)
-    //    .Include(c => c.Productos)
-    //    .ThenInclude(p => p.Producto)
-    //    .Include(c => c.Productos)
-    //    .ThenInclude(p => p.Producto)
-    //    .ThenInclude(p => p.Adicionales)
-    //    .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-    //    .Where(c => c.UsuarioId == 1).ToList();
-
-    //    if (carrito is not null)
-    //    {
-    //        foreach (Carrito c in carrito)
-    //        {
-    //            foreach (CarritoProducto cp in c.Productos)
-    //            {
-    //                Model.Cantidad = cp.Cantidad;
-    //                Model.Nombre = cp.Producto.Nombre;
-    //                Model.Precio = cp.Producto.Precio;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        //anashe
-    //    }
-    //}
-
-    private void EscribirPrecio()
-    {
-        using var db = new CompraContext();
-
-        int total = 0;
-
-        var carritoProducto = db.CarritoProductos
-        .Include(c => c.Adicionales)
-        .ThenInclude(c => c.Adicional).ToList();
-
-        var adicional = db.Adicionales.ToList();
-
-        foreach (CarritoProducto c in carritoProducto)
-        {
-            foreach (CarritoProductoAdicional cpa in c.Adicionales)
-            {
-                total = total + (cpa.Adicional.Precio * cpa.Cantidad);
-            }
-        }
-    }
+    } 
 }

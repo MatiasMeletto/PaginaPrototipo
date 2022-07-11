@@ -2,16 +2,18 @@
 using BlazorApp1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BlazorApp1.Data.Migrations
+namespace BlazorApp1.Data.Migrtaions
 {
     [DbContext(typeof(CompraContext))]
-    partial class CompraContextModelSnapshot : ModelSnapshot
+    [Migration("20220711134525_Inicial")]
+    partial class Inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -285,6 +287,13 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Pedidos");
+
+                    b.HasData(
+                        new
+                        {
+                            PedidoId = 1,
+                            UsuarioId = 1
+                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProducto", b =>

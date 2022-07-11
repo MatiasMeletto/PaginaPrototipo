@@ -13,7 +13,7 @@ namespace BlazorApp1.Data
         public DbSet<PedidoProducto> PedidoProductos { get; set; }
         public DbSet<CarritoProducto> CarritoProductos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
-
+        public DbSet<PedidoProductoAdicional> pedidoProductoAdicionales { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite($"Data Source=compras.db");
 
