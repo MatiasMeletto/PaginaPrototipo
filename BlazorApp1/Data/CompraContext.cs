@@ -226,6 +226,34 @@ namespace BlazorApp1.Data
                     CategoriaId = 5,
                     Nombre = "JamonYQueso",
                     Precio = 100
+                },
+                new Producto()
+                {
+                    ProductoId = 28,
+                    CategoriaId = 6,
+                    Nombre = "Coca-Cola",
+                    Precio = 170
+                },
+                new Producto()
+                {
+                    ProductoId = 29,
+                    CategoriaId = 6,
+                    Nombre = "Pepsi",
+                    Precio = 150
+                },
+                new Producto()
+                {
+                    ProductoId = 30,
+                    CategoriaId = 6,
+                    Nombre = "Sprite",
+                    Precio = 170
+                },
+                new Producto()
+                {
+                    ProductoId = 31,
+                    CategoriaId = 6,
+                    Nombre = "Fanta",
+                    Precio = 150
                 });
 
             modelBuilder.Entity<Adicional>()
