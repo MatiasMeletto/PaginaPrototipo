@@ -95,6 +95,10 @@ else
                     productoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
                 }
             }
+            if (producto.Cantidad > 1)
+            {
+                productoViewModel.Precio *= producto.Cantidad;
+            }
             Model.Productos.Add(productoViewModel);
         }
     }

@@ -102,6 +102,10 @@ else
                     productoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
                 }
             }
+            if (producto.Cantidad > 1)
+            {
+                productoViewModel.Precio *= producto.Cantidad;
+            }
             Model.Productos.Add(productoViewModel);
         }
     }
@@ -133,7 +137,8 @@ else
                         PedidoId = 1,
                         ProductoId = producto.ProductoId,
                         Cantidad = producto.Cantidad,
-                        Precio = pedidoViewModel.Precio
+                        Precio = pedidoViewModel.Precio,
+                        Adicionales = new List<PedidoProductoAdicional>()
                     };
 
                     foreach(var adicional in producto.Adicionales)
