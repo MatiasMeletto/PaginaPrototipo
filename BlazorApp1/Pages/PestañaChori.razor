@@ -21,25 +21,35 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
            <form action="#">
-        <div class="flex-container">
-            <h1>Ingrese la cantidad de choripanes que quiere:</h1>
-            <input @bind="Model.Cantidad" type="number" min="1" max="15" />
+            <div>  
+            <h2>Seleccione la cantidad de choripanes que quiere!</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <img src="/css/Imagenes/314.png" /> 
+                </div>
+                <div class="col-md-8 offset-md-2"> 
+                    <input @bind="Model.Cantidad" class="btn btn-dark" type="number" min="1" max="15" />
+                 </div>
+                <div class="col-6"></div>
+            </div>
+                                   
             <br>
-            <label>
+            <div>
+                <br>
                 <input @bind="Model.Criolla" type="checkbox" />
                 Salsa criolla
-            </label>
-            <br>
-            <label>
-                <input @bind="Model.Chimi" type="checkbox" />
-                Chimichurri
-            </label>
+                <img src="/css/Imagenes/Chimi.png" alt="..." height="150"/>
+                <input @bind="Model.Chimi" type="checkbox" />               
+            </div>
             <br>
         </div>
+        <br>
     </form>
-    <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
-    <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
-</div>
+  </div>
+    <button class="btn btn-dark" @onclick="CargarProductoCarro">Agregar al carrito</button>
+    <button class="btn btn-dark" @onclick="VerCarrito">Ver carrito</button>
+        
+
         
     </header>
 <footer class="footer text-center">
