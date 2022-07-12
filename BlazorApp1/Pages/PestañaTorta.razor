@@ -22,7 +22,7 @@
         <div class="container d-flex align-items-center flex-column">
             <h3>PestañaTortas</h3>
 
-            <select @bind="Model.Id">
+            <select @onclick="CambiarImagen" @bind="Model.Id">
                 <option selected></option>
                 <option value="3">Torta de chocolate</option>
                 <option value="5">Torta de zanahoria</option>
@@ -34,7 +34,8 @@
             </select>
             <input @bind="Model.Cantidad" type="number" min="0" max="5" />
             <br>
-
+            <br>
+            <img src="@Model.Source" />
             <button class="btn btn-primary" @onclick="CargarProductoCarrito">Agregar al carrito</button>
             <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
         </div>        
@@ -84,9 +85,30 @@
     {
         public int Id{ get; set; }
         public int Cantidad{ get; set; }
+        public string Source { get; set; } = "/css/imagenes/frol.jpg";
     }
 
     private ProductoViewModel Model { get; set; } = new();
+
+    private void CambiarImagen()
+    {
+        if(Model.Id == 3)
+        {
+            Model.Source = "/css/imagenes/choco.jpg";
+        }
+        else if(Model.Id == 6)
+        {
+            Model.Source = "/css/imagenes/vanil.jpg";
+        }
+        else if(Model.Id == 7)
+        {
+            Model.Source = "/css/imagenes/frol.jpg";
+        }
+        else if(Model.Id == 9)
+        {
+            Model.Source = "/css/imagenes/brownie.jpg";
+        }
+    }
 
     private void CargarProductoCarrito()
     {
