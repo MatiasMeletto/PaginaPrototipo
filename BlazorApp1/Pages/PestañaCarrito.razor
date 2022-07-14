@@ -31,9 +31,7 @@ else
     </table>
     <p>Total: @Model.Total</p>
 }
-
-<button class="btn btn-primary" @onclick="AgregarProductoPedido">Pagar</button>
-
+<button class="btn btn-primary" @onclick="@(() => { AgregarProductoPedido(); CargarLista(); })">Pagar</button>
 
 @code {
     private class CarritoViewModel
@@ -68,6 +66,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        CargarLista();
+    }
+
+    private void CargarLista()
+    {
         using var db = new CompraContext();
 
         productos = db.CarritoProductos
@@ -81,7 +84,7 @@ else
             {
                     Cantidad = producto.Cantidad,
                     Nombre = producto.Producto.Nombre,
-                    Precio = producto.Producto.Precio
+                    Precio = producto.Producto.Precio * producto.Cantidad
             };
             foreach (var adicional in producto.Adicionales)
             {
@@ -102,10 +105,6 @@ else
                     productoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
                 }
             }
-            if (producto.Cantidad > 1)
-            {
-                productoViewModel.Precio *= producto.Cantidad;
-            }
             Model.Productos.Add(productoViewModel);
         }
     }
@@ -123,7 +122,7 @@ else
 
         if (pedido is not null)
         {
-            foreach(var producto in productos)
+            foreach (var producto in productos)
             {
                 if (producto.ProductoId == 4)
                 {
@@ -137,11 +136,11 @@ else
                         PedidoId = 1,
                         ProductoId = producto.ProductoId,
                         Cantidad = producto.Cantidad,
-                        Precio = pedidoViewModel.Precio,
+                        Precio = pedidoViewModel.Precio * producto.Cantidad,
                         Adicionales = new List<PedidoProductoAdicional>()
                     };
 
-                    foreach(var adicional in producto.Adicionales)
+                    foreach (var adicional in producto.Adicionales)
                     {
                         pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
                         {
@@ -160,8 +159,18 @@ else
                         PedidoId = 1,
                         ProductoId = producto.ProductoId,
                         Cantidad = producto.Cantidad,
-                        Precio = producto.Producto.Precio
+                        Precio = producto.Producto.Precio * producto.Cantidad,
+                        Adicionales = new List<PedidoProductoAdicional>()
                     };
+
+                    foreach (var adicional in producto.Adicionales)
+                    {
+                        pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
+                        {
+                            AdicionalId = adicional.AdicionalId,
+                            Cantidad = adicional.Cantidad
+                        });
+                    }
 
                     pedido.Productos.Add(pedidoProducto);
                     db.SaveChanges();
