@@ -3,16 +3,16 @@
     <!-- Barra de navegación-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#page-top">Pizzas</a>
+            <a class="navbar-brand" href="#page-top">Tortas</a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">Comidas</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})" >Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
                 </ul>
             </div>
         </div>
@@ -20,25 +20,30 @@
     <!-- Limites-->
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
-            <h3>PestañaTortas</h3>
-
-            <select @onclick="CambiarImagen" @bind="Model.Id">
+            <h3>Selecciona la Torta ideal para vos!</h3>
+            <div class=" gap-1">
+            <select class="btn btn-dark p-2  border" @onclick="CambiarImagen" @bind="Model.Id">
                 <option selected></option>
                 <option value="3">Torta de chocolate</option>
                 <option value="5">Torta de zanahoria</option>
                 <option value="6">Torta de vainilla</option>
                 <option value="7">Pastafrola</option>
-                <option value="8">Brownie c/mani</option>
-                <option value="9">Brownie s/mani</option>
+                <option value="9">Brownie</option>
                 <option value="10">Torta de frambuesa</option>
             </select>
-            <input @bind="Model.Cantidad" type="number" min="0" max="5" />
+            <input class="btn btn-dark p-1  border" @bind="Model.Cantidad" type="number" min="0" max="5" />
+            </div>
+            
+            
+            
             <br>
             <br>
             <img src="@Model.Source" />
-            <button class="btn btn-primary" @onclick="CargarProductoCarrito">Agregar al carrito</button>
-            <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
-        </div>        
+            </div>
+            <div class="gap-1">
+            <button class="btn btn-dark p-2 border" @onclick="CargarProductoCarrito">Agregar al carrito</button>
+            <button class="btn btn-dark p-2 border" @onclick="VerCarrito">Ver carrito</button>
+             </div>
     </header>
            <footer class="footer text-center">
                 <div class="container">
@@ -94,11 +99,11 @@
     {
         if(Model.Id == 3)
         {
-            Model.Source = "/css/imagenes/choco.jpg";
+            Model.Source = "/css/imagenes/choco.png";
         }
         else if(Model.Id == 6)
         {
-            Model.Source = "/css/imagenes/vanil.jpg";
+            Model.Source = "/css/imagenes/vanil.png";
         }
         else if(Model.Id == 7)
         {
@@ -106,7 +111,15 @@
         }
         else if(Model.Id == 9)
         {
-            Model.Source = "/css/imagenes/brownie.jpg";
+            Model.Source = "/css/imagenes/brownie.png";
+        }
+         else if(Model.Id == 5)
+        {
+            Model.Source = "/css/imagenes/zanahoria.png";
+        }
+        else if(Model.Id == 10)
+        {
+            Model.Source = "/css/imagenes/frambuesa.png";
         }
     }
 

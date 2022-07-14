@@ -10,9 +10,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">Comidas</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})" >Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
                 </ul>
             </div>
         </div>
@@ -36,8 +36,8 @@
             <br>
             <div>
                 <br>
+                <img src="/css/Imagenes/Criolla.png" alt="..." height="150"/>
                 <input @bind="Model.Criolla" type="checkbox" />
-                Salsa criolla
                 <img src="/css/Imagenes/Chimi.png" alt="..." height="150"/>
                 <input @bind="Model.Chimi" type="checkbox" />               
             </div>
@@ -46,6 +46,7 @@
         <br>
     </form>
   </div>
+    <h2 class="text-black"> Precio = @Model.Total.ToString("C") </h2> 
     <button class="btn btn-dark" @onclick="CargarProductoCarro">Agregar al carrito</button>
     <button class="btn btn-dark" @onclick="VerCarrito">Ver carrito</button>
         
@@ -95,12 +96,43 @@
 
     private class ProductoViewModel
     {
-        public int Cantidad { get; set; }
+        int _cantidad;
+
+        public int Cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                _cantidad = value;
+                CalcularTotal();
+            }
+        }
         public bool Criolla { get; set; }
         public bool Chimi { get; set; }
+        public int Total { get; set; }
+        public async void CalcularTotal()
+        {
+            using var db = new CompraContext();
+
+            Producto producto = db.Productos.Where(c => c.ProductoId == 1).SingleOrDefault();
+
+            Total = 0;
+
+            Total = producto.Precio * Cantidad;
+        }
     }
 
+
     private ProductoViewModel Model { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model.Cantidad = 1;
+        Model.CalcularTotal();
+    }
 
     private void CargarProductoCarro()
     {
