@@ -88,13 +88,6 @@ else
                     productoViewModel.Adicionales += ", ";
                 }
             }
-            if (producto.ProductoId == 4)
-            {
-                foreach (var adicional in producto.Adicionales)
-                {
-                    productoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
-                }
-            }
             Model.Productos.Add(productoViewModel);
         }
     }

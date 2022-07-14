@@ -67,12 +67,13 @@ else
     protected override async Task OnInitializedAsync()
     {
         CargarLista();
-        int i = 0;
     }
 
     private void CargarLista()
     {
         using var db = new CompraContext();
+
+        Model.Productos.Clear();
 
         productos = db.CarritoProductos
         .Include(c => c.Producto)
@@ -105,7 +106,12 @@ else
                 {
                     productoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
                 }
+                if (producto.Cantidad > 1)
+                {
+                    productoViewModel.Precio *= producto.Cantidad;
+                }
             }
+            
             Model.Productos.Add(productoViewModel);
         }
     }
@@ -127,6 +133,8 @@ else
             {
                 if (producto.ProductoId == 4)
                 {
+                    pedidoViewModel.Precio = 0;
+
                     foreach (var adicional in producto.Adicionales)
                     {
                         pedidoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
