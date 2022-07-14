@@ -1,4 +1,4 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -11,29 +11,12 @@ h1:focus {
 a, .btn-link {
     color: #0071c1;
 }
-.inicio-account {
-    font-size: 10px; /*Tamaño*/
-    display: flex; /*Organizar los elementos*/
-    justify-content: space-between; /*Van a utilizar todo el ancho disponible*/
-    height: 70px; /*Definir altura*/
-    padding: 15px; /*Espacio entre contenido y borde */
-    margin-bottom: 15px; /*Espacio hacie abajo para separar de la portada*/
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
-    .inicio-account button {
-        font-size: 14px;
-        cursor: pointer;
-    }
-.inicio {
-    justify-content: space-between; /*Van a utilizar todo el ancho disponible*/
-    height: 70px; /*Definir altura*/
-    padding: 15px; /*Espacio entre contenido y borde */
-    margin-bottom: 15px; /*Espacio hacie abajo para separar de la portada*/
-}
-    .btn-primary {
-        color: #fff;
-        background-color: #1b6ec2;
-        border-color: #1861ac;
-    }
 .btn btn-primary {
     color: #fff;
     background-color: #1b6ec2;
