@@ -20,11 +20,11 @@
     <!-- Limites-->
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
-            <h3>Seleccione las pizzas a pedir!</h3>
+            <h3>Las mejores pizzas para comprar con tu familia y/o amigos!</h3>
             <br>
             <div class=" gap-1">
             <select class="btn btn-dark p-2 border"  @onclick="CambiarImagen" @bind="Model.Id">
-                <option selected></option>
+                <option selected> Seleccione la Pizza</option>
                 <option value="11">Muzzarela</option>
                 <option value="12">Especial</option>
                 <option value="13">Con jamon</option>
@@ -40,13 +40,18 @@
             <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="0" max="5" />
             </div>
             <br>
-            <img src="@Model.Source" />
+            <img src="@Model.Source" class="img-fluid w-50" />
             <div class="gap-1">
             <button class="btn btn-dark p-2 border" @onclick="CargarProductoCarrito">Agregar al carrito</button>
             <button class="btn btn-dark p-2 border" @onclick="VerCarrito">Ver carrito</button>
              </div>
         </div>        
     </header>
+    <div class="contenedor-boton fixed-bottom">
+        <div class="botoncarrito">
+            <a class="carr border border-dark" href="/carrito"><i class="fas fa-shopping-cart fa-2x"></i></a>
+        </div>
+    </div>
     <footer class="footer text-center">
         <div class="container">
             <div class="row">
@@ -65,7 +70,7 @@
                     <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/Escuela-Industrial-Chivilcoy-106196239412818"><i class="fab fa-fw fa-facebook-f"></i></a>
                     <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/dani_gariboldi"><i class="fab fa-fw fa-twitter"></i></a>
                     <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/info7mo/"><i class="fab fa-fw fa-instagram"></i></a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                    
                 </div>
                 <!-- Donaciones -->
                 <div class="col-lg-4">
@@ -91,51 +96,51 @@
     {
         public int Id{ get; set; }
         public int Cantidad{ get; set; }
-        public string Source { get; set; } = "/css/imagenes/frol.jpg";
+        public string Source { get; set; } = "/css/imagenes/muzzarella.png";
     }
     private void CambiarImagen()
     {
-        if(Model.Id == 1)
+        if(Model.Id == 11)
         {
             Model.Source = "/css/imagenes/muzzarella.png";
         }
-        else if(Model.Id == 2)
+        else if(Model.Id == 12)
         {
             Model.Source = "/css/imagenes/pjamon.png";
         }
-        else if(Model.Id == 3)
+        else if(Model.Id == 13)
         {
             Model.Source = "/css/imagenes/pjamon.png";
         }
-        else if(Model.Id == 4)
+        else if(Model.Id == 14)
         {
             Model.Source = "/css/imagenes/napolitana.png";
         }
-        else if(Model.Id == 5)
+        else if(Model.Id == 15)
         {
             Model.Source = "/css/imagenes/4quesos.png";
         }
-         else if(Model.Id == 6)
+         else if(Model.Id == 16)
         {
             Model.Source = "/css/imagenes/pcebolla.png";
         }
-        else if(Model.Id == 7)
+        else if(Model.Id == 17)
         {
             Model.Source = "/css/imagenes/anchoa.png";
         }
-        else if(Model.Id == 8)
+        else if(Model.Id == 18)
         {
             Model.Source = "/css/imagenes/anana.png";
         }
-        else if(Model.Id == 9)
+        else if(Model.Id == 19)
         {
             Model.Source = "/css/imagenes/frambuesa.png";
         }
-          else if(Model.Id == 10)
+          else if(Model.Id == 20)
         {
             Model.Source = "/css/imagenes/frambuesa.png";
         }
-        else if(Model.Id == 11)
+        else if(Model.Id == 21)
         {
             Model.Source = "/css/imagenes/milan.png";
         }
