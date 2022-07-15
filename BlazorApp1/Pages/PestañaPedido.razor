@@ -1,0 +1,95 @@
+﻿@page "/pedido"
+
+<h3>Pedido</h3>
+
+<p>Su pedido es: </p>
+
+@if (productos == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Adicionales</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var producto in Model.Productos)
+            {
+                <tr>
+                    <td>@producto.Nombre</td>
+                    <td>@producto.Cantidad</td>
+                    <td>@producto.Precio</td>
+                    <td>@producto.Adicionales</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Total: @Model.Total</p>
+}
+
+@code {
+    private class CarritoViewModel
+    {
+        public decimal Total
+        {
+            get
+            {
+                return Productos.Sum(p => p.Precio);
+            }
+        }
+        public List<ProductoViewModel> Productos { get; set; } = new List<ProductoViewModel>();
+    }
+
+    private class ProductoViewModel
+    {
+        public string Nombre { get; set; }
+        public int Cantidad { get; set; }
+        public int Precio { get; set; }
+        public string Adicionales { get; set; }
+    }
+
+    private CarritoViewModel Model { get; set; } = new();
+
+    private PedidoProducto[]? productos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var db = new CompraContext();
+
+        productos = db.PedidoProductos
+        .Include(c => c.Producto)
+        .Include(p => p.Adicionales)
+        .ThenInclude(p => p.Adicional).ToArray();
+
+        foreach (var producto in productos)
+        {
+            ProductoViewModel productoViewModel = new ProductoViewModel
+                {
+                    Cantidad = producto.Cantidad,
+                    Nombre = producto.Producto.Nombre,
+                    Precio = producto.Precio
+                };
+            foreach (var adicional in producto.Adicionales)
+            {
+                productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
+                if (producto.Adicionales.Last() == adicional)
+                {
+                    productoViewModel.Adicionales += ".";
+                }
+                else
+                {
+                    productoViewModel.Adicionales += ", ";
+                }
+            }
+            Model.Productos.Add(productoViewModel);
+        }
+    }
+}
+
