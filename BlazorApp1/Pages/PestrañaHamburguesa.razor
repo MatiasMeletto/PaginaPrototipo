@@ -171,10 +171,9 @@
         int _tyboCant;
         int _jamonCant;
         int _cebollaCant;
-        int _mayonesaCant;
-        int _ketchupCant;
-        int _mostazaCant;
-        int _saboraCant;
+        bool _mayonesaCant;
+        bool _ketchupCant;
+        bool _mostazaCant;
         int _carneCant;
         int _hamburguesasCant;
 
@@ -274,11 +273,11 @@
             set
             {
                 _cebollaCant = value;
- 
+
                 CalcularTotal();
             }
         }
-        public int MayonesaCant
+        public bool MayonesaCant
         {
             get
             {
@@ -290,7 +289,7 @@
                 CalcularTotal();
             }
         }
-        public int KetchupCant 
+        public bool KetchupCant 
         { 
             get
             {
@@ -302,7 +301,7 @@
                 CalcularTotal();
             } 
         }
-        public int MostazaCant 
+        public bool MostazaCant 
         {
             get
             {
@@ -312,18 +311,6 @@
             {
                 _mostazaCant = value;
                 CalcularTotal();            
-            }
-        }
-        public int SaboraCant 
-        {
-            get
-            {
-                return _saboraCant;
-            }
-            set
-            {
-                _saboraCant = value;
-                CalcularTotal();
             }
         }
         public int CarneCant 
@@ -352,42 +339,49 @@
         }
         public int Total { get; set; }
 
-        private async void CalcularTotal()
+        public async void CalcularTotal()
         {
             using var db = new CompraContext();
 
             Total = 0;
 
             if (LechugaCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
             if (TomateCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 6)).Precio * TomateCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 6)).Precio * TomateCant);
             if (HuevoCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 7)).Precio * HuevoCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 7)).Precio * HuevoCant);
             if (BaconCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 8)).Precio * BaconCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 8)).Precio * BaconCant);
             if (CheddarCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 9)).Precio * CheddarCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 9)).Precio * CheddarCant);
             if (TyboCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 10)).Precio * TyboCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 10)).Precio * TyboCant);
             if (JamonCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 11)).Precio * JamonCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 11)).Precio * JamonCant);
             if (CebollaCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 12)).Precio * CebollaCant);
-            if (MayonesaCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 13)).Precio * MayonesaCant);
-            if (KetchupCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 14)).Precio * KetchupCant);
-            if (MostazaCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 15)).Precio * MostazaCant);
-            if (SaboraCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 16)).Precio * SaboraCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 12)).Precio * CebollaCant);
+            if (MayonesaCant)
+                Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 13)).Precio;
+            if (KetchupCant)
+                Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 14)).Precio;
+            if (MostazaCant)
+                Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 15)).Precio;
             if (CarneCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
+
+            Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 3)).Precio * 2;
         }
     }
 
     private ProductoViewModel Model { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model.CarneCant = 1;
+        Model.HamburguesaCant = 1;
+        Model.CalcularTotal();
+    }
 
     private void Sumar(string nombre)
     {
@@ -430,26 +424,6 @@
         {
             if (Model.CebollaCant < 4)
                 Model.CebollaCant++;
-        }
-        else if (nombre == "mayonesa")
-        {
-            if (Model.MayonesaCant < 1)
-                Model.MayonesaCant++;
-        }
-        else if (nombre == "ketchup")
-        {
-            if (Model.KetchupCant < 1)
-                Model.KetchupCant++;
-        }
-        else if (nombre == "mostaza")
-        {
-            if (Model.MostazaCant < 1)
-                Model.MostazaCant++;
-        }
-        else if (nombre == "sabora")
-        {
-            if (Model.SaboraCant < 1)
-                Model.SaboraCant++;
         }
         else if (nombre == "carne")
         {
@@ -505,29 +479,9 @@
             if (Model.CebollaCant != 0)
                 Model.CebollaCant--;
         }
-        else if (nombre == "mayonesa")
-        {
-            if (Model.MayonesaCant != 0)
-                Model.MayonesaCant--;
-        }
-        else if (nombre == "ketchup")
-        {
-            if (Model.KetchupCant != 0)
-                Model.KetchupCant--;
-        }
-        else if (nombre == "mostaza")
-        {
-            if (Model.MostazaCant != 0)
-                Model.MostazaCant--;
-        }
-        else if (nombre == "sabora")
-        {
-            if (Model.SaboraCant != 0)
-                Model.SaboraCant--;
-        }
         else if (nombre == "carne")
         {
-            if (Model.CarneCant != 0)
+            if (Model.CarneCant != 1)
                 Model.CarneCant--;
         }
         else if (nombre == "hamburguesa")
@@ -640,39 +594,31 @@
                         Cantidad = Model.CebollaCant
                     });
             }
-            if (Model.MayonesaCant != 0)
+            if (Model.MayonesaCant)
             {
                 //mayonesa
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
                     {
                         AdicionalId = 13,
-                        Cantidad = Model.MayonesaCant
+                        Cantidad = 1
                     });
             }
-            if (Model.KetchupCant != 0)
+            if (Model.KetchupCant)
             {
                 //ketchup
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
                     {
                         AdicionalId = 14,
-                        Cantidad = Model.KetchupCant
+                        Cantidad = 1
                     });
             }
-            if (Model.MostazaCant != 0)
+            if (Model.MostazaCant)
             {
                 //mostaza
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
                     {
                         AdicionalId = 15,
-                        Cantidad = Model.MostazaCant
-                    });
-            }
-            if (Model.SaboraCant != 0)
-            {
-                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                    {
-                        AdicionalId = 16,
-                        Cantidad = Model.SaboraCant
+                        Cantidad = 1
                     });
             }
 
