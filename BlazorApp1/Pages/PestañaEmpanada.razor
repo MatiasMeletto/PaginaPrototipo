@@ -22,22 +22,23 @@
         <div class="container d-flex align-items-center flex-column">
          <form class="form-inline">
             <h3><label class="my-1 mr-2" for="inlineFormCustomSelectPref">Seleccione el tipo de empanada!</label></h3>
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" @bind="Model.Id">
+                <select class="btn btn-dark p-2 border" id="inlineFormCustomSelectPref" @bind="Model.Id">
                     <option selected></option>
                     <option value="1">Empanada de carne</option>
                     <option value="2">Empanada de choclo</option>
                     <option value="3">Empanada de jamon y queso</option>
-                    <option value="1">Empanada de pollo</option>
-                    <option value="2">Empanada de verdura</option>
+                    <option value="4">Empanada de pollo</option>
+                    <option value="5">Empanada de verdura</option>
                 </select>
+                
+                <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="0" max="30" />
                 <br>
-                <h4><label class="my-1 mr-2" for="inlineFormCustomSelectPref">Cantidad de empanada</label></h4>
-                <input @bind="Model.Cantidad" type="number" min="1" max="30" />
                 <br>
-                <br>
+                <img src="@Model.Source" />
+                
                 <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                    <button class="btn btn-primary" @onclick="CargarProductoCarrito">Agregar al carrito</button>
-                    <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
+                    <button class="btn btn-dark p-2 border" @onclick="CargarProductoCarrito">Agregar al carrito</button>
+                    <button class="btn btn-dark p-2 border" @onclick="VerCarrito">Ver carrito</button>
                 </div>
         </form>
 </div>        
@@ -81,12 +82,36 @@
     
 </body>
 @code {
-        private class ProductoViewModel
+    private class ProductoViewModel
     {
         public int Id{ get; set; }
         public int Cantidad{ get; set; }
+        public string Source { get; set; } =  "/css/imagenes/frol.jpg";
     }
+    private void CambiarImagen()
+    {
+        if (Model.Id == 1)
+        {
+            Model.Source = "/css/imagenes/muzzarella.png";
+        }
+        else if (Model.Id == 2)
+        {
+            Model.Source = "/css/imagenes/pjamon.png";
+        }
+        else if (Model.Id == 3)
+        {
+            Model.Source = "/css/imagenes/napolitana.png";
+        }
+        else if (Model.Id == 4)
+        {
+            Model.Source = "/css/imagenes/pjamon.png";
+        }
+        else if (Model.Id == 5)
+        {
+            Model.Source = "/css/imagenes/pjamon.png";
 
+        }
+    }
     private ProductoViewModel Model { get; set; } = new();
 
     private void CargarProductoCarrito()
@@ -124,5 +149,6 @@
         .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
         .Where(c => c.UsuarioId == 1).SingleOrDefault();
     }
+}
 }
 

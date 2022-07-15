@@ -24,21 +24,18 @@
             <div class=" gap-1">
             <select class="btn btn-dark p-2  border" @onclick="CambiarImagen" @bind="Model.Id">
                 <option selected></option>
-                <option value="3">Torta de chocolate</option>
-                <option value="5">Torta de zanahoria</option>
-                <option value="6">Torta de vainilla</option>
-                <option value="7">Pastafrola</option>
-                <option value="9">Brownie</option>
-                <option value="10">Torta de frambuesa</option>
+                <option value="1">Torta de chocolate</option>
+                <option value="2">Torta de zanahoria</option>
+                <option value="3">Torta de vainilla</option>
+                <option value="4">Pastafrola</option>
+                <option value="5">Brownie</option>
+                <option value="6">Torta de frambuesa</option>
             </select>
             <input class="btn btn-dark p-1  border" @bind="Model.Cantidad" type="number" min="0" max="5" />
-            </div>
-            
-            
-            
+            </div>      
             <br>
             <br>
-            <img src="@Model.Source" />
+            <img src="@Model.Source" class="img-fluid max-width=100% max-height=auto " />
             </div>
             <div class="gap-1">
             <button class="btn btn-dark p-2 border" @onclick="CargarProductoCarrito">Agregar al carrito</button>
@@ -97,27 +94,27 @@
 
     private void CambiarImagen()
     {
-        if(Model.Id == 3)
+        if(Model.Id == 1)
         {
             Model.Source = "/css/imagenes/choco.png";
         }
-        else if(Model.Id == 6)
+        else if(Model.Id == 3)
         {
             Model.Source = "/css/imagenes/vanil.png";
         }
-        else if(Model.Id == 7)
+        else if(Model.Id == 4)
         {
             Model.Source = "/css/imagenes/frol.jpg";
         }
-        else if(Model.Id == 9)
+        else if(Model.Id == 5)
         {
             Model.Source = "/css/imagenes/brownie.png";
         }
-         else if(Model.Id == 5)
+         else if(Model.Id == 2)
         {
             Model.Source = "/css/imagenes/zanahoria.png";
         }
-        else if(Model.Id == 10)
+        else if(Model.Id == 6)
         {
             Model.Source = "/css/imagenes/frambuesa.png";
         }

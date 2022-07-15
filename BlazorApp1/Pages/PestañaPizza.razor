@@ -25,17 +25,17 @@
             <div class=" gap-1">
             <select class="btn btn-dark p-2 border"  @onclick="CambiarImagen" @bind="Model.Id">
                 <option selected></option>
-                <option value="11">Muzzarela</option>
-                <option value="12">Especial</option>
-                <option value="13">Con jamon</option>
-                <option value="14">Napolitana</option>
-                <option value="15">4 Quesos</option>
-                <option value="16">Cebolla</option>
-                <option value="17">Anchoa</option>
-                <option value="18">Anana</option>
-                <option value="19">Huevo</option>
-                <option value="20">Choclo</option>
-                <option value="21">Milan</option>
+                <option value="1">Muzzarela</option>
+                <option value="2">Especial</option>
+                <option value="3">Con jamon</option>
+                <option value="4">Napolitana</option>
+                <option value="5">4 Quesos</option>
+                <option value="6">Cebolla</option>
+                <option value="7">Anchoa</option>
+                <option value="8">Anana</option>
+                <option value="9">Huevo</option>
+                <option value="10">Choclo</option>
+                <option value="11">Milan</option>
             </select>
             <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="0" max="5" />
             </div>
@@ -95,43 +95,47 @@
     }
     private void CambiarImagen()
     {
-        if(Model.Id == 11)
+        if(Model.Id == 1)
         {
             Model.Source = "/css/imagenes/muzzarella.png";
         }
-        else if(Model.Id == 13)
+        else if(Model.Id == 2)
         {
             Model.Source = "/css/imagenes/pjamon.png";
         }
-        else if(Model.Id == 14)
+        else if(Model.Id == 3)
+        {
+            Model.Source = "/css/imagenes/pjamon.png";
+        }
+        else if(Model.Id == 4)
         {
             Model.Source = "/css/imagenes/napolitana.png";
         }
-        else if(Model.Id == 15)
+        else if(Model.Id == 5)
         {
             Model.Source = "/css/imagenes/4quesos.png";
         }
-         else if(Model.Id == 16)
+         else if(Model.Id == 6)
         {
             Model.Source = "/css/imagenes/pcebolla.png";
         }
-        else if(Model.Id == 17)
+        else if(Model.Id == 7)
         {
             Model.Source = "/css/imagenes/anchoa.png";
         }
-        else if(Model.Id == 18)
+        else if(Model.Id == 8)
         {
             Model.Source = "/css/imagenes/anana.png";
         }
-        else if(Model.Id == 19)
+        else if(Model.Id == 9)
         {
             Model.Source = "/css/imagenes/frambuesa.png";
         }
-          else if(Model.Id == 20)
+          else if(Model.Id == 10)
         {
             Model.Source = "/css/imagenes/frambuesa.png";
         }
-        else if(Model.Id == 21)
+        else if(Model.Id == 11)
         {
             Model.Source = "/css/imagenes/milan.png";
         }
@@ -174,4 +178,5 @@
         .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
         .Where(c => c.UsuarioId == 1).SingleOrDefault();
     }
+}
 }
