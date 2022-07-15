@@ -4,7 +4,7 @@
 
 namespace BlazorApp1.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class InicialFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -197,6 +197,33 @@ namespace BlazorApp1.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "pedidoProductoAdicionales",
+                columns: table => new
+                {
+                    PedidoProductoAdicionalId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PedidoProductoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AdicionalId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Cantidad = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pedidoProductoAdicionales", x => x.PedidoProductoAdicionalId);
+                    table.ForeignKey(
+                        name: "FK_pedidoProductoAdicionales_Adicionales_AdicionalId",
+                        column: x => x.AdicionalId,
+                        principalTable: "Adicionales",
+                        principalColumn: "AdicionalId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_pedidoProductoAdicionales_PedidoProductos_PedidoProductoId",
+                        column: x => x.PedidoProductoId,
+                        principalTable: "PedidoProductos",
+                        principalColumn: "PedidoProductoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Categorias",
                 columns: new[] { "CategoriaId", "Nombre" },
@@ -238,6 +265,11 @@ namespace BlazorApp1.Data.Migrations
                 values: new object[] { 1, 1 });
 
             migrationBuilder.InsertData(
+                table: "Pedidos",
+                columns: new[] { "PedidoId", "UsuarioId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
                 table: "Productos",
                 columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
                 values: new object[] { 1, 1, "Choripan", 100 });
@@ -245,7 +277,137 @@ namespace BlazorApp1.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Productos",
                 columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 3, 3, "Torta de chocolate", 500 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
                 values: new object[] { 4, 4, "Hamburguesa", 0 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 5, 3, "Torta de zanahoria", 600 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 6, 3, "Torta de vainilla", 500 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 7, 3, "Pastafrola", 700 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 8, 3, "Brownie", 750 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 10, 3, "Torta de Frambuesa", 800 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 11, 2, "Muzzarela", 700 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 12, 2, "Especial", 900 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 13, 2, "Jamon", 850 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 14, 2, "Napolitana", 900 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 15, 2, "4 Quesos", 950 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 16, 2, "Cebolla", 850 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 17, 2, "Anchoa", 900 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 18, 2, "Anana", 850 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 19, 2, "Huevo", 850 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 20, 2, "Choclo", 850 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 21, 2, "Milan", 850 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 22, 5, "Carne", 100 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 23, 5, "Choclo", 100 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 24, 5, "Verdura", 100 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 25, 5, "Pollo", 100 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 27, 5, "JamonYQueso", 100 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 28, 6, "Coca-Cola", 170 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 29, 6, "Pepsi", 150 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 30, 6, "Sprite", 170 });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "ProductoId", "CategoriaId", "Nombre", "Precio" },
+                values: new object[] { 31, 6, "Fanta", 150 });
 
             migrationBuilder.InsertData(
                 table: "Adicionales",
@@ -358,6 +520,16 @@ namespace BlazorApp1.Data.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_pedidoProductoAdicionales_AdicionalId",
+                table: "pedidoProductoAdicionales",
+                column: "AdicionalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pedidoProductoAdicionales_PedidoProductoId",
+                table: "pedidoProductoAdicionales",
+                column: "PedidoProductoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PedidoProductos_PedidoId",
                 table: "PedidoProductos",
                 column: "PedidoId");
@@ -384,19 +556,22 @@ namespace BlazorApp1.Data.Migrations
                 name: "CarritoProductoAdicional");
 
             migrationBuilder.DropTable(
-                name: "PedidoProductos");
-
-            migrationBuilder.DropTable(
-                name: "Adicionales");
+                name: "pedidoProductoAdicionales");
 
             migrationBuilder.DropTable(
                 name: "CarritoProductos");
 
             migrationBuilder.DropTable(
-                name: "Pedidos");
+                name: "Adicionales");
+
+            migrationBuilder.DropTable(
+                name: "PedidoProductos");
 
             migrationBuilder.DropTable(
                 name: "Carritos");
+
+            migrationBuilder.DropTable(
+                name: "Pedidos");
 
             migrationBuilder.DropTable(
                 name: "Productos");

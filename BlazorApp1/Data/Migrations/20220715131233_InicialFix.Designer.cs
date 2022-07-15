@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorApp1.Data.Migrations
 {
     [DbContext(typeof(CompraContext))]
-    [Migration("20220628142415_Inicial")]
-    partial class Inicial
+    [Migration("20220715131233_InicialFix")]
+    partial class InicialFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -287,6 +287,13 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Pedidos");
+
+                    b.HasData(
+                        new
+                        {
+                            PedidoId = 1,
+                            UsuarioId = 1
+                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProducto", b =>
@@ -314,6 +321,30 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("ProductoId");
 
                     b.ToTable("PedidoProductos");
+                });
+
+            modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProductoAdicional", b =>
+                {
+                    b.Property<int>("PedidoProductoAdicionalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdicionalId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PedidoProductoId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PedidoProductoAdicionalId");
+
+                    b.HasIndex("AdicionalId");
+
+                    b.HasIndex("PedidoProductoId");
+
+                    b.ToTable("pedidoProductoAdicionales");
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Producto", b =>
@@ -348,10 +379,192 @@ namespace BlazorApp1.Data.Migrations
                         },
                         new
                         {
+                            ProductoId = 3,
+                            CategoriaId = 3,
+                            Nombre = "Torta de chocolate",
+                            Precio = 500
+                        },
+                        new
+                        {
+                            ProductoId = 5,
+                            CategoriaId = 3,
+                            Nombre = "Torta de zanahoria",
+                            Precio = 600
+                        },
+                        new
+                        {
+                            ProductoId = 6,
+                            CategoriaId = 3,
+                            Nombre = "Torta de vainilla",
+                            Precio = 500
+                        },
+                        new
+                        {
+                            ProductoId = 7,
+                            CategoriaId = 3,
+                            Nombre = "Pastafrola",
+                            Precio = 700
+                        },
+                        new
+                        {
+                            ProductoId = 8,
+                            CategoriaId = 3,
+                            Nombre = "Brownie",
+                            Precio = 750
+                        },
+                        new
+                        {
+                            ProductoId = 10,
+                            CategoriaId = 3,
+                            Nombre = "Torta de Frambuesa",
+                            Precio = 800
+                        },
+                        new
+                        {
                             ProductoId = 4,
                             CategoriaId = 4,
                             Nombre = "Hamburguesa",
                             Precio = 0
+                        },
+                        new
+                        {
+                            ProductoId = 11,
+                            CategoriaId = 2,
+                            Nombre = "Muzzarela",
+                            Precio = 700
+                        },
+                        new
+                        {
+                            ProductoId = 12,
+                            CategoriaId = 2,
+                            Nombre = "Especial",
+                            Precio = 900
+                        },
+                        new
+                        {
+                            ProductoId = 13,
+                            CategoriaId = 2,
+                            Nombre = "Jamon",
+                            Precio = 850
+                        },
+                        new
+                        {
+                            ProductoId = 14,
+                            CategoriaId = 2,
+                            Nombre = "Napolitana",
+                            Precio = 900
+                        },
+                        new
+                        {
+                            ProductoId = 15,
+                            CategoriaId = 2,
+                            Nombre = "4 Quesos",
+                            Precio = 950
+                        },
+                        new
+                        {
+                            ProductoId = 16,
+                            CategoriaId = 2,
+                            Nombre = "Cebolla",
+                            Precio = 850
+                        },
+                        new
+                        {
+                            ProductoId = 17,
+                            CategoriaId = 2,
+                            Nombre = "Anchoa",
+                            Precio = 900
+                        },
+                        new
+                        {
+                            ProductoId = 18,
+                            CategoriaId = 2,
+                            Nombre = "Anana",
+                            Precio = 850
+                        },
+                        new
+                        {
+                            ProductoId = 19,
+                            CategoriaId = 2,
+                            Nombre = "Huevo",
+                            Precio = 850
+                        },
+                        new
+                        {
+                            ProductoId = 20,
+                            CategoriaId = 2,
+                            Nombre = "Choclo",
+                            Precio = 850
+                        },
+                        new
+                        {
+                            ProductoId = 21,
+                            CategoriaId = 2,
+                            Nombre = "Milan",
+                            Precio = 850
+                        },
+                        new
+                        {
+                            ProductoId = 22,
+                            CategoriaId = 5,
+                            Nombre = "Carne",
+                            Precio = 100
+                        },
+                        new
+                        {
+                            ProductoId = 23,
+                            CategoriaId = 5,
+                            Nombre = "Choclo",
+                            Precio = 100
+                        },
+                        new
+                        {
+                            ProductoId = 24,
+                            CategoriaId = 5,
+                            Nombre = "Verdura",
+                            Precio = 100
+                        },
+                        new
+                        {
+                            ProductoId = 25,
+                            CategoriaId = 5,
+                            Nombre = "Pollo",
+                            Precio = 100
+                        },
+                        new
+                        {
+                            ProductoId = 27,
+                            CategoriaId = 5,
+                            Nombre = "JamonYQueso",
+                            Precio = 100
+                        },
+                        new
+                        {
+                            ProductoId = 28,
+                            CategoriaId = 6,
+                            Nombre = "Coca-Cola",
+                            Precio = 170
+                        },
+                        new
+                        {
+                            ProductoId = 29,
+                            CategoriaId = 6,
+                            Nombre = "Pepsi",
+                            Precio = 150
+                        },
+                        new
+                        {
+                            ProductoId = 30,
+                            CategoriaId = 6,
+                            Nombre = "Sprite",
+                            Precio = 170
+                        },
+                        new
+                        {
+                            ProductoId = 31,
+                            CategoriaId = 6,
+                            Nombre = "Fanta",
+                            Precio = 150
                         });
                 });
 
@@ -472,6 +685,25 @@ namespace BlazorApp1.Data.Migrations
                     b.Navigation("Producto");
                 });
 
+            modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProductoAdicional", b =>
+                {
+                    b.HasOne("BlazorApp1.Data.Models.Adicional", "Adicional")
+                        .WithMany()
+                        .HasForeignKey("AdicionalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlazorApp1.Data.Models.PedidoProducto", "PedidoProducto")
+                        .WithMany("Adicionales")
+                        .HasForeignKey("PedidoProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adicional");
+
+                    b.Navigation("PedidoProducto");
+                });
+
             modelBuilder.Entity("BlazorApp1.Data.Models.Producto", b =>
                 {
                     b.HasOne("BlazorApp1.Data.Models.Categoria", "Categoria")
@@ -501,6 +733,11 @@ namespace BlazorApp1.Data.Migrations
             modelBuilder.Entity("BlazorApp1.Data.Models.Pedido", b =>
                 {
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProducto", b =>
+                {
+                    b.Navigation("Adicionales");
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Producto", b =>
