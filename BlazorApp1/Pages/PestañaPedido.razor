@@ -19,40 +19,44 @@
     </nav>
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
-<h3>Pedido</h3>
-
-<p>Su pedido es: </p>
-
-@if (productos == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Adicionales</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var producto in Model.Productos)
+            <h3>Pedido</h3>
+            @if (pedidos == null)
             {
-                <tr>
-                    <td>@producto.Nombre</td>
-                    <td>@producto.Cantidad</td>
-                    <td>@producto.Precio</td>
-                    <td>@producto.Adicionales</td>
-                </tr>
+                <p><em>Loading...</em></p>
             }
-        </tbody>
-    </table>
-    <p>Total: @Model.Total</p>
-}
-</div>
+            else
+            {
+                <ul>
+                    @foreach (var pedido in pedidos)
+                    {
+                        <li>
+                            <label>Su pedido n° @pedido.PedidoId es:</label>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Adicionales</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var producto in Model.Productos.Where(c => c.PedidoId == pedido.PedidoId))
+                                    {
+                                        <tr>
+                                            <td>@producto.Nombre</td>
+                                            <td>@producto.Cantidad</td>
+                                            <td>@producto.Precio</td>
+                                            <td>@producto.Adicionales</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
     </header>
 <footer class="footer text-center">
         <div class="container">
@@ -94,6 +98,7 @@ else
 
 
 @code {
+
     private class CarritoViewModel
     {
         public decimal Total
@@ -112,18 +117,26 @@ else
         public int Cantidad { get; set; }
         public int Precio { get; set; }
         public string Adicionales { get; set; }
+        public int PedidoId { get; set; }
     }
 
     private CarritoViewModel Model { get; set; } = new();
 
     private PedidoProducto[]? productos;
 
+    private Pedido[]? pedidos;
+
     protected override async Task OnInitializedAsync()
     {
         using var db = new CompraContext();
 
+        pedidos = db.Pedidos
+        .Include(c => c.Productos)
+        .Include(c => c.Usuario).ToArray();
+
         productos = db.PedidoProductos
         .Include(c => c.Producto)
+        .Include(c => c.Pedido)
         .Include(p => p.Adicionales)
         .ThenInclude(p => p.Adicional).ToArray();
 
@@ -133,7 +146,8 @@ else
                 {
                     Cantidad = producto.Cantidad,
                     Nombre = producto.Producto.Nombre,
-                    Precio = producto.Precio
+                    Precio = producto.Precio,
+                    PedidoId =producto.PedidoId
                 };
             foreach (var adicional in producto.Adicionales)
             {
