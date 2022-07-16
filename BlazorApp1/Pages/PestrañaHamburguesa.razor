@@ -108,7 +108,12 @@
                         <img src="/css/Imagenes/Mostaza.png" width="100" class="my-1"><img/>
                         <input @bind="Model.MostazaCant" type="checkbox" />
                         
-                    </div>                   
+                    </div>
+                    
+                    <br>
+                    <br>
+
+                   <input class="btn btn-dark p-1  border" @bind="Model.HamburguesaCant" type="number" min="1" max="10" />
             </section>
             <br>
             </form>
@@ -116,16 +121,13 @@
             <h2 class="text-black"> Precio = @Model.Total.ToString("C") </h2>
             </div>
             <button class="btn btn-dark" @onclick="CargarProductoCarro">Agregar al carrito</button>
-            <button class="btn btn-dark" @onclick="VerCarrito">Ver carrito</button>
+            <a href="/carrito">
+            Ver carrito
+            </a>
         </div>
             
         </div>
-</header>
-    <div class="contenedor-boton fixed-bottom">
-        <div class="botoncarrito">
-            <a class="carr border border-dark" href="/carrito"><i class="fas fa-shopping-cart fa-2x"></i></a>
-        </div>
-    </div>
+    </header>
 <footer class="footer text-center">
         <div class="container">
             <div class="row">
@@ -144,7 +146,7 @@
                     <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/Escuela-Industrial-Chivilcoy-106196239412818"><i class="fab fa-fw fa-facebook-f"></i></a>
                     <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/dani_gariboldi"><i class="fab fa-fw fa-twitter"></i></a>
                     <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/info7mo/"><i class="fab fa-fw fa-instagram"></i></a>
-                    
+                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
                 </div>
                 <!-- Donaciones -->
                 <div class="col-lg-4">
@@ -376,6 +378,8 @@
                 Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
 
             Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 3)).Precio * 2;
+
+            Total *= HamburguesaCant;
         }
     }
 
@@ -506,7 +510,7 @@
         {
             CarritoProducto carritoProducto = new CarritoProducto()
                 {
-                    ProductoId = 1,
+                    ProductoId = 4,
                     Cantidad = Model.HamburguesaCant,
                     Adicionales = new()
                 };
@@ -634,19 +638,6 @@
         {
             //anashe
         }
-    }
-
-    private void VerCarrito()
-    {
-        using var db = new CompraContext();
-
-        Carrito carrito = db.Carritos
-        .Include(c => c.Usuario)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .ThenInclude(p => p.Adicionales)
-        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-        .Where(c => c.UsuarioId == 1).SingleOrDefault();
     }
 
     private void EscribirPrecio()
