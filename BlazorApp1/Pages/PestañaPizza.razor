@@ -142,49 +142,29 @@
     private void CambiarImagen()
     {
         if(Model.Id == 11)
-        {
             Model.Source = "/css/imagenes/muzzarella.png";
-        }
         else if(Model.Id == 12)
-        {
             Model.Source = "/css/imagenes/pjamon.png";
-        }
         else if(Model.Id == 13)
-        {
             Model.Source = "/css/imagenes/pjamon.png";
-        }
         else if(Model.Id == 14)
-        {
             Model.Source = "/css/imagenes/napolitana.png";
-        }
         else if(Model.Id == 15)
-        {
             Model.Source = "/css/imagenes/4quesos.png";
-        }
         else if(Model.Id == 16)
-        {
             Model.Source = "/css/imagenes/pcebolla.png";
-        }
         else if(Model.Id == 17)
-        {
             Model.Source = "/css/imagenes/anchoa.png";
-        }
         else if(Model.Id == 18)
-        {
             Model.Source = "/css/imagenes/anana.png";
-        }
         else if(Model.Id == 19)
-        {
             Model.Source = "/css/imagenes/frambuesa.png";
-        }
         else if(Model.Id == 20)
-        {
             Model.Source = "/css/imagenes/frambuesa.png";
-        }
         else if(Model.Id == 21)
-        {
             Model.Source = "/css/imagenes/milan.png";
-        }
+        else if (Model.Id == 0)
+            Model.Source = "";
     }
 
     private ProductoViewModel Model { get; set; } = new();

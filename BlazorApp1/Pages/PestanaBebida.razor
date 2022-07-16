@@ -132,21 +132,15 @@
     private void CambiarImagen()
     {
         if (Model.Id == 28)
-        {
             Model.Source = "/css/imagenes/cocacola.png";
-        }
         else if (Model.Id == 29)
-        {
             Model.Source = "/css/imagenes/pepsi.png";
-        }
         else if (Model.Id == 30)
-        {
             Model.Source = "/css/imagenes/sprite.png";
-        }
         else if (Model.Id == 31)
-        {
             Model.Source = "/css/imagenes/fanta.png";
-        }
+        else if (Model.Id == 0)
+            Model.Source = "";
     }
     private ProductoViewModel Model { get; set; } = new();
 

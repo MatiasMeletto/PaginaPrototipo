@@ -139,29 +139,19 @@
     private void CambiarImagen()
     {
         if(Model.Id == 3)
-        {
             Model.Source = "/css/imagenes/choco.png";
-        }
         else if(Model.Id == 6)
-        {
             Model.Source = "/css/imagenes/vanil.png";
-        }
         else if(Model.Id == 7)
-        {
             Model.Source = "/css/imagenes/frol.png";
-        }
         else if(Model.Id == 8)
-        {
             Model.Source = "/css/imagenes/brownie.png";
-        }
         else if(Model.Id == 5)
-        {
             Model.Source = "/css/imagenes/zanahoria.png";
-        }
         else if(Model.Id == 10)
-        {
             Model.Source = "/css/imagenes/frambuesa.png";
-        }
+        else if (Model.Id == 0)
+            Model.Source = "";
     }
 
     private void CargarProductoCarrito()

@@ -133,26 +133,17 @@
     private void CambiarImagen()
     {
         if (Model.Id == 1)
-        {
             Model.Source = "/css/imagenes/muzzarella.png";
-        }
         else if (Model.Id == 2)
-        {
             Model.Source = "/css/imagenes/pjamon.png";
-        }
         else if (Model.Id == 3)
-        {
             Model.Source = "/css/imagenes/napolitana.png";
-        }
         else if (Model.Id == 4)
-        {
             Model.Source = "/css/imagenes/pjamon.png";
-        }
         else if (Model.Id == 5)
-        {
             Model.Source = "/css/imagenes/pjamon.png";
-
-        }
+        else if (Model.Id == 0)
+            Model.Source = "";
     }
     private ProductoViewModel Model { get; set; } = new();
 
