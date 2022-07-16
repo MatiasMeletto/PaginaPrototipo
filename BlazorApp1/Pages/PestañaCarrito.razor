@@ -1,4 +1,5 @@
 ﻿@page "/carrito"
+
 <body id="page-top">
     <!-- Barra de navegación-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -185,8 +186,11 @@
 
         Pedido pedido = new Pedido()
         {
-            UsuarioId = 1
+            UsuarioId = 1,
+            Productos = new List<PedidoProducto>()
         };
+
+        db.Pedidos.Add(pedido);
 
         foreach (var producto in productos)
         {
@@ -201,7 +205,7 @@
 
                 PedidoProducto pedidoProducto = new PedidoProducto()
                 {
-                    PedidoId = 1,
+                    PedidoId = pedido.PedidoId,
                     ProductoId = producto.ProductoId,
                     Cantidad = producto.Cantidad,
                     Precio = pedidoViewModel.Precio * producto.Cantidad,
@@ -223,7 +227,7 @@
             {
                 PedidoProducto pedidoProducto = new PedidoProducto()
                 {
-                    PedidoId = 1,
+                    PedidoId = pedido.PedidoId,
                     ProductoId = producto.ProductoId,
                     Cantidad = producto.Cantidad,
                     Precio = producto.Producto.Precio * producto.Cantidad,
@@ -249,6 +253,7 @@
             db.CarritoProductos.Remove(producto);
         }
 
+        db.Pedidos.Add(pedido);
         db.SaveChanges();
     }
 }

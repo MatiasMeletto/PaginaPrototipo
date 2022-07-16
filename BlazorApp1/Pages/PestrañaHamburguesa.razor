@@ -514,11 +514,11 @@
         if (carrito is not null)
         {
             CarritoProducto carritoProducto = new CarritoProducto()
-                {
+            {
                     ProductoId = 4,
                     Cantidad = Model.HamburguesaCant,
                     Adicionales = new()
-                };
+            };
 
             carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
                 {
@@ -643,6 +643,19 @@
         {
             //anashe
         }
+        Model.LechugaCant = 0;
+        Model.TomateCant = 0;
+        Model.HuevoCant = 0;
+        Model.CheddarCant = 0;
+        Model.BaconCant = 0;
+        Model.JamonCant = 0;
+        Model.TyboCant = 0;
+        Model.MayonesaCant = false;
+        Model.CebollaCant = 0;
+        Model.MostazaCant = false;
+        Model.KetchupCant = false;
+        Model.CarneCant = 1;
+        Model.HamburguesaCant = 1;
     }
 
     private void EscribirPrecio()

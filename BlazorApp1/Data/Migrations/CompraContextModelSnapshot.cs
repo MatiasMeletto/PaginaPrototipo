@@ -36,7 +36,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("Adicionales");
+                    b.ToTable("Adicionales", (string)null);
 
                     b.HasData(
                         new
@@ -166,7 +166,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Carritos");
+                    b.ToTable("Carritos", (string)null);
 
                     b.HasData(
                         new
@@ -197,7 +197,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("CarritoProductos");
+                    b.ToTable("CarritoProductos", (string)null);
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.CarritoProductoAdicional", b =>
@@ -221,7 +221,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasIndex("CarritoProductoId");
 
-                    b.ToTable("CarritoProductoAdicional");
+                    b.ToTable("CarritoProductoAdicional", (string)null);
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Categoria", b =>
@@ -236,7 +236,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasKey("CategoriaId");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categorias", (string)null);
 
                     b.HasData(
                         new
@@ -284,7 +284,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Pedidos");
+                    b.ToTable("Pedidos", (string)null);
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProducto", b =>
@@ -311,7 +311,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("PedidoProductos");
+                    b.ToTable("PedidoProductos", (string)null);
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProductoAdicional", b =>
@@ -335,7 +335,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasIndex("PedidoProductoId");
 
-                    b.ToTable("pedidoProductoAdicionales");
+                    b.ToTable("pedidoProductoAdicionales", (string)null);
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.Producto", b =>
@@ -358,7 +358,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasIndex("CategoriaId");
 
-                    b.ToTable("Productos");
+                    b.ToTable("Productos", (string)null);
 
                     b.HasData(
                         new
@@ -575,7 +575,7 @@ namespace BlazorApp1.Data.Migrations
 
                     b.HasKey("UsuarioId");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
 
                     b.HasData(
                         new
