@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorApp1.Data.Migrations
 {
     [DbContext(typeof(CompraContext))]
-    [Migration("20220715131233_InicialFix")]
-    partial class InicialFix
+    [Migration("20220716020114_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -287,13 +287,6 @@ namespace BlazorApp1.Data.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Pedidos");
-
-                    b.HasData(
-                        new
-                        {
-                            PedidoId = 1,
-                            UsuarioId = 1
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Models.PedidoProducto", b =>

@@ -4,7 +4,7 @@
 
 namespace BlazorApp1.Data.Migrations
 {
-    public partial class InicialFix : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -262,11 +262,6 @@ namespace BlazorApp1.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Carritos",
                 columns: new[] { "CarritoId", "UsuarioId" },
-                values: new object[] { 1, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Pedidos",
-                columns: new[] { "PedidoId", "UsuarioId" },
                 values: new object[] { 1, 1 });
 
             migrationBuilder.InsertData(

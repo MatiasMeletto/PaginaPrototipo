@@ -24,7 +24,7 @@
             <br>
             <div class=" gap-1">
             <select class="btn btn-dark p-2 border"  @onclick="CambiarImagen" @bind="Model.Id">
-                <option selected> Seleccione la Pizza</option>
+                <option selected value="0">-Seleccione su pizza-</option>
                 <option value="11">Muzzarela</option>
                 <option value="12">Especial</option>
                 <option value="13">Con jamon</option>
@@ -37,13 +37,14 @@
                 <option value="20">Choclo</option>
                 <option value="21">Milan</option>
             </select>
-            <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="0" max="5" />
+            <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="1" max="10" />
             </div>
             <br>
             <img src="@Model.Source" class="img-fluid w-50" />
+            <br>
+            <h2 class="text-black"> Precio = @Model.Total.ToString("C") </h2>
             <div class="gap-1">
             <button class="btn btn-dark p-2 border" @onclick="CargarProductoCarrito">Agregar al carrito</button>
-            <button class="btn btn-dark p-2 border" @onclick="VerCarrito">Ver carrito</button>
              </div>
         </div>        
     </header>
@@ -94,9 +95,49 @@
 @code {
     private class ProductoViewModel
     {
-        public int Id{ get; set; }
-        public int Cantidad{ get; set; }
-        public string Source { get; set; } = "/css/imagenes/muzzarella.png";
+        int _cantidad;
+        int _id;
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                CalcularTotal();
+            }
+        }
+        public int Cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                _cantidad = value;
+                CalcularTotal();
+            }
+        }
+        public string Source { get; set; }
+        public int Total { get; set; }
+
+        public async void CalcularTotal()
+        {
+            using var db = new CompraContext();
+
+            Total = 0;
+            if (Id != 0)
+                Total += ((await db.Productos.SingleAsync(a => a.ProductoId == Id)).Precio * Cantidad);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model.Cantidad = 1;
     }
     private void CambiarImagen()
     {
@@ -120,7 +161,7 @@
         {
             Model.Source = "/css/imagenes/4quesos.png";
         }
-         else if(Model.Id == 16)
+        else if(Model.Id == 16)
         {
             Model.Source = "/css/imagenes/pcebolla.png";
         }
@@ -136,7 +177,7 @@
         {
             Model.Source = "/css/imagenes/frambuesa.png";
         }
-          else if(Model.Id == 20)
+        else if(Model.Id == 20)
         {
             Model.Source = "/css/imagenes/frambuesa.png";
         }
@@ -169,19 +210,7 @@
         {
             //anashe
         }
-
+        Model.Id = 0;
+        Model.Cantidad = 1;
     }
-    private void VerCarrito()
-    {
-        using var db = new CompraContext();
-
-        Carrito carrito = db.Carritos
-        .Include(c => c.Usuario)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .ThenInclude(p => p.Adicionales)
-        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-        .Where(c => c.UsuarioId == 1).SingleOrDefault();
-    }
-}
 }

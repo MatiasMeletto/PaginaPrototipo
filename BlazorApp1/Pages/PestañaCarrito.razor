@@ -169,7 +169,7 @@
                     productoViewModel.Precio *= producto.Cantidad;
                 }
             }
-            
+
             Model.Productos.Add(productoViewModel);
         }
     }
@@ -178,81 +178,77 @@
     {
         using var db = new CompraContext();
 
-        Pedido? pedido = db.Pedidos.Include(c => c.Productos).ThenInclude(p => p.Producto).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == 1).SingleOrDefault();
-
         productos = db.CarritoProductos
         .Include(c => c.Producto)
         .Include(p => p.Adicionales)
         .ThenInclude(p => p.Adicional).ToArray();
 
-        if (pedido is not null)
+        Pedido pedido = new Pedido()
         {
-            foreach (var producto in productos)
+            UsuarioId = 1
+        };
+
+        foreach (var producto in productos)
+        {
+            if (producto.ProductoId == 4)
             {
-                if (producto.ProductoId == 4)
+                pedidoViewModel.Precio = 0;
+
+                foreach (var adicional in producto.Adicionales)
                 {
-                    pedidoViewModel.Precio = 0;
-
-                    foreach (var adicional in producto.Adicionales)
-                    {
-                        pedidoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
-                    }
-
-                    PedidoProducto pedidoProducto = new PedidoProducto()
-                    {
-                        PedidoId = 1,
-                        ProductoId = producto.ProductoId,
-                        Cantidad = producto.Cantidad,
-                        Precio = pedidoViewModel.Precio * producto.Cantidad,
-                        Adicionales = new List<PedidoProductoAdicional>()
-                    };
-
-                    foreach (var adicional in producto.Adicionales)
-                    {
-                        pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
-                        {
-                            AdicionalId = adicional.AdicionalId,
-                            Cantidad = adicional.Cantidad
-                        });
-                    }
-
-                    pedido.Productos.Add(pedidoProducto);
-                    db.SaveChanges();
+                    pedidoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
                 }
-                else
+
+                PedidoProducto pedidoProducto = new PedidoProducto()
                 {
-                    PedidoProducto pedidoProducto = new PedidoProducto()
-                    {
-                        PedidoId = 1,
-                        ProductoId = producto.ProductoId,
-                        Cantidad = producto.Cantidad,
-                        Precio = producto.Producto.Precio * producto.Cantidad,
-                        Adicionales = new List<PedidoProductoAdicional>()
-                    };
+                    PedidoId = 1,
+                    ProductoId = producto.ProductoId,
+                    Cantidad = producto.Cantidad,
+                    Precio = pedidoViewModel.Precio * producto.Cantidad,
+                    Adicionales = new List<PedidoProductoAdicional>()
+                };
 
-                    foreach (var adicional in producto.Adicionales)
+                foreach (var adicional in producto.Adicionales)
+                {
+                    pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
                     {
-                        pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
-                        {
-                            AdicionalId = adicional.AdicionalId,
-                            Cantidad = adicional.Cantidad
-                        });
-                    }
-
-                    pedido.Productos.Add(pedidoProducto);
-                    db.SaveChanges();
+                        AdicionalId = adicional.AdicionalId,
+                        Cantidad = adicional.Cantidad
+                    });
                 }
+
+                pedido.Productos.Add(pedidoProducto);
+            }
+            else
+            {
+                PedidoProducto pedidoProducto = new PedidoProducto()
+                {
+                    PedidoId = 1,
+                    ProductoId = producto.ProductoId,
+                    Cantidad = producto.Cantidad,
+                    Precio = producto.Producto.Precio * producto.Cantidad,
+                    Adicionales = new List<PedidoProductoAdicional>()
+                };
+
+                foreach (var adicional in producto.Adicionales)
+                {
+                    pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
+                    {
+                        AdicionalId = adicional.AdicionalId,
+                        Cantidad = adicional.Cantidad
+                    });
+                }
+
+                pedido.Productos.Add(pedidoProducto);
             }
 
-            foreach(var producto in productos)
-            {
-                db.CarritoProductos.Remove(producto);
-                db.SaveChanges();
-            }
         }
-        else
+
+        foreach (var producto in productos)
         {
-            //anashe
+            db.CarritoProductos.Remove(producto);
         }
-    } 
+
+        db.SaveChanges();
+    }
 }

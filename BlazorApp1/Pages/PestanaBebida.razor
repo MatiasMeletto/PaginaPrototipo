@@ -23,21 +23,21 @@
          <form class="form-inline">
             <h3><label class="my-1 mr-2" for="inlineFormCustomSelectPref">Seleccione la bebida!</label></h3>
                 <select class="btn btn-dark p-2 border" id="inlineFormCustomSelectPref" @onclick="CambiarImagen" @bind="Model.Id">
-                    <option selected></option>
+                    <option selected value="0">-Seleccione su bebida-</option>
                     <option value="28">Coca-Cola</option>
                     <option value="29">Pespi</option>
                     <option value="30">Sprite</option>
                     <option value="31">Fanta</option>
                 </select>
                 
-                <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="0" max="30" />
+                <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="1" max="10" />
                 <br>
                 <br>
                 <img src="@Model.Source" class="img-fluid w-25 d-md-inline-flex" />
-                
+                <br>
+                <h2 class="text-black"> Precio = @Model.Total.ToString("C") </h2>
                 <div class="custom-control custom-checkbox my-1 mr-sm-2">
                     <button class="btn btn-dark p-2 border" @onclick="CargarProductoCarrito">Agregar al carrito</button>
-                    <button class="btn btn-dark p-2 border" @onclick="VerCarrito">Ver carrito</button>
                 </div>
         </form>
 </div>        
@@ -88,9 +88,49 @@
 @code {
     private class ProductoViewModel
     {
-        public int Id{ get; set; }
-        public int Cantidad{ get; set; }
-        public string Source { get; set; } =  "/css/imagenes/cocacola.png";
+        int _cantidad;
+        int _id;
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                CalcularTotal();
+            }
+        }
+        public int Cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                _cantidad = value;
+                CalcularTotal();
+            }
+        }
+        public string Source { get; set; }
+        public int Total { get; set; }
+
+        public async void CalcularTotal()
+        {
+            using var db = new CompraContext();
+
+            Total = 0;
+            if (Id != 0)
+                Total += ((await db.Productos.SingleAsync(a => a.ProductoId == Id)).Precio * Cantidad);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model.Cantidad = 1;
     }
     private void CambiarImagen()
     {
@@ -134,21 +174,11 @@
         {
             //anashe
         }
-
+        Model.Id = 0;
+        Model.Cantidad = 1;
     }
-    private void VerCarrito()
-    {
-        using var db = new CompraContext();
 
-        Carrito carrito = db.Carritos
-        .Include(c => c.Usuario)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .ThenInclude(p => p.Adicionales)
-        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-        .Where(c => c.UsuarioId == 1).SingleOrDefault();
-    }
 }
-}
+
 
 
