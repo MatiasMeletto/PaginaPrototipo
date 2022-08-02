@@ -113,7 +113,7 @@ else
     {
         using var db = new CompraContext();
 
-        Pedido? pedido = db.Pedidos.Include(c => c.Productos).ThenInclude(p => p.Producto).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == 1).SingleOrDefault();
+        Pedido? pedido = db.Pedidos.Include(c => c.Productos).ThenInclude(p => p.Producto).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == "1").SingleOrDefault();
 
         productos = db.CarritoProductos
         .Include(c => c.Producto)

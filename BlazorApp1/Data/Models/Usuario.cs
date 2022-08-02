@@ -1,9 +1,13 @@
-﻿namespace BlazorApp1.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+
+namespace BlazorApp1.Data.Models
 {
-    public class Usuario
+    public class Usuario : IdentityUser
     {
-        public int UsuarioId { get; set; }
+        [PersonalData, StringLength(255)]
         public string Nombre { get; set; }
-        public string Password { get; set; }
+        [PersonalData, StringLength(255)]
+        public string Apellido { get; set; }
     }
 }

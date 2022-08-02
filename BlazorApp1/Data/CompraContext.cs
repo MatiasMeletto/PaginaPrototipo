@@ -1,19 +1,20 @@
 ﻿using BlazorApp1.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorApp1.Data
 {
-    public class CompraContext : DbContext
+    public class CompraContext : IdentityDbContext
     {
         public DbSet<Adicional> Adicionales { get; set; }
         public DbSet<Carrito> Carritos { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<PedidoProducto> PedidoProductos { get; set; }
         public DbSet<CarritoProducto> CarritoProductos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<PedidoProductoAdicional> pedidoProductoAdicionales { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite($"Data Source=compras.db");
 
@@ -371,27 +372,7 @@ namespace BlazorApp1.Data
                     ProductoId = 4
                 });
 
-            modelBuilder.Entity<Usuario>()
-                .HasData(new Usuario()
-                {
-                    UsuarioId = 1,
-                    Nombre = "guest",
-                    Password = "password"
-                });
-
-            modelBuilder.Entity<Carrito>()
-                .HasData(new Carrito() 
-                {
-                    CarritoId = 1,
-                    UsuarioId = 1
-                });
-
-            modelBuilder.Entity<Pedido>()
-                .HasData(new Pedido()
-                {
-                    PedidoId = 1,
-                    UsuarioId = 1
-                });
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

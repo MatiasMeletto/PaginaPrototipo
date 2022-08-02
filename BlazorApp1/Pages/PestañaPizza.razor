@@ -34,7 +34,7 @@
     {
         using var db = new CompraContext();
 
-        Carrito carrito = db.Carritos.Include(c => c.Productos) .Where(c => c.UsuarioId == 1).SingleOrDefault();
+        Carrito carrito = db.Carritos.Include(c => c.Productos) .Where(c => c.UsuarioId == "1").SingleOrDefault();
 
         if (carrito is not null)
         {
@@ -65,6 +65,6 @@
         .ThenInclude(p => p.Producto)
         .ThenInclude(p => p.Adicionales)
         .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-        .Where(c => c.UsuarioId == 1).SingleOrDefault();
+        .Where(c => c.UsuarioId == "1").SingleOrDefault();
     }
 }
