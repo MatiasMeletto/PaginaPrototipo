@@ -18,7 +18,7 @@ builder.Services.AddDefaultIdentity<Usuario>(options => options.SignIn.RequireCo
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<Usuario>>();
 builder.Services.AddScoped<IConfiguracionInicial, ConfiguracionInicial>();
 
 var app = builder.Build();
