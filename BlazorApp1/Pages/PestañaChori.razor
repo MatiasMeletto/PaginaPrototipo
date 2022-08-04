@@ -1,4 +1,6 @@
-﻿@page "/chori"
+﻿@inject IAuthorizationService AuthorizationService
+@inject UserManager<Usuario> UserManager
+@page "/chori"
 
 <div>
     <form action="#">
@@ -19,7 +21,6 @@
         </div>
     </form>
     <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
-    <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
 </div>
 
 @code {
@@ -32,12 +33,18 @@
     }
 
     private ProductoViewModel Model { get; set; } = new();
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
-    private void CargarProductoCarro()
+    private async void CargarProductoCarro()
     {
+        var user = (await AuthenticationStateTask).User;
+        if (user.Identity.IsAuthenticated)
+        {
             using var db = new CompraContext();
+            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
 
-            Carrito carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == "1").SingleOrDefault();
+            Carrito carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
 
             if (carrito is not null)
             {
@@ -70,48 +77,7 @@
             else
             {
                 //anashe
-            } 
+            }
+        }
     }
-
-    private void VerCarrito()
-    {
-        using var db = new CompraContext();
-
-        Carrito carrito = db.Carritos
-        .Include(c => c.Usuario)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .ThenInclude(p => p.Adicionales)
-        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-        .Where(c => c.UsuarioId == "1").SingleOrDefault();
-    }
-
-
-        //private void CrearNombre()
-        //{
-        //    if (DeNombre.Chimi && DeNombre.Criolla)
-        //        Model.Nombre = "Choripan con chimichurri y salsa criolla";
-        //    else if (DeNombre.Chimi && !DeNombre.Criolla)
-        //        Model.Nombre = "Choripan con chimichurri";
-        //    else if (!DeNombre.Chimi && DeNombre.Criolla)
-        //        Model.Nombre = "Choripan con salsa criolla";
-        //    else
-        //        Model.Nombre = "Choripan";
-        //}
-
-        //CrearNombre();
-
-
-        //CarritoProducto carritoProducto = new CarritoProducto()
-        //{
-        //    Carrito = carrito,
-        //    CarritoId = carrito.CarritoId,
-        //    ProductoId = producto.ProductoId,
-        //    Producto = producto,
-        //    Cantidad = Model.Cantidad
-        //};
-
-        //carrito.Productos.Add(carritoProducto);
-        //db.Add(carrito);
-        //db.SaveChanges();
 }

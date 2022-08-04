@@ -21,11 +21,9 @@
 <br>
 
 <button class="btn btn-primary" @onclick="CargarProductoCarrito">Agregar al carrito</button>
-<button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
 
 @code {
-    [CascadingParameter]
-    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    
 
     private class ProductoViewModel
     {
@@ -34,6 +32,8 @@
     }
 
     private ProductoViewModel Model { get; set; } = new();
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     private async void CargarProductoCarrito()
     {
@@ -48,12 +48,12 @@
             if (carrito is not null)
             {
                 CarritoProducto carritoProducto = new CarritoProducto()
-                    {
-                        ProductoId = Model.Id,
-                        Cantidad = Model.Cantidad,
-                        CarritoId = carrito.CarritoId,
-                        Carrito = carrito
-                    };
+                {
+                    ProductoId = Model.Id,
+                    Cantidad = Model.Cantidad,
+                    CarritoId = carrito.CarritoId,
+                    Carrito = carrito
+                };
 
                 carrito.Productos.Add(carritoProducto);
                 db.SaveChanges();
@@ -63,22 +63,5 @@
                 //anashe
             }
         }
-    }
-
-    private async void VerCarrito()
-    {
-        var user = (await AuthenticationStateTask).User;
-        if (user.Identity.IsAuthenticated)
-        {
-            using var db = new CompraContext();
-            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
-            Carrito carrito = db.Carritos
-               .Include(c => c.Usuario)
-               .Include(c => c.Productos)
-               .ThenInclude(p => p.Producto)
-               .ThenInclude(p => p.Adicionales)
-               .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-               .Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
-        }       
     }
 }
