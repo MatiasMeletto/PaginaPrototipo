@@ -33,7 +33,6 @@
 	<ItemGroup>
 	  <Folder Include="wwwroot\Pagina\assets\Media\" />
 	  <Folder Include="wwwroot\Pagina\assets\img\" />
-	  <Folder Include="wwwroot\Pagina\css\" />
 	</ItemGroup>
 
 </Project>
