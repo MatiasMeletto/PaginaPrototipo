@@ -1,6 +1,7 @@
 ﻿@inject IAuthorizationService AuthorizationService
 @inject UserManager<Usuario> UserManager
 @page "/pizzas"
+
  <body id="page-top">
     <!-- Barra de navegación-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -127,6 +128,7 @@
         public string Source { get; set; }
         public int Total { get; set; }
 
+
         public async void CalcularTotal()
         {
             using var db = new CompraContext();
@@ -137,10 +139,15 @@
         }
     }
 
+    private ProductoViewModel Model { get; set; } = new();
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         Model.Cantidad = 1;
     }
+
     private void CambiarImagen()
     {
         if(Model.Id == 11)
@@ -169,34 +176,37 @@
             Model.Source = "";
     }
 
-    private ProductoViewModel Model { get; set; } = new();
-
-    private void CargarProductoCarrito()
+    private async void CargarProductoCarrito()
     {
         if (Model.Id != 0)
         {
-            using var db = new CompraContext();
-
-            Carrito carrito = db.Carritos.Include(c => c.Productos).Where(c => c.UsuarioId == 1).SingleOrDefault();
-
-            if (carrito is not null)
+            var user = (await AuthenticationStateTask).User;
+            if (user.Identity.IsAuthenticated)
             {
-                CarritoProducto carritoProducto = new CarritoProducto()
+                using var db = new CompraContext();
+                var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
+
+                Carrito carrito = db.Carritos.Include(c => c.Productos).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
+
+                if (carrito is not null)
                 {
-                    ProductoId = Model.Id,
-                    Cantidad = Model.Cantidad,
-                };
+                    CarritoProducto carritoProducto = new CarritoProducto()
+                    {
+                        ProductoId = Model.Id,
+                        Cantidad = Model.Cantidad,
+                    };
 
-                carrito.Productos.Add(carritoProducto);
-                db.SaveChanges();
+                    carrito.Productos.Add(carritoProducto);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    //anashe
+                }
+                Model.Id = 0;
+                Model.Cantidad = 1;
             }
-            else
-            {
-                //anashe
-            }
-            Model.Id = 0;
-            Model.Cantidad = 1;
+            CambiarImagen();
         }
-        CambiarImagen();
     }
 }

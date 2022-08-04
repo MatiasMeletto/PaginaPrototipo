@@ -1,4 +1,7 @@
-﻿@page "/pedido"
+﻿@inject IAuthorizationService AuthorizationService
+@inject UserManager<Usuario> UserManager
+@page "/pedido"
+
 <body id="page-top">
     <!-- Barra de navegación-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -121,6 +124,8 @@
     }
 
     private CarritoViewModel Model { get; set; } = new();
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     private PedidoProducto[]? productos;
 
@@ -128,40 +133,45 @@
 
     protected override async Task OnInitializedAsync()
     {
-        using var db = new CompraContext();
-
-        pedidos = db.Pedidos
-        .Include(c => c.Productos)
-        .Include(c => c.Usuario).ToArray();
-
-        productos = db.PedidoProductos
-        .Include(c => c.Producto)
-        .Include(c => c.Pedido)
-        .Include(p => p.Adicionales)
-        .ThenInclude(p => p.Adicional).ToArray();
-
-        foreach (var producto in productos)
+        var user = (await AuthenticationStateTask).User;
+        if (user.Identity.IsAuthenticated)
         {
-            ProductoViewModel productoViewModel = new ProductoViewModel
-                {
-                    Cantidad = producto.Cantidad,
-                    Nombre = producto.Producto.Nombre,
-                    Precio = producto.Precio,
-                    PedidoId =producto.PedidoId
-                };
-            foreach (var adicional in producto.Adicionales)
+            using var db = new CompraContext();
+            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
+
+            pedidos = db.Pedidos
+            .Include(c => c.Productos)
+            .Include(c => c.Usuario).Where(c => c.UsuarioId == usuario.Id).ToArray();
+
+            productos = db.PedidoProductos
+            .Include(c => c.Producto)
+            .Include(c => c.Pedido)
+            .Include(p => p.Adicionales)
+            .ThenInclude(p => p.Adicional).Where(c => c.Pedido.UsuarioId == usuario.Id).ToArray();
+
+            foreach (var producto in productos)
             {
-                productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
-                if (producto.Adicionales.Last() == adicional)
+                ProductoViewModel productoViewModel = new ProductoViewModel
+                    {
+                        Cantidad = producto.Cantidad,
+                        Nombre = producto.Producto.Nombre,
+                        Precio = producto.Precio,
+                        PedidoId = producto.PedidoId
+                    };
+                foreach (var adicional in producto.Adicionales)
                 {
-                    productoViewModel.Adicionales += ".";
+                    productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
+                    if (producto.Adicionales.Last() == adicional)
+                    {
+                        productoViewModel.Adicionales += ".";
+                    }
+                    else
+                    {
+                        productoViewModel.Adicionales += ", ";
+                    }
                 }
-                else
-                {
-                    productoViewModel.Adicionales += ", ";
-                }
+                Model.Productos.Add(productoViewModel);
             }
-            Model.Productos.Add(productoViewModel);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@inject IAuthorizationService AuthorizationService
 @inject UserManager<Usuario> UserManager
 @page "/chori"
+
 <body id="page-top">
     <!-- Barra de navegación-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -133,6 +134,8 @@
 
 
     private ProductoViewModel Model { get; set; } = new();
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -140,46 +143,54 @@
         Model.CalcularTotal();
     }
 
-    private void CargarProductoCarro()
+    private async void CargarProductoCarro()
     {
-            using var db = new CompraContext();
-
-            Carrito carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == 1).SingleOrDefault();
-
-            if (carrito is not null)
+        if (Model.Cantidad != 0)
+        {
+            var user = (await AuthenticationStateTask).User;
+            if (user.Identity.IsAuthenticated)
             {
-                CarritoProducto carritoProducto = new CarritoProducto()
-                {
-                    ProductoId = 1,
-                    Cantidad = Model.Cantidad,
-                    Adicionales = new()
-                };
+                using var db = new CompraContext();
+                var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
 
-                if (Model.Chimi)
+                Carrito? carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
+
+                if (carrito is not null)
                 {
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    CarritoProducto carritoProducto = new CarritoProducto()
                     {
-                        AdicionalId = 2,
-                        Cantidad = 1
-                    });
+                        ProductoId = 1,
+                        Cantidad = Model.Cantidad,
+                        Adicionales = new()
+                    };
+
+                    if (Model.Chimi)
+                    {
+                        carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                        {
+                            AdicionalId = 2,
+                            Cantidad = 1
+                        });
+                    }
+                    if (Model.Criolla)
+                    {
+                        carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                        {
+                            AdicionalId = 1,
+                            Cantidad = 1
+                        });
+                    }
+                    carrito.Productos.Add(carritoProducto);
+                    db.SaveChanges();
                 }
-                if (Model.Criolla)
+                else
                 {
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                    {
-                        AdicionalId = 1,
-                        Cantidad = 1
-                    });
+                    //anashe
                 }
-                carrito.Productos.Add(carritoProducto);
-                db.SaveChanges();
+                Model.Chimi = false;
+                Model.Criolla = false;
+                Model.Cantidad = 1;
             }
-            else
-            {
-                //anashe
-            }
-            Model.Chimi = false;
-            Model.Criolla = false;
-            Model.Cantidad = 1;
+        }
     }
 }
