@@ -1,4 +1,6 @@
-﻿@page "/carrito"
+﻿@inject IAuthorizationService AuthorizationService
+@inject UserManager<Usuario> UserManager
+@page "/carrito"
 
 <h3>Carrito</h3>
 
@@ -61,6 +63,8 @@ else
 
     private PedidoViewModel pedidoViewModel { get; set; } = new();
     private CarritoViewModel Model { get; set; } = new();
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     private CarritoProducto[]? productos;
 
@@ -69,43 +73,54 @@ else
         CargarLista();
     }
 
-    private void CargarLista()
+    private async void CargarLista()
     {
-        using var db = new CompraContext();
-
-        productos = db.CarritoProductos
-        .Include(c => c.Producto)
-        .Include(p => p.Adicionales)
-        .ThenInclude(p => p.Adicional).ToArray();
-
-        foreach (var producto in productos)
+        var user = (await AuthenticationStateTask).User;
+        if (user.Identity.IsAuthenticated)
         {
-            ProductoViewModel productoViewModel = new ProductoViewModel
+            using var db = new CompraContext();
+            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
+
+            Carrito carrito = db.Carritos.Include(c => c.Productos).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
+            
+            if (carrito is not null)
             {
-                    Cantidad = producto.Cantidad,
-                    Nombre = producto.Producto.Nombre,
-                    Precio = producto.Producto.Precio * producto.Cantidad
-            };
-            foreach (var adicional in producto.Adicionales)
-            {
-                productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
-                if (producto.Adicionales.Last() == adicional)
+                productos = db.CarritoProductos
+                .Include(c => c.Carrito)
+                .Include(c => c.Producto)
+                .Include(p => p.Adicionales)
+                .ThenInclude(p => p.Adicional).Where(c => c.CarritoId == carrito.CarritoId).ToArray();
+
+                foreach (var producto in productos)
                 {
-                    productoViewModel.Adicionales += ".";
-                }
-                else
-                {
-                    productoViewModel.Adicionales += ", ";
+                    ProductoViewModel productoViewModel = new ProductoViewModel
+                        {
+                            Cantidad = producto.Cantidad,
+                            Nombre = producto.Producto.Nombre,
+                            Precio = producto.Producto.Precio * producto.Cantidad
+                        };
+                    foreach (var adicional in producto.Adicionales)
+                    {
+                        productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
+                        if (producto.Adicionales.Last() == adicional)
+                        {
+                            productoViewModel.Adicionales += ".";
+                        }
+                        else
+                        {
+                            productoViewModel.Adicionales += ", ";
+                        }
+                    }
+                    if (producto.ProductoId == 4)
+                    {
+                        foreach (var adicional in producto.Adicionales)
+                        {
+                            productoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
+                        }
+                    }
+                    Model.Productos.Add(productoViewModel);
                 }
             }
-            if (producto.ProductoId == 4)
-            {
-                foreach (var adicional in producto.Adicionales)
-                {
-                    productoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
-                }
-            }
-            Model.Productos.Add(productoViewModel);
         }
     }
 
@@ -177,12 +192,6 @@ else
                 }
             }
 
-            //foreach(var producto in productos)
-            //{
-            //    db.CarritoProductos.Remove(producto);
-            //    db.SaveChanges();
-            //}
-
             db.CarritoProductos.RemoveRange(productos);
             db.SaveChanges();
         }
@@ -190,5 +199,6 @@ else
         {
             //anashe
         }
-    } 
-}
+    }
+} 
+
