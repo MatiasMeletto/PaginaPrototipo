@@ -1,49 +1,183 @@
 ﻿@inject IAuthorizationService AuthorizationService
 @inject UserManager<Usuario> UserManager
 @page "/pizzas"
-
-<h3>Pizza</h3>
-<select @bind="Model.Id">
-    <option selected></option>
-    <option value="11">Muzzarela</option>
-    <option value="12">Especial</option>
-    <option value="13">Con jamon</option>
-    <option value="14">Napolitana</option>
-    <option value="15">4 quesos</option>
-    <option value="16">Cebolla</option>
-    <option value="17">Anchoa</option>
-    <option value="18">Anana</option>
-    <option value="19">Huevo</option>
-    <option value="20">Choclo</option>
-    <option value="21">Milan</option>
-</select>
-<input @bind="Model.Cantidad" type="number" min="0" max="5" />
-<br>
-
-<button class="btn btn-primary" @onclick="CargarProductoCarrito">Agregar al carrito</button>
+ <body id="page-top">
+    <!-- Barra de navegación-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top">Pizzas</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})" >Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Limites-->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <h3>Las mejores pizzas para comprar con tu familia y/o amigos!</h3>
+            <br>
+            <div class=" gap-1">
+            <select class="btn btn-dark p-2 border"  @onclick="CambiarImagen" @bind="Model.Id">
+                <option selected value="0">-Seleccione su pizza-</option>
+                <option value="11">Muzzarela</option>
+                <option value="12">Especial</option>
+                <option value="13">Con jamon</option>
+                <option value="14">Napolitana</option>
+                <option value="15">4 Quesos</option>
+                <option value="16">Cebolla</option>
+                <option value="17">Anchoa</option>
+                <option value="18">Anana</option>
+                <option value="19">Huevo</option>
+                <option value="20">Choclo</option>
+                <option value="21">Milan</option>
+            </select>
+            <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="1" max="10" />
+            </div>
+            <br>
+            <img src="@Model.Source" class="img-fluid w-50" />
+            <br>
+            <h2 class="text-black"> Precio = @Model.Total.ToString("C") </h2>
+            <div class="gap-1">
+            <button class="btn btn-dark p-2 border" @onclick="CargarProductoCarrito">Agregar al carrito</button>
+             </div>
+        </div>        
+    </header>
+    <div class="contenedor-boton fixed-bottom">
+        <div class="botoncarrito">
+            <a class="carr border border-dark" href="/carrito"><i class="fas fa-shopping-cart fa-2x"></i></a>
+        </div>
+    </div>
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <!-- Locación -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Locación Escolar</h4>
+                    <p class="lead mb-0">
+                        Pellegrini 338.
+                        <br />
+                        6620, Chivilcoy, Buenos Aires, Argentina.
+                    </p>
+                </div>
+                <!-- Iconos -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Encontranos en...</h4>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/Escuela-Industrial-Chivilcoy-106196239412818"><i class="fab fa-fw fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/dani_gariboldi"><i class="fab fa-fw fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/info7mo/"><i class="fab fa-fw fa-instagram"></i></a>
+                    
+                </div>
+                <!-- Donaciones -->
+                <div class="col-lg-4">
+                    <h4 class="text-uppercase mb-4">Donaciones</h4>
+                    <p class="lead mb-0">
+                        Aceptamos donaciones para apoyar y contribuir con la Fiesta y el Viaje de Egresados.
+                        <br>                       
+                        <a href="http://startbootstrap.com">DONA AQUÌ</a>                       
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright -->
+    <div class="copyright py-3 text-center text-white">
+        <div class="container"><small>Copyright &copy; Eest1 Chivilcoy</small></div>
+    </div>
+    
+ </body>
 
 @code {
-    
-
     private class ProductoViewModel
     {
-        public int Id{ get; set; }
-        public int Cantidad{ get; set; }
+        int _cantidad;
+        int _id;
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                CalcularTotal();
+            }
+        }
+        public int Cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                _cantidad = value;
+                CalcularTotal();
+            }
+        }
+        public string Source { get; set; }
+        public int Total { get; set; }
+
+        public async void CalcularTotal()
+        {
+            using var db = new CompraContext();
+
+            Total = 0;
+            if (Id != 0)
+                Total += ((await db.Productos.SingleAsync(a => a.ProductoId == Id)).Precio * Cantidad);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model.Cantidad = 1;
+    }
+    private void CambiarImagen()
+    {
+        if(Model.Id == 11)
+            Model.Source = "/css/imagenes/muzzarella.png";
+        else if(Model.Id == 12)
+            Model.Source = "/css/imagenes/pjamon.png";
+        else if(Model.Id == 13)
+            Model.Source = "/css/imagenes/pjamon.png";
+        else if(Model.Id == 14)
+            Model.Source = "/css/imagenes/napolitana.png";
+        else if(Model.Id == 15)
+            Model.Source = "/css/imagenes/4quesos.png";
+        else if(Model.Id == 16)
+            Model.Source = "/css/imagenes/pcebolla.png";
+        else if(Model.Id == 17)
+            Model.Source = "/css/imagenes/anchoa.png";
+        else if(Model.Id == 18)
+            Model.Source = "/css/imagenes/anana.png";
+        else if(Model.Id == 19)
+            Model.Source = "/css/imagenes/frambuesa.png";
+        else if(Model.Id == 20)
+            Model.Source = "/css/imagenes/frambuesa.png";
+        else if(Model.Id == 21)
+            Model.Source = "/css/imagenes/milan.png";
+        else if (Model.Id == 0)
+            Model.Source = "";
     }
 
     private ProductoViewModel Model { get; set; } = new();
-    [CascadingParameter]
-    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
-    private async void CargarProductoCarrito()
+    private void CargarProductoCarrito()
     {
-        var user = (await AuthenticationStateTask).User;
-        if (user.Identity.IsAuthenticated)
+        if (Model.Id != 0)
         {
             using var db = new CompraContext();
-            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);            
 
-            Carrito carrito = db.Carritos.Include(c => c.Productos).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
+            Carrito carrito = db.Carritos.Include(c => c.Productos).Where(c => c.UsuarioId == 1).SingleOrDefault();
 
             if (carrito is not null)
             {
@@ -51,8 +185,6 @@
                 {
                     ProductoId = Model.Id,
                     Cantidad = Model.Cantidad,
-                    CarritoId = carrito.CarritoId,
-                    Carrito = carrito
                 };
 
                 carrito.Productos.Add(carritoProducto);
@@ -62,6 +194,9 @@
             {
                 //anashe
             }
+            Model.Id = 0;
+            Model.Cantidad = 1;
         }
+        CambiarImagen();
     }
 }

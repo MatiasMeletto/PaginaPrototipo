@@ -1,47 +1,433 @@
 ﻿@page "/"
+<body id="page-top">
+    <!-- Barra de navegación-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top">Escuela Industrial Nº1 Chivilcoy</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Limites-->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Icono -->
+            <img class="masthead-avatar mb-5" src="/Pagina/assets/media/Icono.png" alt="..." />
+            <!-- Titulo -->
+            <h1 class="masthead-heading text-uppercase mb-0">Comienza a Pedir</h1>
+            <!-- Iconos -->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Subtitulo -->
+            <p class="masthead-subheading font-weight-light mb-0">Colabora con nuestra Fiesta de Egresados!</p>
+        </div>
+    </header>
+    <!-- Sección para comidas -->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!--Titulo-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Comidas</h2>
+            <!-- Iconos -->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
 
-<PageTitle>Index</PageTitle>
+            <div class="row justify-content-center">
 
-<h1>Hello, world!</h1>
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" src="/Pagina/assets/Media/Burguer.jpg" alt="..." />
+                    </div>
+                </div>
 
-<button class="btn btn-primary">Agregar categorias</button>
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" src="/Pagina/assets/Media/Choripan2.jpg" alt="..." />
+                    </div>
+                </div>
 
-@code {
-    private void CrearObj()
-    {
-        using var db = new CompraContext();
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" src="/Pagina/assets/Media/Empanada.jpg" alt="..." />
+                    </div>
+                </div>
 
-        Categoria categoria1 = new Categoria()
-        {
-                Nombre = "Choripan"
-        };
-        Categoria categoria2 = new Categoria()
-        {
-                Nombre = "Pizza"
-        };
-        Categoria categoria3 = new Categoria()
-        {
-                Nombre = "Torta"
-        };
-        Categoria categoria4 = new Categoria()
-        {
-                Nombre = "Hamburguesa"
-        };
-        Categoria categoria5 = new Categoria()
-        {
-                Nombre = "Empanada"
-        };
-        Categoria categoria6 = new Categoria()
-        {
-                Nombre = "Bebida"
-        };
+                <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" src="/Pagina/assets/Media/Pizza.jpg" alt="..." />
+                    </div>
+                </div>
 
-        db.Add(categoria1);
-        db.Add(categoria2);
-        db.Add(categoria3);
-        db.Add(categoria4);
-        db.Add(categoria5);
-        db.Add(categoria6);
-        db.SaveChanges();
-    }
-}
+                <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" src="/Pagina/assets/Media/Torta1.jpg" alt="..." />
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid" src="/Pagina/assets/Media/CocaCola.jpg" alt="..." />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section bg-primary text-white mb-0" id="about">
+        <div class="container">
+            <!-- Titulo -->
+            <h2 class="page-section-heading text-center text-uppercase text-white">Quienes Somos?</h2>
+            <!-- Iconos -->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Contenido de "about" -->
+            <div class="row">
+                <div class="col-lg-4 ms-auto"><p class="lead">Nosotros somos los chicos de la Escuela Industrial Nº1 de Chivilcoy que estamos en el ultimo año de la secundaria, y trabajando en un proyecto para los Bomberos Voluntarios. </p></div>
+                <div class="col-lg-4 me-auto"><p class="lead">El fin de esta Pagina Web es para la colaboración de la Fiesta de Egresados que queremos hacer a fin de este maravilloso año junto a todos nuestros familiares y amigos!</p></div>
+            </div>                   
+        </div>
+    </section>
+    <!-- Sección de "Contact"-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <!-- Titulo -->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contactanos</h2>
+            <!-- Iconos -->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Contact Section Form-->
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-7">
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- * * Formulario de contacto de formularios SB * *-->
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- Este formulario está preintegrado con SB Forms.-->
+                    <!-- Para que este formulario funcione, regístrese en-->
+                    <!-- https://startbootstrap.com/solution/contact-forms-->
+                    <!-- para obtener un token API!-->
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <!-- Nombre input -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                            <label for="name">Nombre Completo</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Se requiere un nombre.</div>
+                        </div>
+                        <!-- Correo input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                            <label for="email">Correo Electronico</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">Se requiere un correo electronico.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Correo invalido.</div>
+                        </div>
+                        <!-- Telefono input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Numero de Telefono</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">Se requiere un numero de telefono.</div>
+                        </div>
+                        <!-- MMensaje input-->
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                            <label for="message">Agrege el comentario</label>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">Se requiere un comentario.</div>
+                        </div>            
+                        <!-- Enviar mensaje con exito -->
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Mensaje enviado con Exito!</div>
+                                Para activar este formulario, regístrate en
+                                <br />
+                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            </div>
+                        </div>
+                        <!-- Enviar mensaje de error-->                                                
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error al enviar el mensaje!</div></div>
+                        <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="contenedor-boton fixed-bottom">
+            <div class="botoncarrito">
+                <a class="carr border border-dark" href="/carrito"><i class="fas fa-shopping-cart fa-2x"></i></a>
+            </div>
+        </div>
+    </section>
+    <!-- Pie de la pagina -->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <!-- Locación -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Locación Escolar</h4>
+                    <p class="lead mb-0">
+                        Pellegrini 338.
+                        <br />
+                        6620, Chivilcoy, Buenos Aires, Argentina.
+                    </p>
+                </div>
+                <!-- Iconos -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Encontranos en...</h4>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/Escuela-Industrial-Chivilcoy-106196239412818"><i class="fab fa-fw fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/dani_gariboldi"><i class="fab fa-fw fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/info7mo/"><i class="fab fa-fw fa-instagram"></i></a>
+                    
+                </div>
+                <!-- Donaciones -->
+                <div class="col-lg-4">
+                    <h4 class="text-uppercase mb-4">Donaciones</h4>
+                    <p class="lead mb-0">
+                        Aceptamos donaciones para apoyar y contribuir con la Fiesta y el Viaje de Egresados.
+                        <br>
+                        <br> 
+                        <a href="http://startbootstrap.com">DONA AQUÌ</a>                       
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright -->
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright &copy; Eest1 Chivilcoy</small></div>
+    </div>
+    <!-- Modelos de Comida-->
+    <!-- Modelos de Comida 1-->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Modelos de Comida - Titulo-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Hamburguesa</h2>
+                                <!-- Iconos -->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Modelos de Comida - Imagen -->
+                                <img class="img-fluid rounded mb-5" src="/Pagina/assets/Media/Burguer.jpg" alt="..." />
+                                <!-- Modelos de Comida - Texto -->
+                                <p class="mb-4">Pedi tu hamburguesa como quieras, totalmente personalizable y con los aderezos que quieras, no te pierdas la oportunidad de ayudarnos y de disfrutar de una gran hamburguesa!</p>                     
+                                 <a href="/Hamburguesas"> 
+                                    <button class="btn btn-primary" data-bs-dismiss="modal"> 
+                                          Ir ya!
+                                    </button>
+                                 </a>                                 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modelos de Comida 2-->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Modelos de Comida - Titulo-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Choripan</h2>
+                                <!-- Iconos -->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Modelos de Comida - Imagen-->
+                                <img class="img-fluid rounded mb-5" src="/Pagina/assets/Media/Choripan2.jpg" alt="..." />
+                                <!-- Modelos de Comida - Texto-->
+                                <p class="mb-4">Los mejores choripanes de la zona, pedi uno para vos y para tu familia o amigos, no te lo pierdas, aprovecha y contribui con nuestra fiesta de egresados!</p>
+                                 <a href="/chori"> 
+                                    <button class="btn btn-primary" data-bs-dismiss="modal"> 
+                                        Ir ya!
+                                    </button>
+                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modelos de Comida 3-->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Modelos de Comida - Titulo-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Empanadas</h2>
+                                <!-- Iconos -->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Modelos de Comida - Imagen-->
+                                <img class="img-fluid rounded mb-5" src="/Pagina/assets/Media/Empanada.jpg" alt="..." />
+                                <!-- Portfolio Modal - Texto-->
+                                <p class="mb-4">Estas apurado y no sabes que comer? Pedi ya unas ricas empanadas de cualquier gusto que te imagines, elegilas y te llegan al instante!</p>
+                                 <a href="/empanadas"> 
+                                    <button class="btn btn-primary" data-bs-dismiss="modal"> 
+                                          Ir ya!
+                                    </button>
+                                 </a>      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modelos de Comida 4-->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Modelos de Comida - Titulo-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Pizzas</h2>
+                                <!-- Iconos -->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Modelos de Comida - Imagen-->
+                                <img class="img-fluid rounded mb-5" src="/Pagina/assets/media/Pizza.jpg" alt="..." />
+                                <!-- Modelos de Comida - Texto-->
+                                <p class="mb-4">Las mejores pizzas a la piedra que vas a encontrar, come con tu familia e amigos y disfruta de una gran pizza, comenza a elegir y pedi la tuya!</p>
+                                 <a href="/pizzas"> 
+                                    <button class="btn btn-primary" data-bs-dismiss="modal"> 
+                                          Ir ya!
+                                    </button>
+                                 </a>      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modelos de Comida 5-->
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Modelos de Comida - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tortas</h2>
+                                <!-- Iconos -->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Modelos de Comida - Imagen-->
+                                <img class="img-fluid rounded mb-5" src="/Pagina/assets/media/Torta1.jpg" alt="..." />
+                                <!-- Modelos de Comida - Texto-->
+                                <p class="mb-4">Cumpleaños de un amigo o simplemente un dia por la tarde? Lleva una torta deliciosa para disfrutar con la gente que mas queres, tenemos gustos variados y estan echas con el mayor cariño posible!</p>
+                                 <a href="/tortas"> 
+                                    <button class="btn btn-primary" data-bs-dismiss="modal"> 
+                                          Ir ya!
+                                    </button>
+                                 </a>      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modelos de Comida 6-->
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Modelos de Comida - Titulo-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Bebidas</h2>
+                                <!-- Iconos -->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Modelos de Comida - Imagen-->
+                                <img class="img-fluid rounded mb-5" src="/Pagina/assets/media/CocaCola.jpg" alt="..." />
+                                <!-- Modelos de Comida - Texto-->
+                                <p class="mb-4">No puede faltar para acompañar tu comida día a día, busca y encontra la bebida que mas te guste a vos y a tu familia, tenemos lo mas refrescante!</p>
+                                 <a href="/bebidas"> 
+                                    <button class="btn btn-primary" data-bs-dismiss="modal"> 
+                                          Ir ya!
+                                    </button>
+                                 </a>      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

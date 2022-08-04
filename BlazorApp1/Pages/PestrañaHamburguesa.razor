@@ -1,127 +1,179 @@
 ﻿@inject IAuthorizationService AuthorizationService
 @inject UserManager<Usuario> UserManager
 @page "/hamburguesas"
-
-<div>
-    <form action="#">
+<body id="page-top">
+    <!-- Barra de navegación-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <label>PAN</label>
-            <br>
-            <label> 
-                <input @onclick="@(() => { string nombre = "lechuga"; Sumar(nombre); })" type="button" value="+"/>
-                Lechuga
-                <input @onclick="@(() => { string nombre = "lechuga"; Restar(nombre); })" type="button" value="-"/>
-                @Model.LechugaCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "tomate"; Sumar(nombre); })" type="button" value="+"/>
-                Tomate
-                <input @onclick="@(() => { string nombre = "tomate"; Restar(nombre); })" type="button" value="-"/>
-                @Model.TomateCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "huevo"; Sumar(nombre); })" type="button" value="+"/>
-                Huevo
-                <input @onclick="@(() => { string nombre = "huevo"; Restar(nombre); })" type="button" value="-"/>
-                @Model.HuevoCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "bacon"; Sumar(nombre); })" type="button" value="+"/>
-                Bacon
-                <input @onclick="@(() => { string nombre = "bacon"; Restar(nombre); })" type="button" value="-"/>
-                @Model.BaconCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "cheddar"; Sumar(nombre); })" type="button" value="+"/>
-                Cheddar
-                <input @onclick="@(() => { string nombre = "cheddar"; Restar(nombre); })" type="button" value="-"/>
-                @Model.CheddarCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "tybo"; Sumar(nombre); })" type="button" value="+"/>
-                Tybo
-                <input @onclick="@(() => { string nombre = "tybo"; Restar(nombre); })" type="button" value="-"/>
-                @Model.TyboCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "jamon"; Sumar(nombre); })" type="button" value="+"/>
-                Jamon
-                <input @onclick="@(() => { string nombre = "jamon"; Restar(nombre); })" type="button" value="-"/>
-                @Model.JamonCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "cebolla"; Sumar(nombre); })" type="button" value="+"/>
-                Lechuga
-                <input @onclick="@(() => { string nombre = "cebolla"; Restar(nombre); })" type="button" value="-"/>
-                @Model.CebollaCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "mayonesa"; Sumar(nombre); })" type="button" value="+"/>
-                Lechuga
-                <input @onclick="@(() => { string nombre = "mayonesa"; Restar(nombre); })" type="button" value="-"/>
-                @Model.MayonesaCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "ketchup"; Sumar(nombre); })" type="button" value="+"/>
-                Lechuga
-                <input @onclick="@(() => { string nombre = "ketchup"; Restar(nombre); })" type="button" value="-"/>
-                @Model.KetchupCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "mostaza"; Sumar(nombre); })" type="button" value="+"/>
-                Lechuga
-                <input @onclick="@(() => { string nombre = "mostaza"; Restar(nombre); })" type="button" value="-"/>
-                @Model.MostazaCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "sabora"; Sumar(nombre); })" type="button" value="+"/>
-                Lechuga
-                <input @onclick="@(() => { string nombre = "sabora"; Restar(nombre); })" type="button" value="-"/>
-                @Model.SaboraCant
-            </label>
-            <br>
-            <label>
-                <input @onclick="@(() => { string nombre = "carne"; Sumar(nombre); })" type="button" value="+"/>
-                Lechuga
-                <input @onclick="@(() => { string nombre = "carne"; Restar(nombre); })" type="button" value="-"/>
-                @Model.CarneCant
-            </label>
-            <br>
-            <label>PAN</label>
-            <br>
-            <br>
-            <br>
-            <label>
-                Cantidad
-                <input @bind="Model.HamburguesaCant" type="number" min="1" max="5" />
-            </label>
-            <br>
+            <a class="navbar-brand" href="#page-top">HAMBURGUESAS</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})" >Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
+                </ul>
+            </div>
         </div>
-    </form>
-    <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
-</div>
-<div>
-    <h2>Precio = @Model.Total.ToString("C")</h2>
-</div>
+    </nav>
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+        <div>
+            <form action="#">
+            <section id="Labels">
+               <div class="col-2"></div>  
+                <div class="col-md-8 offset-md-2"> 
+                <div class="row">
+                <div class="container">          
+                   <div class="Pan">
+                         <div class="col-1"></div>         
+                        <div class="col-11">
+                        <img src="/css/Imagenes/Up bond.png" width="100" left="20" margin="50%" class="my-1"><img/>
+                        </div>
+                   </div>
+                   <div class="Lechuga">
+                        <input @onclick="@(() => { string nombre = "lechuga"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/LECHUGA.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "lechuga"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
+                        @Model.LechugaCant               
+                
+                   </div>
+                   <div class="Tomate">
+                        <input @onclick="@(() => { string nombre = "tomate"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/TOMATE.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "tomate"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
+                        @Model.TomateCant  
+                   </div>
+                   <div class="Huevo">
+                       <input @onclick="@(() => { string nombre = "huevo"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/HUEVO.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "huevo"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
+                        @Model.HuevoCant   
+                   </div>
+                   <div class="Bacon">
+                        <input @onclick="@(() => { string nombre = "bacon"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/BACON.png " width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "bacon"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
+                        @Model.BaconCant          
+                   </div>
+                   <div class="Cheddar">
+                        <input @onclick="@(() => { string nombre = "cheddar"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/CHEDDAR.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "cheddar"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
+                        @Model.CheddarCant   
+                   </div>
+                   <div class="Tybo">
+                       <input @onclick="@(() => { string nombre = "tybo"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/QUESO.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "tybo"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
+                        @Model.TyboCant  
+                   </div>
+                   <div class="Jamon">
+                       <input @onclick="@(() => { string nombre = "jamon"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/JAMON.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "jamon"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
+                        @Model.JamonCant   
+                   </div>
+                   <div class="Cebolla">
+                      <input @onclick="@(() => { string nombre = "cebolla"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/CEBOLLA.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "cebolla"; Sumar(nombre); })" type="button" class="btn btn-dark" value="+"/>
+                        @Model.CebollaCant   
+                   </div>
+                   <div class="Carne">
+                        <input @onclick="@(() => { string nombre = "carne"; Restar(nombre); })" type="button" class="btn btn-dark" value="-"/>
+                        <img src="/css/Imagenes/HAMBURGESA.png" width="100" class="my-1"><img/>
+                        <input @onclick="@(() => { string nombre = "carne"; Sumar(nombre); })"  type="button" class="btn btn-dark" value="+"/>
+                        @Model.CarneCant
+                
+                   </div>
+                   <div class="Pan">
+                        <div class="col-1"></div>         
+                        <div class="col-11">
+                           <img src="/css/Imagenes/Bottom bond.png" width="100" class="my-1"><img/>
+                        </div>
+                   </div> 
+                   </div>
+               </div> 
+               <div class="col-2"></div>  
+               <br>
+               </div>
+                    <div class="Aderezos">
+                        
+                        <img src="/css/Imagenes/Mayonesaa.png" width="100" class="my-1"><img/>
+                        <input @bind="Model.MayonesaCant" type="checkbox" />                                       
+                        <img src="/css/Imagenes/Ketchup.png" width="100" class="my-1"><img/>
+                        <input @bind="Model.KetchupCant" type="checkbox" />                                                                                    
+                        <img src="/css/Imagenes/Mostaza.png" width="100" class="my-1"><img/>
+                        <input @bind="Model.MostazaCant" type="checkbox" />
+                        
+                    </div>
+                    
+                    <br>
+                    <br>
+
+                   <input class="btn btn-dark p-1  border" @bind="Model.HamburguesaCant" type="number" min="1" max="10" />
+            </section>
+            <br>
+            </form>
+            <div>
+            <h2 class="text-black"> Precio = @Model.Total.ToString("C") </h2>
+            </div>
+            <button class="btn btn-dark" @onclick="CargarProductoCarro">Agregar al carrito</button>
+            <a href="/carrito">
+            Ver carrito
+            </a>
+        </div>
+            
+        </div>
+    </header>
+        <div class="contenedor-boton fixed-bottom">
+        <div class="botoncarrito">
+            <a class="carr border border-dark" href="/carrito"><i class="fas fa-shopping-cart fa-2x"></i></a>
+        </div>
+    </div>
+<footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <!-- Locación -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Locación Escolar</h4>
+                    <p class="lead mb-0">
+                        Pellegrini 338.
+                        <br />
+                        6620, Chivilcoy, Buenos Aires, Argentina.
+                    </p>
+                </div>
+                <!-- Iconos -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Encontranos en...</h4>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/Escuela-Industrial-Chivilcoy-106196239412818"><i class="fab fa-fw fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/dani_gariboldi"><i class="fab fa-fw fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/info7mo/"><i class="fab fa-fw fa-instagram"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                </div>
+                <!-- Donaciones -->
+                <div class="col-lg-4">
+                    <h4 class="text-uppercase mb-4">Donaciones</h4>
+                    <p class="lead mb-0">
+                        Aceptamos donaciones para apoyar y contribuir con la Fiesta y el Viaje de Egresados.
+                        <br>                       
+                        <a href="http://startbootstrap.com">DONA AQUÌ</a>                       
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright -->
+    <div class="copyright py-3 text-center text-white">
+        <div class="container"><small>Copyright &copy; Eest1 Chivilcoy</small></div>
+    </div>
+</body>
 
 @code {
-    protected override async Task OnInitializedAsync()
-    {
-        Model.HamburguesaCant = 1;
-        Model.CarneCant = 1;
-        Model.CalcularTotal();
-    }
 
     private class ProductoViewModel
     {
@@ -133,10 +185,9 @@
         int _tyboCant;
         int _jamonCant;
         int _cebollaCant;
-        int _mayonesaCant;
-        int _ketchupCant;
-        int _mostazaCant;
-        int _saboraCant;
+        bool _mayonesaCant;
+        bool _ketchupCant;
+        bool _mostazaCant;
         int _carneCant;
         int _hamburguesasCant;
 
@@ -149,6 +200,7 @@
             set
             {
                 _lechugaCant = value;
+
                 CalcularTotal();
             }
         }
@@ -161,6 +213,7 @@
             set
             {
                 _tomateCant = value;
+
                 CalcularTotal();
             }
         }
@@ -197,6 +250,7 @@
             set
             {
                 _cheddarCant = value;
+
                 CalcularTotal();
             }
         }
@@ -233,10 +287,11 @@
             set
             {
                 _cebollaCant = value;
+
                 CalcularTotal();
             }
         }
-        public int MayonesaCant
+        public bool MayonesaCant
         {
             get
             {
@@ -244,11 +299,11 @@
             }
             set
             {
-                _mayonesaCant = value;
+                _mayonesaCant = value;         
                 CalcularTotal();
             }
         }
-        public int KetchupCant 
+        public bool KetchupCant 
         { 
             get
             {
@@ -260,7 +315,7 @@
                 CalcularTotal();
             } 
         }
-        public int MostazaCant 
+        public bool MostazaCant 
         {
             get
             {
@@ -272,19 +327,7 @@
                 CalcularTotal();            
             }
         }
-        public int SaboraCant 
-        {
-            get
-            {
-                return _saboraCant;
-            }
-            set
-            {
-                _saboraCant = value;
-                CalcularTotal();
-            }
-        }
-        public int CarneCant
+        public int CarneCant 
         {
             get
             {
@@ -317,38 +360,44 @@
             Total = 0;
 
             if (LechugaCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 5)).Precio * LechugaCant);
             if (TomateCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 6)).Precio * TomateCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 6)).Precio * TomateCant);
             if (HuevoCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 7)).Precio * HuevoCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 7)).Precio * HuevoCant);
             if (BaconCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 8)).Precio * BaconCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 8)).Precio * BaconCant);
             if (CheddarCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 9)).Precio * CheddarCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 9)).Precio * CheddarCant);
             if (TyboCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 10)).Precio * TyboCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 10)).Precio * TyboCant);
             if (JamonCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 11)).Precio * JamonCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 11)).Precio * JamonCant);
             if (CebollaCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 12)).Precio * CebollaCant);
-            if (MayonesaCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 13)).Precio * MayonesaCant);
-            if (KetchupCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 14)).Precio * KetchupCant);
-            if (MostazaCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 15)).Precio * MostazaCant);
-            if (SaboraCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 16)).Precio * SaboraCant);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 12)).Precio * CebollaCant);
+            if (MayonesaCant)
+                Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 13)).Precio;
+            if (KetchupCant)
+                Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 14)).Precio;
+            if (MostazaCant)
+                Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 15)).Precio;
             if (CarneCant != 0)
-                Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
-            Total = Total + ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 3)).Precio * 2);
+                Total += ((await db.Adicionales.SingleAsync(a => a.AdicionalId == 4)).Precio * CarneCant);
+
+            Total += (await db.Adicionales.SingleAsync(a => a.AdicionalId == 3)).Precio * 2;
+
+            Total *= HamburguesaCant;
         }
     }
 
     private ProductoViewModel Model { get; set; } = new();
-    [CascadingParameter]
-    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model.CarneCant = 1;
+        Model.HamburguesaCant = 1;
+        Model.CalcularTotal();
+    }
 
     private void Sumar(string nombre)
     {
@@ -391,26 +440,6 @@
         {
             if (Model.CebollaCant < 4)
                 Model.CebollaCant++;
-        }
-        else if (nombre == "mayonesa")
-        {
-            if (Model.MayonesaCant < 1)
-                Model.MayonesaCant++;
-        }
-        else if (nombre == "ketchup")
-        {
-            if (Model.KetchupCant < 1)
-                Model.KetchupCant++;
-        }
-        else if (nombre == "mostaza")
-        {
-            if (Model.MostazaCant < 1)
-                Model.MostazaCant++;
-        }
-        else if (nombre == "sabora")
-        {
-            if (Model.SaboraCant < 1)
-                Model.SaboraCant++;
         }
         else if (nombre == "carne")
         {
@@ -466,26 +495,6 @@
             if (Model.CebollaCant != 0)
                 Model.CebollaCant--;
         }
-        else if (nombre == "mayonesa")
-        {
-            if (Model.MayonesaCant != 0)
-                Model.MayonesaCant--;
-        }
-        else if (nombre == "ketchup")
-        {
-            if (Model.KetchupCant != 0)
-                Model.KetchupCant--;
-        }
-        else if (nombre == "mostaza")
-        {
-            if (Model.MostazaCant != 0)
-                Model.MostazaCant--;
-        }
-        else if (nombre == "sabora")
-        {
-            if (Model.SaboraCant != 0)
-                Model.SaboraCant--;
-        }
         else if (nombre == "carne")
         {
             if (Model.CarneCant != 1)
@@ -498,156 +507,178 @@
         }
     }
 
-    private async void CargarProductoCarro()
+    private void CargarProductoCarro()
     {
-        var user = (await AuthenticationStateTask).User;
-        if (user.Identity.IsAuthenticated)
+        using var db = new CompraContext();
+
+        Carrito carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == 1).SingleOrDefault();
+
+        if (carrito is not null)
         {
-            using var db = new CompraContext();
-            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
-
-            Carrito carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
-
-            if (carrito is not null)
+            CarritoProducto carritoProducto = new CarritoProducto()
             {
-                CarritoProducto carritoProducto = new CarritoProducto()
-                    {
-                        ProductoId = 4,
-                        Cantidad = Model.HamburguesaCant,
-                        Adicionales = new()
-                    };
+                    ProductoId = 4,
+                    Cantidad = Model.HamburguesaCant,
+                    Adicionales = new()
+            };
 
+            carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                {
+                    //pan
+                    AdicionalId = 3,
+                    Cantidad = 2
+                });
+
+            if (Model.CarneCant != 0)
+            {
+                //carne
                 carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
                     {
-                        //pan
-                        AdicionalId = 3,
-                        Cantidad = 2
+                        AdicionalId = 4,
+                        Cantidad = Model.CarneCant
                     });
-
-                if (Model.CarneCant != 0)
-                {
-                    //carne
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 4,
-                            Cantidad = Model.CarneCant
-                        });
-                }
-                if (Model.LechugaCant != 0)
-                {
-                    //lechuga
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 5,
-                            Cantidad = Model.LechugaCant
-                        });
-                }
-                if (Model.TomateCant != 0)
-                {
-                    //tomate
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 6,
-                            Cantidad = Model.TomateCant
-                        });
-                }
-                if (Model.HuevoCant != 0)
-                {
-                    //huevo
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 7,
-                            Cantidad = Model.HuevoCant
-                        });
-                }
-                if (Model.BaconCant != 0)
-                {
-                    //bacon
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 8,
-                            Cantidad = Model.BaconCant
-                        });
-                }
-                if (Model.CheddarCant != 0)
-                {
-                    //cheddar
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 9,
-                            Cantidad = Model.CheddarCant
-                        });
-                }
-                if (Model.TyboCant != 0)
-                {
-                    //tybo
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 10,
-                            Cantidad = Model.TyboCant
-                        });
-                }
-                if (Model.JamonCant != 0)
-                {
-                    //jamon
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 11,
-                            Cantidad = Model.JamonCant
-                        });
-                }
-                if (Model.CebollaCant != 0)
-                {
-                    //cebolla
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 12,
-                            Cantidad = Model.CebollaCant
-                        });
-                }
-                if (Model.MayonesaCant != 0)
-                {
-                    //mayonesa
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 13,
-                            Cantidad = Model.MayonesaCant
-                        });
-                }
-                if (Model.KetchupCant != 0)
-                {
-                    //ketchup
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 14,
-                            Cantidad = Model.KetchupCant
-                        });
-                }
-                if (Model.MostazaCant != 0)
-                {
-                    //mostaza
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 15,
-                            Cantidad = Model.MostazaCant
-                        });
-                }
-                if (Model.SaboraCant != 0)
-                {
-                    carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
-                        {
-                            AdicionalId = 16,
-                            Cantidad = Model.SaboraCant
-                        });
-                }
-
-                carrito.Productos.Add(carritoProducto);
-                db.SaveChanges();
             }
-            else
+            if (Model.LechugaCant != 0)
             {
-                //anashe
+                //lechuga
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 5,
+                        Cantidad = Model.LechugaCant
+                    });
+            }
+            if (Model.TomateCant != 0)
+            {
+                //tomate
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 6,
+                        Cantidad = Model.TomateCant
+                    });
+            }
+            if (Model.HuevoCant != 0)
+            {
+                //huevo
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 7,
+                        Cantidad = Model.HuevoCant
+                    });
+            }
+            if (Model.BaconCant != 0)
+            {
+                //bacon
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 8,
+                        Cantidad = Model.BaconCant
+                    });
+            }
+            if (Model.CheddarCant != 0)
+            {
+                //cheddar
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 9,
+                        Cantidad = Model.CheddarCant
+                    });
+            }
+            if (Model.TyboCant != 0)
+            {
+                //tybo
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 10,
+                        Cantidad = Model.TyboCant
+                    });
+            }
+            if (Model.JamonCant != 0)
+            {
+                //jamon
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 11,
+                        Cantidad = Model.JamonCant
+                    });
+            }
+            if (Model.CebollaCant != 0)
+            {
+                //cebolla
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 12,
+                        Cantidad = Model.CebollaCant
+                    });
+            }
+            if (Model.MayonesaCant)
+            {
+                //mayonesa
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 13,
+                        Cantidad = 1
+                    });
+            }
+            if (Model.KetchupCant)
+            {
+                //ketchup
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 14,
+                        Cantidad = 1
+                    });
+            }
+            if (Model.MostazaCant)
+            {
+                //mostaza
+                carritoProducto.Adicionales.Add(new CarritoProductoAdicional()
+                    {
+                        AdicionalId = 15,
+                        Cantidad = 1
+                    });
+            }
+
+            carrito.Productos.Add(carritoProducto);
+            db.SaveChanges();
+        }
+        else
+        {
+            //anashe
+        }
+        Model.LechugaCant = 0;
+        Model.TomateCant = 0;
+        Model.HuevoCant = 0;
+        Model.CheddarCant = 0;
+        Model.BaconCant = 0;
+        Model.JamonCant = 0;
+        Model.TyboCant = 0;
+        Model.MayonesaCant = false;
+        Model.CebollaCant = 0;
+        Model.MostazaCant = false;
+        Model.KetchupCant = false;
+        Model.CarneCant = 1;
+        Model.HamburguesaCant = 1;
+    }
+
+    private void EscribirPrecio()
+    {
+        using var db = new CompraContext();
+
+        int total = 0;
+
+        var carritoProducto = db.CarritoProductos
+        .Include(c => c.Adicionales)
+        .ThenInclude(c => c.Adicional).ToList();
+
+        var adicional = db.Adicionales.ToList();
+
+        foreach (CarritoProducto c in carritoProducto)
+        {
+            foreach (CarritoProductoAdicional cpa in c.Adicionales)
+            {
+                total = total + (cpa.Adicional.Precio * cpa.Cantidad);
             }
         }
     }
+
 }

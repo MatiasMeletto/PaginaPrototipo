@@ -1,50 +1,150 @@
 ﻿@inject IAuthorizationService AuthorizationService
 @inject UserManager<Usuario> UserManager
 @page "/chori"
-
-<div>
-    <form action="#">
+<body id="page-top">
+    <!-- Barra de navegación-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <h1>Ingrese la cantidad de choripanes que quiere:</h1>
-            <input @bind="Model.Cantidad" type="number" min="1" max="15" />
+            <a class="navbar-brand" href="#page-top">Choripanes</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})" >Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Limites-->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+           <form action="#">
+            <div>  
+            <h2>Seleccione la cantidad de choripanes que quiere!</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <img src="/css/Imagenes/314.png" /> 
+                </div>
+                <div class="col-md-8 offset-md-2"> 
+                    <input @bind="Model.Cantidad" class="btn btn-dark" type="number" min="1" max="15" />
+                 </div>
+                <div class="col-6"></div>
+            </div>
+                                   
             <br>
-            <label>
+            <div>
+                <br>
+                <img src="/css/Imagenes/Criolla.png" alt="..." height="150"/>
                 <input @bind="Model.Criolla" type="checkbox" />
-                Salsa criolla
-            </label>
-            <br>
-            <label>
-                <input @bind="Model.Chimi" type="checkbox" />
-                Chimichurri
-            </label>
+                <img src="/css/Imagenes/Chimi.png" alt="..." height="150"/>
+                <input @bind="Model.Chimi" type="checkbox" />               
+            </div>
             <br>
         </div>
+        <br>
     </form>
-    <button class="btn btn-primary" @onclick="CargarProductoCarro">Agregar al carrito</button>
-</div>
+  </div>
+    <h2 class="text-black"> Precio = @Model.Total.ToString("C") </h2> 
+    <button class="btn btn-dark" @onclick="CargarProductoCarro">Agregar al carrito</button>
+        
+
+        
+    </header>
+    <div class="contenedor-boton fixed-bottom">
+        <div class="botoncarrito">
+            <a class="carr border border-dark" href="/carrito"><i class="fas fa-shopping-cart fa-2x"></i></a>
+        </div>
+    </div>
+<footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <!-- Locación -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Locación Escolar</h4>
+                    <p class="lead mb-0">
+                        Pellegrini 338.
+                        <br />
+                        6620, Chivilcoy, Buenos Aires, Argentina.
+                    </p>
+                </div>
+                <!-- Iconos -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Encontranos en...</h4>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/Escuela-Industrial-Chivilcoy-106196239412818"><i class="fab fa-fw fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/dani_gariboldi"><i class="fab fa-fw fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/info7mo/"><i class="fab fa-fw fa-instagram"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                </div>
+                <!-- Donaciones -->
+                <div class="col-lg-4">
+                    <h4 class="text-uppercase mb-4">Donaciones</h4>
+                    <p class="lead mb-0">
+                        Aceptamos donaciones para apoyar y contribuir con la Fiesta y el Viaje de Egresados.
+                        <br>                       
+                        <a href="http://startbootstrap.com">DONA AQUÌ</a>                       
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright -->
+    <div class="copyright py-3 text-center text-white">
+        <div class="container"><small>Copyright &copy; Eest1 Chivilcoy</small></div>
+    </div>
+    
+</body>
 
 @code {
 
     private class ProductoViewModel
     {
-        public int Cantidad { get; set; }
+        int _cantidad;
+
+        public int Cantidad
+        {
+            get
+            {
+                return _cantidad;
+            }
+            set
+            {
+                _cantidad = value;
+                CalcularTotal();
+            }
+        }
         public bool Criolla { get; set; }
         public bool Chimi { get; set; }
-    }
-
-    private ProductoViewModel Model { get; set; } = new();
-    [CascadingParameter]
-    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
-
-    private async void CargarProductoCarro()
-    {
-        var user = (await AuthenticationStateTask).User;
-        if (user.Identity.IsAuthenticated)
+        public int Total { get; set; }
+        public async void CalcularTotal()
         {
             using var db = new CompraContext();
-            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
 
-            Carrito carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
+            Producto producto = db.Productos.Where(c => c.ProductoId == 1).SingleOrDefault();
+
+            Total = 0;
+
+            Total = producto.Precio * Cantidad;
+        }
+    }
+
+
+    private ProductoViewModel Model { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model.Cantidad = 1;
+        Model.CalcularTotal();
+    }
+
+    private void CargarProductoCarro()
+    {
+            using var db = new CompraContext();
+
+            Carrito carrito = db.Carritos.Include(c => c.Productos).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == 1).SingleOrDefault();
 
             if (carrito is not null)
             {
@@ -78,6 +178,8 @@
             {
                 //anashe
             }
-        }
+            Model.Chimi = false;
+            Model.Criolla = false;
+            Model.Cantidad = 1;
     }
 }

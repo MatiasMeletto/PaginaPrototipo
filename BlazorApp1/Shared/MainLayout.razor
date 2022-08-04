@@ -3,22 +3,10 @@
 <PageTitle>BlazorApp1</PageTitle>
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
+ 
     <main>
-        <div class="top-row px-4">
-            <div class="inicio-account">
-                <button class="btn btn-success" onclick="location.href='/Identity/Account/Login'">Log In</button>
-                <button class="btn btn-dark" onclick="location.href='/Identity/Account/Register'">Register</button>
-            </div>
-        </div>
-
-        <article class="content px-4">
+        <article>
             @Body
         </article>
     </main>
 </div>
-
-
