@@ -30,4 +30,10 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\Pagina\assets\Media\" />
+	  <Folder Include="wwwroot\Pagina\assets\img\" />
+	  <Folder Include="wwwroot\Pagina\css\" />
+	</ItemGroup>
+
 </Project>
