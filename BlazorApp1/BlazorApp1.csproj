@@ -31,6 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="wwwroot\css\Imagenes\" />
 	  <Folder Include="wwwroot\Pagina\assets\Media\" />
 	  <Folder Include="wwwroot\Pagina\assets\img\" />
 	</ItemGroup>
