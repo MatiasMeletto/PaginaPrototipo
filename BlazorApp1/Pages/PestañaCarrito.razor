@@ -177,11 +177,14 @@ else
                 }
             }
 
-            foreach(var producto in productos)
-            {
-                db.CarritoProductos.Remove(producto);
-                db.SaveChanges();
-            }
+            //foreach(var producto in productos)
+            //{
+            //    db.CarritoProductos.Remove(producto);
+            //    db.SaveChanges();
+            //}
+
+            db.CarritoProductos.RemoveRange(productos);
+            db.SaveChanges();
         }
         else
         {

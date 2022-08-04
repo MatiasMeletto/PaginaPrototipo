@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using BlazorApp1.Data;
 using BlazorApp1.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -134,6 +135,14 @@ namespace BlazorApp1.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    // Creación de carrito al usuario recién creado
+                    using var db = new CompraContext();
+                    db.Carritos.Add(new Carrito()
+                    {
+                        UsuarioId = userId
+                    });
+                    await db.SaveChangesAsync();
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

@@ -1,4 +1,6 @@
-﻿@page "/pizzas"
+﻿@inject IAuthorizationService AuthorizationService
+@inject UserManager<Usuario> UserManager
+@page "/pizzas"
 
 <h3>Pizza</h3>
 <select @bind="Model.Id">
@@ -22,6 +24,9 @@
 <button class="btn btn-primary" @onclick="VerCarrito">Ver carrito</button>
 
 @code {
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
     private class ProductoViewModel
     {
         public int Id{ get; set; }
@@ -30,41 +35,50 @@
 
     private ProductoViewModel Model { get; set; } = new();
 
-    private void CargarProductoCarrito()
+    private async void CargarProductoCarrito()
     {
-        using var db = new CompraContext();
-
-        Carrito carrito = db.Carritos.Include(c => c.Productos) .Where(c => c.UsuarioId == "1").SingleOrDefault();
-
-        if (carrito is not null)
+        var user = (await AuthenticationStateTask).User;
+        if (user.Identity.IsAuthenticated)
         {
-            CarritoProducto carritoProducto = new CarritoProducto()
+            using var db = new CompraContext();
+            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);            
+
+            Carrito carrito = db.Carritos.Include(c => c.Productos).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
+
+            if (carrito is not null)
             {
-                ProductoId = Model.Id,
-                Cantidad = Model.Cantidad,
-                CarritoId = carrito.CarritoId,
-                Carrito = carrito
-            };
+                CarritoProducto carritoProducto = new CarritoProducto()
+                    {
+                        ProductoId = Model.Id,
+                        Cantidad = Model.Cantidad,
+                        CarritoId = carrito.CarritoId,
+                        Carrito = carrito
+                    };
 
-            carrito.Productos.Add(carritoProducto);
-            db.SaveChanges();
+                carrito.Productos.Add(carritoProducto);
+                db.SaveChanges();
+            }
+            else
+            {
+                //anashe
+            }
         }
-        else
-        {
-            //anashe
-        }
-
     }
-    private void VerCarrito()
-    {
-        using var db = new CompraContext();
 
-        Carrito carrito = db.Carritos
-        .Include(c => c.Usuario)
-        .Include(c => c.Productos)
-        .ThenInclude(p => p.Producto)
-        .ThenInclude(p => p.Adicionales)
-        .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
-        .Where(c => c.UsuarioId == "1").SingleOrDefault();
+    private async void VerCarrito()
+    {
+        var user = (await AuthenticationStateTask).User;
+        if (user.Identity.IsAuthenticated)
+        {
+            using var db = new CompraContext();
+            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
+            Carrito carrito = db.Carritos
+               .Include(c => c.Usuario)
+               .Include(c => c.Productos)
+               .ThenInclude(p => p.Producto)
+               .ThenInclude(p => p.Adicionales)
+               .Include(c => c.Productos).ThenInclude(p => p.Adicionales)
+               .Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
+        }       
     }
 }
