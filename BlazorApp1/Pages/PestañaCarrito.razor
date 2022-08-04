@@ -82,7 +82,7 @@ else
             var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
 
             Carrito carrito = db.Carritos.Include(c => c.Productos).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
-            
+
             if (carrito is not null)
             {
                 productos = db.CarritoProductos
@@ -94,11 +94,11 @@ else
                 foreach (var producto in productos)
                 {
                     ProductoViewModel productoViewModel = new ProductoViewModel
-                        {
-                            Cantidad = producto.Cantidad,
-                            Nombre = producto.Producto.Nombre,
-                            Precio = producto.Producto.Precio * producto.Cantidad
-                        };
+                    {
+                        Cantidad = producto.Cantidad,
+                        Nombre = producto.Producto.Nombre,
+                        Precio = producto.Producto.Precio * producto.Cantidad
+                    };
                     foreach (var adicional in producto.Adicionales)
                     {
                         productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
@@ -124,80 +124,85 @@ else
         }
     }
 
-    private void AgregarProductoPedido()
+    private async void AgregarProductoPedido()
     {
-        using var db = new CompraContext();
-
-        Pedido? pedido = db.Pedidos.Include(c => c.Productos).ThenInclude(p => p.Producto).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == "1").SingleOrDefault();
-
-        productos = db.CarritoProductos
-        .Include(c => c.Producto)
-        .Include(p => p.Adicionales)
-        .ThenInclude(p => p.Adicional).ToArray();
-
-        if (pedido is not null)
+        var user = (await AuthenticationStateTask).User;
+        if (user.Identity.IsAuthenticated)
         {
-            foreach (var producto in productos)
+            using var db = new CompraContext();
+            var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
+
+            Pedido? pedido = db.Pedidos.Include(c => c.Productos).ThenInclude(p => p.Producto).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
+
+            productos = db.CarritoProductos
+            .Include(c => c.Producto)
+            .Include(p => p.Adicionales)
+            .ThenInclude(p => p.Adicional).ToArray();
+
+            if (pedido is not null)
             {
-                if (producto.ProductoId == 4)
+                foreach (var producto in productos)
                 {
-                    foreach (var adicional in producto.Adicionales)
+                    if (producto.ProductoId == 4)
                     {
-                        pedidoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
-                    }
-
-                    PedidoProducto pedidoProducto = new PedidoProducto()
-                    {
-                        PedidoId = 1,
-                        ProductoId = producto.ProductoId,
-                        Cantidad = producto.Cantidad,
-                        Precio = pedidoViewModel.Precio * producto.Cantidad,
-                        Adicionales = new List<PedidoProductoAdicional>()
-                    };
-
-                    foreach (var adicional in producto.Adicionales)
-                    {
-                        pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
+                        foreach (var adicional in producto.Adicionales)
                         {
-                            AdicionalId = adicional.AdicionalId,
-                            Cantidad = adicional.Cantidad
-                        });
-                    }
+                            pedidoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
+                        }
 
-                    pedido.Productos.Add(pedidoProducto);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    PedidoProducto pedidoProducto = new PedidoProducto()
-                    {
-                        PedidoId = 1,
-                        ProductoId = producto.ProductoId,
-                        Cantidad = producto.Cantidad,
-                        Precio = producto.Producto.Precio * producto.Cantidad,
-                        Adicionales = new List<PedidoProductoAdicional>()
-                    };
-
-                    foreach (var adicional in producto.Adicionales)
-                    {
-                        pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
+                        PedidoProducto pedidoProducto = new PedidoProducto()
                         {
-                            AdicionalId = adicional.AdicionalId,
-                            Cantidad = adicional.Cantidad
-                        });
-                    }
+                            PedidoId = pedido.PedidoId,
+                            ProductoId = producto.ProductoId,
+                            Cantidad = producto.Cantidad,
+                            Precio = pedidoViewModel.Precio * producto.Cantidad,
+                            Adicionales = new List<PedidoProductoAdicional>()
+                        };
 
-                    pedido.Productos.Add(pedidoProducto);
-                    db.SaveChanges();
+                        foreach (var adicional in producto.Adicionales)
+                        {
+                            pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
+                            {
+                                AdicionalId = adicional.AdicionalId,
+                                Cantidad = adicional.Cantidad
+                            });
+                        }
+
+                        pedido.Productos.Add(pedidoProducto);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        PedidoProducto pedidoProducto = new PedidoProducto()
+                        {
+                            PedidoId = pedido.PedidoId,
+                            ProductoId = producto.ProductoId,
+                            Cantidad = producto.Cantidad,
+                            Precio = producto.Producto.Precio * producto.Cantidad,
+                            Adicionales = new List<PedidoProductoAdicional>()
+                        };
+
+                        foreach (var adicional in producto.Adicionales)
+                        {
+                            pedidoProducto.Adicionales.Add(new PedidoProductoAdicional()
+                            {
+                                AdicionalId = adicional.AdicionalId,
+                                Cantidad = adicional.Cantidad
+                            });
+                        }
+
+                        pedido.Productos.Add(pedidoProducto);
+                        db.SaveChanges();
+                    }
                 }
+
+                db.CarritoProductos.RemoveRange(productos);
+                db.SaveChanges();
             }
-
-            db.CarritoProductos.RemoveRange(productos);
-            db.SaveChanges();
-        }
-        else
-        {
-            //anashe
+            else
+            {
+                //anashe
+            }
         }
     }
 } 
