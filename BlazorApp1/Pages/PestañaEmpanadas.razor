@@ -24,7 +24,7 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <h3><label class="my-1 mr-2" for="inlineFormCustomSelectPref">Seleccione el tipo de empanada!</label></h3>
-                <select class="btn btn-dark p-2 border" id="inlineFormCustomSelectPref" @bind="Model.Id">
+                <select class="btn btn-dark p-2 border" @onclick="CambiarImagen" id="inlineFormCustomSelectPref" @bind="Model.Id">
                     <option selected value="0">-Seleccione su empanada-</option>
                     <option value="22">Empanada de carne</option>
                     <option value="23">Empanada de choclo</option>
@@ -115,7 +115,7 @@
                 CalcularTotal();
             }
         }
-        public string Source { get; set; } =  "/css/imagenes/frol.jpg";
+        public string Source { get; set; } =  "/css/imagenes/CarneE.jpg";
         public int Total { get; set; }
 
         public async void CalcularTotal()
@@ -135,18 +135,16 @@
 
     private void CambiarImagen()
     {
-        if (Model.Id == 1)
-            Model.Source = "/css/imagenes/muzzarella.png";
-        else if (Model.Id == 2)
-            Model.Source = "/css/imagenes/pjamon.png";
-        else if (Model.Id == 3)
-            Model.Source = "/css/imagenes/napolitana.png";
-        else if (Model.Id == 4)
-            Model.Source = "/css/imagenes/pjamon.png";
-        else if (Model.Id == 5)
-            Model.Source = "/css/imagenes/pjamon.png";
-        else if (Model.Id == 0)
-            Model.Source = "";
+        if (Model.Id == 22)
+            Model.Source = "/css/imagenes/CarneE.jpg";
+        else if (Model.Id == 23)
+            Model.Source = "/css/imagenes/ChocloE.jpg";
+        else if (Model.Id == 27)
+            Model.Source = "/css/imagenes/JamonYQuesoE.jpg";
+        else if (Model.Id == 25)
+            Model.Source = "/css/imagenes/PolloE.jpg";
+        else if (Model.Id == 24)
+            Model.Source = "/css/imagenes/VerduraE.jpg";
     }
 
     private ProductoViewModel Model { get; set; } = new();

@@ -30,14 +30,11 @@
                 <option selected value="0">-Seleccione su pizza-</option>
                 <option value="11">Muzzarela</option>
                 <option value="12">Especial</option>
-                <option value="13">Con jamon</option>
                 <option value="14">Napolitana</option>
                 <option value="15">4 Quesos</option>
                 <option value="16">Cebolla</option>
                 <option value="17">Anchoa</option>
                 <option value="18">Anana</option>
-                <option value="19">Huevo</option>
-                <option value="20">Choclo</option>
                 <option value="21">Milan</option>
             </select>
             <input class="btn btn-dark p-1 border" @bind="Model.Cantidad" type="number" min="1" max="10" />
@@ -154,8 +151,6 @@
             Model.Source = "/css/imagenes/muzzarella.png";
         else if(Model.Id == 12)
             Model.Source = "/css/imagenes/pjamon.png";
-        else if(Model.Id == 13)
-            Model.Source = "/css/imagenes/pjamon.png";
         else if(Model.Id == 14)
             Model.Source = "/css/imagenes/napolitana.png";
         else if(Model.Id == 15)
@@ -166,14 +161,9 @@
             Model.Source = "/css/imagenes/anchoa.png";
         else if(Model.Id == 18)
             Model.Source = "/css/imagenes/anana.png";
-        else if(Model.Id == 19)
-            Model.Source = "/css/imagenes/frambuesa.png";
-        else if(Model.Id == 20)
-            Model.Source = "/css/imagenes/frambuesa.png";
         else if(Model.Id == 21)
             Model.Source = "/css/imagenes/milan.png";
-        else if (Model.Id == 0)
-            Model.Source = "";
+       
     }
 
     private async void CargarProductoCarrito()
