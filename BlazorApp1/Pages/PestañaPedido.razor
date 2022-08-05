@@ -21,8 +21,10 @@
         </div>
     </nav>
     <header class="masthead bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
-            <h3>Pedido</h3>
+        <div class="container align-items-center flex-column">    
+            <ul>
+            <h3 class="text-black">Pedidos</h3>     
+            </ul>
             @if (pedidos == null)
             {
                 <p><em>Loading...</em></p>
@@ -32,9 +34,9 @@
                 <ul>
                     @foreach (var pedido in pedidos)
                     {
-                        <li>
-                            <label>Su pedido n° @pedido.PedidoId es:</label>
-                            <table class="table">
+                        <h5 class="text-center text-black">Su pedido n° @pedido.PedidoId es: </h5>    
+                        <li>                                                                         
+                            <table class="table border-dark fw-bolder">
                                 <thead>
                                     <tr>
                                         <th>Producto</th>
@@ -59,6 +61,7 @@
                     }
                 </ul>
             }
+            
         </div>
     </header>
 <footer class="footer text-center">
