@@ -34,7 +34,7 @@
                 <ul>
                     @foreach (var pedido in pedidos)
                     {
-                        <h5 class="text-center text-black">Su pedido n° @pedido.PedidoId es: </h5>    
+                        <h5 class="text-center text-black">Su pedido n° @(pedidos.FindIndex(c => c.PedidoId == pedido.PedidoId) + 1) es: </h5>    
                         <li>                                                                         
                             <table class="table border-dark fw-bolder">
                                 <thead>
@@ -132,7 +132,7 @@
 
     private PedidoProducto[]? productos;
 
-    private Pedido[]? pedidos;
+    private List<Pedido> pedidos = new List<Pedido>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -144,7 +144,7 @@
 
             pedidos = db.Pedidos
             .Include(c => c.Productos)
-            .Include(c => c.Usuario).Where(c => c.UsuarioId == usuario.Id).ToArray();
+            .Include(c => c.Usuario).Where(c => c.UsuarioId == usuario.Id).ToList();
 
             productos = db.PedidoProductos
             .Include(c => c.Producto)
@@ -155,12 +155,12 @@
             foreach (var producto in productos)
             {
                 ProductoViewModel productoViewModel = new ProductoViewModel
-                    {
-                        Cantidad = producto.Cantidad,
-                        Nombre = producto.Producto.Nombre,
-                        Precio = producto.Precio,
-                        PedidoId = producto.PedidoId
-                    };
+                {
+                    Cantidad = producto.Cantidad,
+                    Nombre = producto.Producto.Nombre,
+                    Precio = producto.Precio,
+                    PedidoId = producto.PedidoId
+                };
                 foreach (var adicional in producto.Adicionales)
                 {
                     productoViewModel.Adicionales += $"{adicional.Adicional.Nombre} ({adicional.Cantidad})";
