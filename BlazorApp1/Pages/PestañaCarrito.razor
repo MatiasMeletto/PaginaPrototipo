@@ -194,12 +194,16 @@
             using var db = new CompraContext();
             var usuario = await UserManager.FindByNameAsync(user.Identity.Name);
 
-            Pedido? pedido = db.Pedidos.Include(c => c.Productos).ThenInclude(p => p.Producto).ThenInclude(p => p.Adicionales).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
-
             productos = db.CarritoProductos
             .Include(c => c.Producto)
             .Include(p => p.Adicionales)
             .ThenInclude(p => p.Adicional).ToArray();
+
+            Pedido pedido = new Pedido()
+            {
+                    UsuarioId = usuario.Id,
+                    Productos = new List<PedidoProducto>()
+            };
 
             foreach (var producto in productos)
             {
@@ -235,13 +239,13 @@
                 else
                 {
                     PedidoProducto pedidoProducto = new PedidoProducto()
-                        {
-                            PedidoId = pedido.PedidoId,
-                            ProductoId = producto.ProductoId,
-                            Cantidad = producto.Cantidad,
-                            Precio = producto.Producto.Precio * producto.Cantidad,
-                            Adicionales = new List<PedidoProductoAdicional>()
-                        };
+                    {
+                        PedidoId = pedido.PedidoId,
+                        ProductoId = producto.ProductoId,
+                        Cantidad = producto.Cantidad,
+                        Precio = producto.Producto.Precio * producto.Cantidad,
+                        Adicionales = new List<PedidoProductoAdicional>()
+                    };
 
                     foreach (var adicional in producto.Adicionales)
                     {
@@ -256,7 +260,6 @@
                 }
                 
             }
-            db.Pedidos.Add(pedido);
 
             db.CarritoProductos.RemoveRange(productos);
             db.SaveChanges();
