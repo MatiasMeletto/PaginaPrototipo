@@ -209,11 +209,12 @@
             {
                 if (producto.ProductoId == 4)
                 {
-                    pedidoViewModel.Precio = 0;
-
                     foreach (var adicional in producto.Adicionales)
                     {
-                        pedidoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
+                        if (pedidoViewModel is not null)
+                            pedidoViewModel.Precio += adicional.Adicional.Precio * adicional.Cantidad;
+                        else if (pedidoViewModel is null)
+                            pedidoViewModel.Precio = adicional.Adicional.Precio * adicional.Cantidad;
                     }
 
                     PedidoProducto pedidoProducto = new PedidoProducto()
