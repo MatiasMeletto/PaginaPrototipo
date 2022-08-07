@@ -667,25 +667,4 @@
             Model.HamburguesaCant = 1;
         }
     }
-
-    //private void EscribirPrecio()
-    //{
-    //    using var db = new CompraContext();
-
-    //    int total = 0;
-
-    //    var carritoProducto = db.CarritoProductos
-    //    .Include(c => c.Adicionales)
-    //    .ThenInclude(c => c.Adicional).ToList();
-
-    //    var adicional = db.Adicionales.ToList();
-
-    //    foreach (CarritoProducto c in carritoProducto)
-    //    {
-    //        foreach (CarritoProductoAdicional cpa in c.Adicionales)
-    //        {
-    //            total = total + (cpa.Adicional.Precio * cpa.Cantidad);
-    //        }
-    //    }
-    //}
 }
