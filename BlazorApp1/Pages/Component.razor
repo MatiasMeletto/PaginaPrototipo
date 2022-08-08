@@ -1,4 +1,6 @@
-﻿@page "/InicioSesion"
+﻿@page "/Restablecer"
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 <body id="page-top">
     <!-- Barra de navegación-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -20,27 +22,24 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <div class="bordeinicio">
-              <h1 >Inicia Sesion!</h1>
-              <br>  
-               <div class="input-contenedor">                                                   
-               </div>
+                
+              <h1 >Restablecer Contraseña!</h1>
+              <br>               
                <div class="input-contenedor">
-                   <i class="fa fa-envelope" aria-hidden="true"></i>
-                   <input type="text" placeholder="Correo Electronico">
+                   
+                  <i class="fa fa-key" aria-hidden="true"></i>
+                   <input type="text" placeholder=" Nueva Contraseña">
+                   <p class="text-black"><a data-bs-toggle="tooltip" data-bs-title="Al colocar la nueva contraseña se pide que no se parezca a la anterior.">Coloque una nueva contraseña</a></p>
                </div>
                <div class="input-contenedor">
                    <i class="fa fa-key" aria-hidden="true"></i>
-                   <input type="password" placeholder="Contraseña">
-               </div>
-               <p class=" text-black"><a class="link text-black" href="/Registro"> Olvidaste tu contraseña?</a></p>
+                   <input type="password" placeholder="Repita la contraseña">
+                   <p class="text-black"><a data-bs-toggle="tooltip" data-bs-title="Al repetir la contraseña esta tiene que ser identica a la ya colocada en la parte superior.">Repita la contraseña</a></p>
+               </div>             
                <br>
                <div class="botonregistrar">
-               <input type="submit" value="Iniciar Sesion" class="button ">
+               <input type="submit" value="Restablecer" class="button ">
                </div>
-               <br>
-               <br>
-               <p class=" text-black">Al iniciar sesion, estas aceptando nuestras Condiciones de uso y Politica de privacidad.</p>
-               <p class=" text-black">No tienes cuenta? <a class="link text-black" href="/Registro"> Registrate</a></p>
                 </div>
         </div>
     </header>
