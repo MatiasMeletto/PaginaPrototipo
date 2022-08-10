@@ -9,38 +9,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"> <!--Biblioteca de íconos-->
 
 
-
-
-@*<div class="text-center">
-    <div class="align-items-center">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Crea una nueva cuenta</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Email"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.Password"></label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.ConfirmPassword"></label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <br />
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registrar</button>
-        </form>
-    </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}*@
  <!-- Barra de navegación-->
    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
@@ -59,36 +27,42 @@
     </nav>
     <!-- Limites-->
     <header class="masthead bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
-            <div class="bordeinicio">
-              <h1 >Registrate!</h1>
-               <div class="input-contenedor">               
-                   <br>
-                   <i class="fa fa-address-card" aria-hidden="true"></i>
-                   <input type="text" placeholder="Nombre Completo">
-               </div>
-               <div class="input-contenedor">
-                   <i class="fa fa-envelope" aria-hidden="true"></i>
-                   <input type="text" placeholder="Correo Electronico">
-               </div>
-               <div class="input-contenedor">
-                   <i class="fa fa-key" aria-hidden="true"></i>
-                   <input type="password" placeholder="Contraseña">
-               </div>
-               <div class="input-contenedor">
-                   <i class="fa fa-key" aria-hidden="true"></i>
-                   <input type="password" placeholder="Repita contraseña">
-               </div>
-               <br>
-               <div class="botonregistrar">
-               <input type="submit" value="Registrate" class="button ">
-               </div>
-               <br>
-               <br>
-               <p class=" text-black">Al registrarte, estas aceptando nuestras Condiciones de uso y Politica de privacidad.</p>
-               <p class=" text-black">Ya tienes cuenta? <a class="link text-black" href="/Identity/Account/login"> Iniciar Sesion</a></p>
-                </div>
+
+        <div class="text-center">
+            <div class="align-items-center">
+                <section class="container d-flex align-items-center flex-column">
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="bordeinicio">
+                        <h2>Crea una nueva cuenta</h2>
+                        <hr />
+                        <label asp-for="Input.Email"></label>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-floating">
+                            <input asp-for="Input.Email" class="fa fa-envelope" autocomplete="username" aria-required="true" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <label asp-for="Input.Password"></label>
+                        <div class="form-floating">
+                            <input asp-for="Input.Password" class="fa fa-envelope" autocomplete="new-password" aria-required="true" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <label asp-for="Input.ConfirmPassword"></label>
+                        <div class="form-floating">
+                            <input asp-for="Input.ConfirmPassword" class="fa fa-envelope autocomplete="new-password" aria-required="true" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <br />
+                         <div class="botonregistrar">
+                            <input type="submit" value="Registrar" id="registerSubmit" class="button">
+                        </div>
+                    </form>
+                </section>
+            </div>
         </div>
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
     </header>
  
     <footer class="footer text-center">

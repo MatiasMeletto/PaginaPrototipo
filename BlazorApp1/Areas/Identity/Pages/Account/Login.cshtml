@@ -57,42 +57,44 @@
                 </div>
         </div>*@
         <div class="text-center">
-    <div class="align-items-center">
-        <section class="container d-flex align-items-center flex-column">
-            <form id="account" method="post"  class="bordeinicio">
-                <h2>Inicia con tu cuenta</h2>
-                <hr />
-                <label asp-for="Input.Email" class="form-label"></label>
-                <div asp-validation-summary="ModelOnly"></div>
-                <div class="form-floating">
-                    <input asp-for="Input.Email" class="fa fa-envelope" autocomplete="username" aria-required="true" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <br />
-                    <label asp-for="Input.Password" class="form-label"></label>
-                <div class="form-floating">
-                    <input asp-for="Input.Password" class="fa fa-envelope" autocomplete="current-password" aria-required="true" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <br />
-                <div>
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe" class="form-label">
-                            <input class="form-check-input" asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="botonregistrar">
-                    <input type="submit" value="Iniciar Sesion" id="login-submit" class="button">
-                </div>
-                <br>
-               <p class=" text-black">Al iniciar sesion, estas aceptando nuestras Condiciones de uso y Politica de privacidad.</p>
-               <p class=" text-black">No tienes cuenta? <a class="link text-black" href="/Identity/Account/Register"> Registrate</a></p>
-            </form>
-        </section>
-    </div>
-</div>
+            <div class="align-items-center">
+                <section class="container d-flex align-items-center flex-column">
+                    <form id="account" method="post"  class="bordeinicio">
+                        <h2>Inicia con tu cuenta</h2>
+                        <hr />
+                        <label asp-for="Input.Email" class="form-label"></label>
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="form-floating">
+                            <input asp-for="Input.Email" class="fa fa-envelope" autocomplete="username" aria-required="true" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <br />
+                            <label asp-for="Input.Password" class="form-label"></label>
+                        <div class="form-floating">
+                            <input asp-for="Input.Password" class="fa fa-envelope" autocomplete="current-password" aria-required="true" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div>
+                            <div class="checkbox">
+                                <label asp-for="Input.RememberMe" class="form-label">
+                                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="botonregistrar">
+                            <input type="submit" value="Iniciar Sesion" id="login-submit" class="button">
+                        </div>
+                        <br>
+                       <p class=" text-black">Al iniciar sesion, estas aceptando nuestras Condiciones de uso y Politica de privacidad.</p>
+                       <p class=" text-black">No tienes cuenta? <a class="link text-black" href="/Identity/Account/Register"> Registrate</a></p>
+                       <p class=" text-black"><a class="link text-black" href="/Identity/Account/forgotpassword"> Olvidaste tu contraseña?</a></p>
+                       <br>
+                    </form>
+                </section>
+            </div>
+        </div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
