@@ -1,51 +1,18 @@
-﻿@page
-@model ForgotPasswordModel
-@{
-    ViewData["Title"] = "Forgot your password?";
-}
+﻿@page "/Restablecer"
 
-<h1>@ViewData["Title"]</h1>
-
-<link rel="stylesheet" href="~/Pagina/css/styles.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"> <!--Biblioteca de íconos-->
-
-
-
-@*<h2>Enter your email.</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Email" class="form-label"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Reset Password</button>
-        </form>
-    </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}*@
-
-
-
-
-<!-- Barra de navegación-->
+<body id="page-top">
+    <!-- Barra de navegación-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="/ ">Escuela Industrial Nº1 Chivilcoy</a>
+            <a class="navbar-brand" href="#page-top">Escuela Industrial Nº1 Chivilcoy</a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a href="/Identity/Account/login" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;">Iniciar Sesion</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a href="/Identity/Account/Register" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;">Registrarse</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;">Iniciar Sesion</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/Registro" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;">Registrarse</a></li>
                 </ul>
             </div>
         </div>
@@ -54,18 +21,24 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <div class="bordeinicio">
-              <h1 >Coloque su correo electronico</h1>
-              <br>              
+                
+              <h1 >Restablecer Contraseña!</h1>
+              <br>               
                <div class="input-contenedor">
-                   <i class="fa fa-envelope" aria-hidden="true"></i>
-                   <input type="text" placeholder="Correo Electronico">
+                   
+                  <i class="fa fa-key" aria-hidden="true"></i>
+                   <input type="password" placeholder=" Nueva Contraseña">
+                   <p class="text-black"><a data-bs-toggle="tooltip" data-bs-title="Al colocar la nueva contraseña se pide que no se parezca a la anterior.">Coloque una nueva contraseña</a></p>
                </div>
-                <div class="botonregistrar">
-               <input type="submit" value="Restablecer Contraseña" class="button ">
-               </div>
+               <div class="input-contenedor">
+                   <i class="fa fa-key" aria-hidden="true"></i>
+                   <input type="password" placeholder="Repita la contraseña">
+                   <p class="text-black"><a data-bs-toggle="tooltip" data-bs-title="Al repetir la contraseña esta tiene que ser identica a la ya colocada en la parte superior.">Repita la contraseña</a></p>
+               </div>             
                <br>
-               <p class="text-black">Una vez que haya colocado su correo electronico y haga click en el boton Restablecer contraseña se le enviara un link a su correo, acceda a el y podra restablecer su contraseña! </p>
-               
+               <div class="botonregistrar">
+               <input type="submit" value="Restablecer" class="button ">
+               </div>
                 </div>
         </div>
     </header>
@@ -107,3 +80,4 @@
     <div class="copyright py-4 text-center text-white">
         <div class="container"><small>Copyright &copy; Eest1 Chivilcoy</small></div>
     </div>
+       </body>
