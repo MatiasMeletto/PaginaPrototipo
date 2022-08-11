@@ -1,4 +1,5 @@
-﻿@page "/Restablecer"
+﻿@inject IJSRuntime JS
+@page "/Restablecer"
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 <body id="page-top">
@@ -22,28 +23,28 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <div class="bordeinicio">
-                
-              <h1 >Restablecer Contraseña!</h1>
-              <br>               
-               <div class="input-contenedor">
-                   
-                  <i class="fa fa-key" aria-hidden="true"></i>
-                   <input type="text" placeholder=" Nueva Contraseña">
-                   <p class="text-black"><a data-bs-toggle="tooltip" data-bs-title="Al colocar la nueva contraseña se pide que no se parezca a la anterior.">Coloque una nueva contraseña</a></p>
-               </div>
-               <div class="input-contenedor">
-                   <i class="fa fa-key" aria-hidden="true"></i>
-                   <input type="password" placeholder="Repita la contraseña">
-                   <p class="text-black"><a data-bs-toggle="tooltip" data-bs-title="Al repetir la contraseña esta tiene que ser identica a la ya colocada en la parte superior.">Repita la contraseña</a></p>
-               </div>             
-               <br>
-               <div class="botonregistrar">
-               <input type="submit" value="Restablecer" class="button ">
-               </div>
+
+                <h1>Restablecer Contraseña!</h1>
+                <br>
+                <div class="input-contenedor">
+
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    <input type="text" placeholder=" Nueva Contraseña">
+                    <p class="text-black"><a data-bs-toggle="tooltip" data-bs-title="Al colocar la nueva contraseña se pide que no se parezca a la anterior.">Coloque una nueva contraseña</a></p>
                 </div>
+                <div class="input-contenedor">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    <input type="password" placeholder="Repita la contraseña">
+                    <p class="text-black"><a data-bs-toggle="tooltip" data-bs-title="Al repetir la contraseña esta tiene que ser identica a la ya colocada en la parte superior.">Repita la contraseña</a></p>
+                </div>
+                <br>
+                <div class="botonregistrar">
+                    <input type="submit" value="Restablecer" class="button ">
+                </div>
+            </div>
         </div>
     </header>
- 
+
     <footer class="footer text-center">
         <div class="container">
             <div class="row">
@@ -62,7 +63,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
                     <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/Escuela-Industrial-Chivilcoy-106196239412818"><i class="fab fa-fw fa-facebook-f"></i></a>
                     <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/dani_gariboldi"><i class="fab fa-fw fa-twitter"></i></a>
                     <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/info7mo/"><i class="fab fa-fw fa-instagram"></i></a>
-                    
+
                 </div>
                 <!-- Donaciones -->
                 <div class="col-lg-4">
@@ -70,8 +71,8 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
                     <p class="lead mb-0">
                         Aceptamos donaciones para apoyar y contribuir con la Fiesta y el Viaje de Egresados.
                         <br>
-                        <br> 
-                        <a href="http://startbootstrap.com">DONA AQUÌ</a>                       
+                        <br>
+                        <a href="http://startbootstrap.com">DONA AQUÌ</a>
                     </p>
                 </div>
             </div>
@@ -81,4 +82,14 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
     <div class="copyright py-4 text-center text-white">
         <div class="container"><small>Copyright &copy; Eest1 Chivilcoy</small></div>
     </div>
-       </body>
+</body>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("addTooltips");
+        }
+    }
+}
