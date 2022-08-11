@@ -240,21 +240,15 @@
 
                 Carrito carrito = db.Carritos.Include(c => c.Productos).Where(c => c.UsuarioId == usuario.Id).SingleOrDefault();
 
-                if (carrito is not null)
+                CarritoProducto carritoProducto = new CarritoProducto()
                 {
-                    CarritoProducto carritoProducto = new CarritoProducto()
-                    {
-                        ProductoId = Model.Id,
-                        Cantidad = Model.Cantidad,
-                    };
+                    ProductoId = Model.Id,
+                    Cantidad = Model.Cantidad,
+                };
 
-                    carrito.Productos.Add(carritoProducto);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    //anashe
-                }
+                carrito.Productos.Add(carritoProducto);
+                db.SaveChanges();
+                
                 Model.Id = 0;
                 Model.Cantidad = 1;
             }
