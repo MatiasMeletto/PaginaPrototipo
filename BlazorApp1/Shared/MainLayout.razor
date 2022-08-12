@@ -13,9 +13,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">Comidas</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})">Quienes Somos?</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contactanos</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">Comidas</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Quienes Somos?</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contactanos</a></li>
                 @if(!NavManager.Uri.Contains("pedido") && !NavManager.Uri.Contains("InicioSesion"))
                 {
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3" href="/pedido" style="cursor:pointer;">Pedidos</a></li>
@@ -35,7 +35,7 @@
             <div class="col-lg-4 mb-5 mb-lg-0">
                 <h4 class="text-uppercase mb-4">Locación Escolar</h4>
                 <p class="lead mb-0">
-                    Pellegrini 338
+                    Pellegrini 338.
                     <br />
                     6620, Chivilcoy, Buenos Aires, Argentina.
                 </p>
