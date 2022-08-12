@@ -13,13 +13,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">Comidas</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Quienes Somos?</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contactanos</a></li>
-                @if(!NavManager.Uri.Contains("pedido") && !NavManager.Uri.Contains("InicioSesion"))
+                                 
+                @if (NavManager.Uri.Contains("iniciosesion") || NavManager.Uri.Contains("restablecer") || NavManager.Uri.Contains("registro") || NavManager.Uri.Contains("olvidarcontraseña"))
+                { 
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;">Iniciar Sesion</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/Registro" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;">Registrarse</a></li>
+                }
+                else
+                {
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})" >Comidas</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('about').scrollIntoView({behavior:'smooth'})" >Quienes Somos?</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a href="/" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor:pointer;" onclick="    document.getElementById('contact').scrollIntoView({behavior:'smooth'})" >Contactanos</a></li>
+                }
+                 @if(!NavManager.Uri.Contains("pedido") && !NavManager.Uri.Contains("iniciosesion") && NavManager.Uri.Contains("restablecer") && NavManager.Uri.Contains("registro") && NavManager.Uri.Contains("olvidarcontraseña"))
                 {
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3" href="/pedido" style="cursor:pointer;">Pedidos</a></li>
-                }                
+                }
             </ul>
         </div>
     </div>
